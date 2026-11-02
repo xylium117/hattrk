@@ -1,0 +1,6 @@
+# Hattrik settings
+# Set active = true to enable overrides
+active = false
+# venue = Wembley
+# extra_time = true
+# penalties = true
