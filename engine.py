@@ -705,453 +705,20 @@ class team:
 	rating = 0
 	subs_made = 0
 
-STADIUM_MAP = {
-	'Arsenal': 'Emirates Stadium',
-	'Aston Villa': 'Villa Park',
-	'AFC Bournemouth': 'Vitality Stadium',
-	'Brentford': 'Gtech Community Stadium',
-	'Brighton & Hove Albion': 'Amex Stadium',
-	'Chelsea': 'Stamford Bridge',
-	'Crystal Palace': 'Selhurst Park',
-	'Everton': 'Goodison Park',
-	'Fulham': 'Craven Cottage',
-	'Ipswich Town': 'Portman Road',
-	'Leeds United': 'Elland Road',
-	'Leicester City': 'King Power Stadium',
-	'Liverpool': 'Anfield',
-	'Manchester City': 'Etihad Stadium',
-	'Man Utd': 'Old Trafford',
-	'Newcastle United': "St. James' Park",
-	'Nottingham Forest': "City Ground",
-	'Southampton': "St. Mary's Stadium",
-	'Spurs': 'Tottenham Hotspur Stadium',
-	'West Ham United': 'London Stadium',
-	'Wolverhampton Wanderers': 'Molineux',
-	'Sunderland': 'Stadium of Light',
-	'Burnley': 'Turf Moor',
-	'Blackburn Rovers': 'Ewood Park',
-	'Middlesbrough': 'Riverside Stadium',
-	'Queens Park Rangers': "Loftus Road",
-	'Birmingham City': 'St. Andrew\'s',
-	'Charlton Athletic': 'The Valley',
-	'Derby County': 'Pride Park Stadium',
-	'Millwall': 'The Den',
-	'West Bromwich Albion': 'The Hawthorns',
-	'Portsmouth': 'Fratton Park',
-	'Norwich City': 'Carrow Road',
-	'Sheffield United': 'Bramall Lane',
-	'Watford': 'Vicarage Road',
-	'Coventry City': 'Coventry Building Society Arena',
-	'Luton Town': 'Kenilworth Road',
-	'Swansea City': 'Liberty Stadium',
-	'Stoke City': 'bet365 Stadium',
-	'Cardiff City': 'Cardiff City Stadium',
-	'Hull City': 'MKM Stadium',
-	'Preston North End': 'Deepdale',
-	'Sheffield Wednesday': 'Hillsborough',
-	'Plymouth Argyle': 'Home Park',
-	'Oxford United': 'Kassam Stadium',
-	'Chelsea Women': 'Kingsmeadow',
-	'Arsenal Women': 'Meadow Park',
-	'Manchester City Women': 'Joie Stadium',
-	'Liverpool Women': 'Prenton Park',
-	'Manchester United Women': 'Old Trafford',
-	'Aston Villa Women': 'Villa Park',
-	'Brighton & Hove Albion Women': 'Amex Stadium',
-	'Tottenham Hotspur Women': 'Tottenham Hotspur Stadium',
-	'West Ham United Women': 'Chigwell Construction Stadium',
-	'Real Madrid': 'Estadio Santiago Bernabéu',
-	'FC Barcelona': 'Spotify Camp Nou',
-	'Atlético de Madrid': 'Cívitas Metropolitano',
-	'Real Sociedad': 'Reale Arena',
-	'Athletic Club': 'San Mamés',
-	'Villarreal': 'Estadio de la Cerámica',
-	'Real Betis': 'Estadio Benito Villamarín',
-	'Sevilla FC': 'Ramón Sánchez Pizjuán',
-	'Valencia CF': 'Mestalla',
-	'Deportivo Alaves': 'Estadio de Mendizorrotza',
-	'Deportivo Alavés': 'Estadio de Mendizorrotza',
-	'Osasuna': 'El Sadar',
-	'Celta Vigo': 'Estadio Abanca-Balaídos',
-	'Getafe CF': 'Estadio Coliseum Alfonso Pérez',
-	'Getafe': 'Estadio Coliseum Alfonso Pérez',
-	'Rayo Vallecano': 'Estadio de Vallecas',
-	'UD Las Palmas': 'Estadio Gran Canaria',
-	'Mallorca': 'Visit Mallorca Estadi',
-	'Espanyol': 'RCDE Stadium',
-	'Leganés': 'Municipal de Butarque',
-	'Valladolid': 'Estadio José Zorrilla',
-	'Real Valladolid': 'Estadio José Zorrilla',
-	'Elche': 'Estadio Martínez Valero',
-	'Granada': 'Estadio Nuevo Los Cármenes',
-	'Cádiz': 'Estadio Nuevo Mirandilla',
-	'SD Eibar': 'Municipal de Ipurúa',
-	'Levante': 'Estadi Ciutat de València',
-	'Real Madrid F': 'Estadio Alfredo Di Stéfano',
-	'Real Madrid Women': 'Estadio Alfredo Di Stéfano',
-	'Real Madrid Castilla': 'Estadio Alfredo Di Stéfano',
-	'VfL Wolfsburg Women': 'StrongHER Stadium',
-	'Mexico (national team)': 'Estadio Azteca',
-	'Mexico': 'Estadio Azteca',
-	'FC Barcelona F': 'Spotify Camp Nou',
-	'Atlético de Madrid F': 'Cívitas Metropolitano',
-	'FC Bayern München': 'Allianz Arena',
-	'Borussia Dortmund': 'Signal Iduna Park',
-	'Leverkusen': 'BayArena',
-	'RB Leipzig': 'Red Bull Arena',
-	'Eintracht Frankfurt': 'Deutsche Bank Park',
-	'Wolfsburg': 'Volkswagen Arena',
-	'SC Freiburg': 'Europa-Park Stadion',
-	'Borussia Mönchengladbach': 'Borussia-Park',
-	'1. FC Union Berlin': 'Stadion An der Alten Försterei',
-	'VfB Stuttgart': 'MHPArena',
-	'TSG 1899 Hoffenheim': 'PreZero Arena',
-	'Werder Bremen': 'Weserstadion',
-	'FC Augsburg': 'WWK Arena',
-	'1. FC Heidenheim': 'Voith-Arena',
-	'FC St. Pauli': 'Millerntor-Stadion',
-	'Holstein Kiel': 'Holstein-Stadion',
-	'VfL Bochum': 'Vonovia Ruhrstadion',
-	'FC Schalke 04': 'Veltins-Arena',
-	'Hamburger SV': 'Volksparkstadion',
-	'Hannover 96': 'HDI-Arena',
-	'Fortuna Düsseldorf': 'Merkur Spiel-Arena',
-	'1. FC Nürnberg': 'Max-Morlock Stadium',
-	'SpVgg Greuther Fürth': 'Sportpark Ronhof',
-	'SC Paderborn': 'Home Deluxe Arena',
-	'FC Bayern München Frauen': 'FC Bayern Campus',
-	'VfL Wolfsburg Frauen': 'StrongHER Stadium',
-	'PSG': 'Parc des Princes',
-	'Olympique de Marseille': 'Orange Vélodrome',
-	'OGC Nice': 'Allianz Riviera',
-	'RC Lens': 'Stade Bollaert-Delelis',
-	'Stade Rennais': 'Roazhon Park',
-	'Lille OSC': 'Stade Pierre-Mauroy',
-	'Olympique Lyonnais': 'Groupama Stadium',
-	'AS Monaco': 'Stade Louis II',
-	'Stade Brestois 29': 'Stade Francis-Le Blé',
-	'RC Strasbourg': 'Stade de la Meinau',
-	'Montpellier HSC': 'Stade de la Mosson',
-	'Toulouse FC': 'Stadium de Toulouse',
-	'Nantes': 'Stade de la Beaujoire – Louis Fonteneau',
-	'FC Nantes': 'Stade de la Beaujoire – Louis Fonteneau',
-	'Stade de Reims': 'Stade Auguste-Delaune',
-	'Le Havre AC': 'Stade Océane',
-	'AS Saint-Étienne': 'Stade Geoffroy-Guichard',
-	'Angers SCO': 'Stade Jean-Bouin',
-	'OL Féminin': 'Groupama Stadium',
-	'PSG Féminine': 'Parc des Princes',
-	'Atlético de Madrid F': 'Cívitas Metropolitano',
-	'Juventus FC': 'Allianz Stadium',
-	'Inter Milan': 'San Siro',
-	'AC Milan': 'San Siro',
-	'AS Roma': 'Stadio Olimpico',
-	'Lazio': 'Stadio Olimpico',
-	'Napoli': 'Stadio Diego Armando Maradona',
-	'Atalanta BC': 'Gewiss Stadium',
-	'Fiorentina': 'Stadio Artemio Franchi',
-	'Torino': 'Stadio Olimpico Grande Torino',
-	'Sassuolo': 'Mapei Stadium',
-	'Bologna': 'Stadio Renato Dall\'Ara',
-	'Genoa': 'Stadio Luigi Ferraris',
-	'Sampdoria': 'Stadio Luigi Ferraris',
-	'Udinese': 'Dacia Arena',
-	'Hellas Verona': 'Stadio Marcantonio Bentegodi',
-	'Cagliari': 'Unipol Domus',
-	'Lecce': 'Stadio Via del Mare',
-	'Parma': 'Stadio Ennio Tardini',
-	'Empoli FC': 'Carlo Castellani Computer Gross Arena',
-	'Venezia FC': 'Stadio Pier Luigi Penzo',
-	'Como 1907': 'Stadio Giuseppe Sinigaglia',
-	'Monza': 'U-Power Stadium',
-	'Frosinone Calcio': 'Stadio Benito Stirpe',
-	'Salernitana': 'Stadio Arechi',
-	'Benfica': 'Estádio do Sport Lisboa e Benfica',
-	'FC Porto': 'Estádio do Dragão',
-	'Sporting CP': 'Estádio José Alvalade',
-	'SC Braga': 'Estádio Municipal de Braga',
-	'Vitória SC': 'Estádio D. Afonso Henriques',
-	'Boavista FC': 'Estádio do Bessa',
-	'Famalicão': 'Estádio Municipal de Famalicão',
-	'Estoril Praia': 'Estádio António Coimbra da Mota',
-	'Santa Clara': 'Estádio de São Miguel',
-	'Rio Ave FC': 'Estádio dos Arcos',
-	'Moreirense FC': 'Parque de Jogos Comendador Joaquim de Almeida Freitas',
-	'Estrela da Amadora': 'Estadio José Gomes',
-	'Casa Pia AC': 'Estádio Nacional',
-	'Gil Vicente FC': 'Estádio Cidade de Barcelos',
-	'Ajax': 'Johan Cruyff Arena',
-	'PSV': 'Philips Stadion',
-	'Feyenoord': 'De Kuip',
-	'AZ': 'AFAS Stadion',
-	'FC Twente': 'De Grolsch Veste',
-	'FC Utrecht': 'Galgenwaard',
-	'sc Heerenveen': 'Abe Lenstra Stadion',
-	'Vitesse': 'GelreDome',
-	'FC Groningen': 'Euroborg',
-	'Sparta Rotterdam': 'Het Kasteel',
-	'NAC Breda': 'Rat Verlegh Stadion',
-	'N.E.C. Nijmegen': 'Goffertstadion',
-	'PEC Zwolle': 'MAC³PARK Stadion',
-	'Go Ahead Eagles': 'De Adelaarshorst',
-	'Heracles Almelo': 'Polman Stadion',
-	'Excelsior': 'Van Donge & De Roo Stadion',
-	'FC Volendam': 'Kras Stadion',
-	'Fortuna Sittard': 'Fortuna Sittard Stadion',
-	'Telstar': 'B草sterzijde',
-	'Club Brugge': 'Jan Breydel Stadion',
-	'Anderlecht': 'Lotto Park',
-	'Gent': 'Ghelamco Arena',
-	'Genk': 'Cegeka Arena',
-	'Standard Liège': 'Stade Maurice Dufrasne',
-	'Antwerp': 'Bosuilstadion',
-	'Union Saint-Gilloise': 'Joseph Marien Stadium',
-	'Cercle Brugge': 'Jan Breydel Stadion',
-	'OH Leuven': 'Den Dreef',
-	'KV Mechelen': 'Achter de Kazerne',
-	'Westerlo': 'Het Kuipje',
-	'Sint-Truiden': 'Stadion Stayen',
-	'Charleroi': 'Stade du Pays de Charleroi',
-	'Dender': 'Stad Dender',
-	'Zulte Waregem': 'Regenboogstadion',
-	'RAAL La Louvière': 'Stade du Tivoli',
-	'Celtic': 'Celtic Park',
-	'Rangers': 'Ibrox Stadium',
-	'Heart of Midlothian': 'Tynecastle Park',
-	'Hibernian': 'Easter Road',
-	'Aberdeen': 'Pittodrie Stadium',
-	'Motherwell': 'Fir Park',
-	'Dundee United': 'Tannadice Park',
-	'Ross County': 'Global Energy Stadium',
-	'Livingston': 'Tony Macaroni Arena',
-	'St. Mirren': 'SMiSA Stadium',
-	'Kilmarnock': 'Rugby Park',
-	'St. Johnstone': 'McDiarmid Park',
-	'FC København': 'Parken',
-	'Brøndby IF': 'Brøndby Stadion',
-	'FC Midtjylland': 'MCH Arena',
-	'FC Nordsjælland': 'Right to Dream Park',
-	'Silkeborg IF': 'JYSK Park',
-	'AGF': 'Ceres Park',
-	'Odense Boldklub': 'Nature Energy Park',
-	'Randers FC': 'Cepheus Park',
-	'Vejle BK': 'Vejle Stadion',
-	'Viborg FF': 'Energi Viborg Arena',
-	'Sønderjyske Fodbold': 'Sydbank Park',
-	'FC Fredericia': 'Monjasa Park',
-	'Galatasaray': 'RAMS Park',
-	'Fenerbahçe': 'Ülker Şükrü Saracoğlu Stadyumu',
-	'Beşiktaş': 'Tüpraş Stadyumu',
-	'Trabzonspor': 'Papara Park',
-	'Başakşehir': 'Başakşehir Fatih Terim Stadyumu',
-	'Kayserispor': 'Kadir Has Stadyumu',
-	'Sivasspor': '4 Eylül Stadyumu',
-	'Konyaspor': 'Konya Büyükşehir Stadyumu',
-	'Ankaragücü': 'Eryaman Stadyumu',
-	'Alanyaspor': 'Bahçeşehir Okul Stadyumu',
-	'Kasımpaşa': 'Recep Tayyip Erdoğan Stadyumu',
-	'Fatih Karagümrük': 'Atatürk Olimpiyat Stadyumu',
-	'Fatih Karagümrük S.K.': 'Atatürk Olimpiyat Stadyumu',
-	'Hatayspor': 'Hatay Stadyumu',
-	'Gaziantep FK': 'Kalyon Stadyumu',
-	'Rizespor': 'Çaykur Didi Stadyumu',
-	'Samsunspor': 'Samsun 19 Mayıs Stadyumu',
-	'Adana Demirspor': '5 Ocak Fatih Terim Stadyumu',
-	'Antalyaspor': 'Corendon Airlines Park Antalya Stadyumu',
-	'Boluspor': 'Bolu Abant İzzet Baysal Stadyumu',
-	'Olympiacos': 'Georgios Karaiskakis Stadium',
-	'PAOK': 'Toumba Stadium',
-	'AEK Athens': 'OPAP Arena',
-	'Panathinaikos': 'Apostolos Nikolaidis Stadium',
-	'Aris Thessaloniki': 'Kleanthis Vikelidis Stadium',
-	'Atromitos': 'Peristeri Stadium',
-	'CSKA Moscow': 'VEB Arena',
-	'Spartak Moscow': 'Otkritie Arena',
-	'Zenit': 'Gazprom Arena',
-	'Dynamo Moscow': 'VTB Arena',
-	'Lokomotiv Moscow': 'RZD Arena',
-	'Slavia Prague': 'Sinobo Stadium',
-	'Sparta Prague': 'Generali Arena',
-	'Viktoria Plzeň': 'Doosan Arena',
-	'RB Salzburg': 'Red Bull Arena',
-	'Rapid Vienna': 'Allianz Stadion',
-	'Austria Vienna': 'Generali Arena',
-	'FC Basel': 'St. Jakob-Park',
-	'BSC Young Boys': 'Wankdorf Stadium',
-	'FC Zurich': 'Letzigrund',
-	'FCSB': 'Arena Națională',
-	'CFR Cluj': 'Cluj Arena',
-	'Universitatea Craiova': 'Ion Oblemenco Stadium',
-	'Dynamo Kyiv': 'Olimpiyskiy',
-	'Shakhtar Donetsk': 'Donbass Arena',
-	'Red Star Belgrade': 'Rajko Mitić Stadium',
-	'Partizan': 'Partizan Stadium',
-	'Dinamo Zagreb': 'Maksimir',
-	'Hajduk Split': 'Poljud',
-	'Rosenborg': 'Lerkendal Stadion',
-	'Brann': 'Brann Stadion',
-	'Molde FK': 'Aker Stadion',
-	'Malmö FF': 'Eleda Stadion',
-	'IFK Göteborg': 'Gamla Ullevi',
-	'Djurgårdens IF': 'Tele2 Arena',
-	'AIK': 'Friends Arena',
-	'Hammarby IF': 'Tele2 Arena',
-	'IF Elfsborg': 'Borås Arena',
-	'Atlético de Madrid F': 'Cívitas Metropolitano',
-	'Sevilla FC F': 'Estadio Jesús Navas',
-	'LA Galaxy': 'Dignity Health Sports Park',
-	'LAFC': 'BMO Stadium',
-	'Seattle Sounders': 'Lumen Field',
-	'Portland Thorns': 'Providence Park',
-	'New England Revolution': 'Gillette Stadium',
-	'New York Red Bulls': 'Red Bull Arena',
-	'New York City FC': 'Yankee Stadium',
-	'Atlanta United': 'Mercedes-Benz Stadium',
-	'Orlando City': 'Inter&Co Stadium',
-	'FC Dallas': 'Toyota Stadium',
-	'Sporting Kansas City': 'Children\'s Mercy Park',
-	'Columbus Crew': 'Lower.com Field',
-	'Inter Miami': 'Chase Stadium',
-	'CF Montréal': 'Saputo Stadium',
-	'Toronto FC': 'BMO Field',
-	'Vancouver Whitecaps': 'BC Place',
-	'Minnesota United': 'Allianz Field',
-	'Real Salt Lake': 'America First Field',
-	'Colorado Rapids': 'Dick\'s Sporting Goods Park',
-	'San Jose Earthquakes': 'PayPal Park',
-	'Houston Dynamo': 'Shell Energy Stadium',
-	'Chicago Fire': 'Soldier Field',
-	'Philadelphia Union': 'Subaru Park',
-	'D.C. United': 'Audi Field',
-	'Nashville SC': 'GEODIS Park',
-	'Austin FC': 'Q2 Stadium',
-	'FC Cincinnati': 'TQL Stadium',
-	'St. Louis City SC': 'CITYPARK',
-	'Charlotte FC': 'Bank of America Stadium',
-	'Gotham FC': 'Red Bull Arena',
-	'Portland Thorns FC': 'Providence Park',
-	'OL Reign': 'Lumen Field',
-	'North Carolina Courage': 'WakeMed Soccer Park',
-	'Chicago Red Stars': 'SeatGeek Stadium',
-	'Houston Dash': 'Shell Energy Stadium',
-	'Sky Blue FC': 'Red Bull Arena',
-	'Utah Royals': 'America First Field',
-	'Washington Spirit': 'Audi Field',
-	'San Diego Wave': 'Snapdragon Stadium',
-	'Angel City FC': 'BMO Stadium',
-	'Racing Louisville': 'Lynn Family Stadium',
-	'Cavalry FC': 'ATCO Field at Spruce Meadows',
-	'FC Edmonton': 'Clarke Stadium',
-	'Forge FC': 'Tim Hortons Field',
-	'Club América': 'Estadio Azteca',
-	'Cruz Azul': 'Estadio Azteca',
-	'Chivas Guadalajara': 'Estadio Akron',
-	'CF Monterrey': 'Estadio BBVA',
-	'Tigres UANL': 'Estadio Universitario',
-	'UNAM Pumas': 'Estadio Olímpico Universitario',
-	'Club León': 'Estadio León',
-	'Club Necaxa': 'Estadio Victoria',
-	'Santos Laguna': 'Estadio Corona',
-	'Pachuca': 'Estadio Hidalgo',
-	'Toluca': 'Estadio Nemesio Díez',
-	'Atlas FC': 'Estadio Jalisco',
-	'FC Juárez': 'Estadio Olímpico Benito Juárez',
-	'Querétaro FC': 'Estadio La Corregidora',
-	'Mazatlán FC': 'Estadio El Encanto',
-	'Deportivo Guadalajara': 'Estadio Akron',
-	'Flamengo': 'Maracanã',
-	'Fluminense': 'Maracanã',
-	'Botafogo': 'Estádio Nilton Santos',
-	'Vasco da Gama': 'São Januário',
-	'Palmeiras': 'Allianz Parque',
-	'São Paulo FC': 'MorumBIS',
-	'Corinthians': 'Neo Química Arena',
-	'Santos FC': 'Vila Belmiro',
-	'Sport Club Internacional': 'Beira-Rio',
-	'SC Grêmio': 'Arena do Grêmio',
-	'Athletico Paranaense': 'Arena da Baixada',
-	'Cruzeiro': 'Mineirão',
-	'Atlético Mineiro': 'Arena MRV',
-	'Belo Horizonte': 'Mineirão',
-	'River Plate': 'El Monumental',
-	'Boca Juniors': 'La Bombonera',
-	'Racing Club': 'Presidente Perón',
-	'Independiente': 'Estadio Libertadores de América',
-	'San Lorenzo': 'Pedro Bidegain',
-	'Estudiantes de La Plata': 'Jorge Luis Hirschi',
-	'Vélez Sársfield': 'José Amalfitani',
-	'Newell\'s Old Boys': 'Estadio Marcelo Bielsa',
-	'Rosario Central': 'Estadio Gigante de Arroyito',
-	'Talleres': 'Estadio Mario Alberto Kempes',
-	'Lanús': 'Estadio Ciudad de Lanús',
-	'Huracán': 'Estadio Tomás A. Ducó',
-	'Atlético Nacional': 'Estadio Atanasio Girardot',
-	'Millonarios': 'Estadio El Campín',
-	'América de Cali': 'Estadio Pascual Guerrero',
-	'Deportivo Cali': 'Estadio Deportivo Cali',
-	'Once Caldas': 'Estadio Palogrande',
-	'Colo-Colo': 'Estadio Monumental David Arellano',
-	'Universidad de Chile': 'Estadio Nacional',
-	'Universidad Católica': 'Estadio San Carlos de Apoquindo',
-	'Nacional': 'Estadio Gran Parque Central',
-	'Peñarol': 'Estadio Campeón del Siglo',
-	'Gamba Osaka': 'Panasonic Stadium Suita',
-	'Cerezo Osaka': 'Yodoko Sakura Stadium',
-	'Urawa Red Diamonds': 'Saitama Stadium 2002',
-	'Kashima Antlers': 'Kashima Soccer Stadium',
-	'Kawasaki Frontale': 'Todoroki Athletics Stadium',
-	'Yokohama F. Marinos': 'Nissan Stadium',
-	'Nagoya Grampus': 'Toyota Stadium',
-	'Sanfrecce Hiroshima': 'Edion Peace Wing Hiroshima',
-	'Consadole Sapporo': 'Sapporo Dome',
-	'Shimizu S-Pulse': 'IAI Stadium Nihondaira',
-	'FC Tokyo': 'Ajinomoto Stadium',
-	'Ventforet Kofu': 'JIT Recycle Ink Stadium',
-	'Kashiwa Reysol': 'Sankyo Frontier Kashiwa Stadium',
-	'Albirex Niigata': 'Denka Big Swan Stadium',
-	'Jeonbuk Motors': 'Jeonju World Cup Stadium',
-	'Ulsan Hyundai': 'Munsu Football Stadium',
-	'Suwon Samsung': 'Suwon World Cup Stadium',
-	'Pohang Steelers': 'Steelyard Stadium',
-	'Seongnam FC': 'Tancheon Sports Complex',
-	'FC Seoul': 'Seoul World Cup Stadium',
-	'Jeju United': 'Jeju World Cup Stadium',
-	'Shanghai Port': 'Hongkou Football Stadium',
-	'Guangzhou FC': 'Yuexiushan Stadium',
-	'Beijing Guoan': 'Workers\' Stadium',
-	'Melbourne City': 'AAMI Park',
-	'Melbourne Victory': 'AAMI Park',
-	'Sydney FC': 'Allianz Stadium',
-	'Brisbane Roar': 'Lang Park',
-	'Adelaide United': 'Hindmarsh Stadium',
-	'Western Sydney Wanderers': 'CommBank Stadium',
-	'Perth Glory': 'HBF Park',
-	'Wellington Phoenix': 'Wellington Regional Stadium',
-	'Newcastle Jets': 'McDonald Jones Stadium',
-	'Central Coast Mariners': 'Central Coast Stadium',
-	'Al Hilal': 'Al Awwal Park',
-	'Al Nassr': 'Al-Awwal Park',
-	'Al Ahli': 'King Abdullah Sports City',
-	'Al Ittihad': 'King Abdullah Sports City',
-	'Al Shabab': 'Prince Faisal bin Fahd Stadium',
-	'Al Qadsiah': 'Prince Abdullah bin Jalawi Stadium',
-	'Al Fayha': 'Prince Abdullah bin Jalawi Stadium',
-	'Al Taawoun': 'Prince Sultan bin Fahd Stadium',
-	'Al Fateh': 'Khalid bin Mohamed Stadium',
-	'Mumbai City FC': 'Mumbai Football Arena',
-	'ATK Mohun Bagan': 'Vivekananda Yuba Bharati Krirangan',
-	'Bengaluru FC': 'Sree Kanteerava Stadium',
-	'FC Goa': 'Jawaharlal Nehru Stadium',
-	'Hyderabad FC': 'GMC Athletic Stadium',
-	'Kerala Blasters': 'Jawaharlal Nehru Stadium',
-	'Jamshedpur FC': 'JRD Tata Sports Complex',
-	'Odisha FC': 'Kalinga Stadium',
-	'Al Ahly': 'Cairo International Stadium',
-	'Zamalek': 'Cairo International Stadium',
-	'Mamelodi Sundowns': 'Loftus Versfeld Stadium',
-	'Kaizer Chiefs': 'FNB Stadium',
-	'Orlando Pirates': 'Orlando Stadium',
-}
+def _load_stadium_map():
+	path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data', 'stadiums.json')
+	if not os.path.exists(path):
+		path = 'data/stadiums.json'
+	if os.path.exists(path):
+		try:
+			import json
+			with open(path, 'r', encoding='utf-8') as f:
+				return json.load(f)
+		except Exception:
+			pass
+	return {}
+
+STADIUM_MAP = _load_stadium_map()
 
 _WOMEN_TEAM_KEYS = {
     'Chelsea': 'Chelsea Women',
@@ -1473,8 +1040,8 @@ class CoachAI:
 			if 'attacking_overload' not in self.tactical_orders:
 				self.tactical_orders.add('attacking_overload')
 				self.mentality = 'attacking_overload'
-				msg = "TACTICAL SHIFT: {} manager {} signals ALL-OUT ATTACK! Overloading the final third and committing fullbacks forward.".format(
-					self.team.name, self.name
+				msg = "{} are committing extra bodies forward now, with {} urging {pos} team to flood into the attacking third.".format(
+					self.team.name, self.name, pos="her" if "Women" in self.team.name else "his"
 				)
 				self.match.logger(msg)
 
@@ -1482,8 +1049,8 @@ class CoachAI:
 			if 'low_block' not in self.tactical_orders:
 				self.tactical_orders.add('low_block')
 				self.mentality = 'low_block'
-				msg = "TACTICAL SHIFT: {} manager {} calls for GAME MANAGEMENT! Dropping into a compact shape to protect the lead.".format(
-					self.team.name, self.name
+				msg = "{} are managing the contest with composure now, compacting their defensive lines to protect this lead.".format(
+					self.team.name
 				)
 				self.match.logger(msg)
 
@@ -2323,7 +1890,7 @@ class period:
 			if gk and len(gk.inns) > 0:
 				gk.inns[-1].saves += 1
 			gk_disp = getattr(gk, 'short_name', '') or (gk.name if gk else 'the keeper')
-			self.match.logger("Dangerous Free Kick! {} bent a fierce effort over the wall, brilliantly parried away by {}!".format(t_name, gk_disp))
+			self.match.logger("Terrific strike from the set piece! {} bends the free kick up and over the wall, but {} makes a sensational parry!".format(t_name, gk_disp))
 			if random.random() < 0.35:
 				self.corner_event(att_team, def_team)
 		else:
@@ -2334,7 +1901,7 @@ class period:
 	def penalty_event(self, att_team, def_team, fouled_player=None, fouling_player=None):
 		f_name = (getattr(fouled_player, 'short_name', '') or fouled_player.name) if fouled_player else 'the attacker'
 		d_name = (getattr(fouling_player, 'short_name', '') or fouling_player.name) if fouling_player else 'the defender'
-		self.match.logger("PENALTY AWARDED! {} is felled inside the box by {}! The referee points to the spot!".format(f_name, d_name))
+		self.match.logger("Penalty! {} is brought down inside the area by {}, and the referee points straight to the spot!".format(f_name, d_name))
 
 		outfield = [p for p in att_team.xi if p.position != 'GK']
 		if not outfield:
@@ -2381,13 +1948,13 @@ class period:
 			if gk and len(gk.inns) > 0:
 				gk.inns[-1].saves += 1
 			gk_disp = getattr(gk, 'short_name', '') or (gk.name if gk else 'the keeper')
-			self.match.logger("PENALTY SAVED! {} guesses the right way and pulls off a magnificent diving save from {}'s spot kick!".format(gk_disp, t_name))
+			self.match.logger("Saved! {} guesses correctly and pulls off a magnificent diving stop to deny {} from the spot!".format(gk_disp, t_name))
 			if random.random() < 0.40:
 				self.corner_event(att_team, def_team)
 		else:
 			woodwork = random.choice(["rattles the crossbar and bounces away", "drills {} penalty agonisingly against the upright", "blasts {} penalty high over the crossbar"])
 			pos_pro = 'her' if getattr(taker, 'gender', 'Male') == 'Female' else 'his'
-			self.match.logger("PENALTY MISSED! {} {}!".format(t_name, woodwork.format(pos_pro) if '{}' in woodwork else woodwork))
+			self.match.logger("He's missed it! {} {}!".format(t_name, woodwork.format(pos_pro) if '{}' in woodwork else woodwork))
 
 	def minute_event(self):
 		if hasattr(self.match, 'possession_engine') and self.match.possession_engine:
@@ -2600,7 +2167,7 @@ class period:
 						self.match.away_yellows += 1
 
 					if fouler.inns[-1].yellow_cards == 1:
-						self.match.logger("Booking: {} is shown a yellow card for a cynical foul on {}.".format(fouler_name, victim_name))
+						self.match.logger("Yellow card. {} is booked following a cynical foul on {}.".format(fouler_name, victim_name))
 					elif fouler.inns[-1].yellow_cards >= 2:
 						fouler.inns[-1].red_cards += 1
 						if fouling_team == self.match.home:
@@ -2611,8 +2178,8 @@ class period:
 						fouler.inns[-1].out = True
 						if fouler in fouling_team.xi:
 							fouling_team.xi.remove(fouler)
-						self.match.logger("RED CARD! Second yellow for {}! {} is sent off and {} are down to {} players!".format(
-							fouler_name, fouler_name, fouling_team.name, len(fouling_team.xi)
+						self.match.logger("He's off! A second yellow card for {}! The referee brandishes the red, and {} are reduced to {} men!".format(
+							fouler_name, fouling_team.name, len(fouling_team.xi)
 						))
 						return
 				elif yellow_roll < 0.1435:
@@ -2625,7 +2192,7 @@ class period:
 					fouler.inns[-1].out = True
 					if fouler in fouling_team.xi:
 						fouling_team.xi.remove(fouler)
-					self.match.logger("STRAIGHT RED CARD! Reckless challenge by {} on {}! The referee brandishes a red card! {} are down to {} players!".format(
+					self.match.logger("Straight red card! A reckless challenge by {} on {} leaves the referee no choice! {} are down to {} men!".format(
 						fouler_name, victim_name, fouling_team.name, len(fouling_team.xi)
 					))
 					return
@@ -2647,7 +2214,7 @@ class period:
 				att_name = getattr(att_p, 'short_name', '') or att_p.name
 				cb = random.choice(def_cbs) if def_cbs else None
 				cb_name = (getattr(cb, 'short_name', '') or cb.name) if cb else 'the defense'
-				self.match.logger("Offside Trap! {} steps up in unison with the backline to catch {} offside.".format(cb_name, att_name))
+				self.match.logger("Flag goes up on the far side! The backline stepped up in unison, catching {} comfortably offside.".format(att_name))
 				return
 
 		if random.random() < 0.018:
@@ -2694,7 +2261,7 @@ class period:
 					base_xg = 0.36
 					pm_name = getattr(pm, 'short_name', '') or pm.name
 					sh_name = getattr(shooter, 'short_name', '') or shooter.name
-					self.match.logger("Visionary Pass! {} carves open the defense with an inch-perfect through ball, putting {} 1-on-1!".format(pm_name, sh_name))
+					self.match.logger("What a ball that is! {} splits the defense open with an exquisite through pass to put {} clean through on goal!".format(pm_name, sh_name))
 
 			if shooter is None:
 				wing_prob = 0.30 if (att_coach and att_coach.philosophy in ['direct_counter', 'high_press']) else 0.25
@@ -2725,7 +2292,7 @@ class period:
 								shot_type = 'header'
 								base_xg = 0.09
 								sh_name = getattr(shooter, 'short_name', '') or shooter.name
-								self.match.logger("Pinpoint Cross! {} whips a teasing delivery to the far post where {} attacks the ball!".format(w_name, sh_name))
+								self.match.logger("Gorgeous cross! {} swings an inviting delivery towards the back post where {} attacks the header!".format(w_name, sh_name))
 
 			if shooter is None:
 				shooter = self.pick_shooter(att_team.xi)

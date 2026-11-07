@@ -64,7 +64,7 @@ class GameStateManager:
 		if cbs:
 			self.target_man = max(cbs, key=lambda p: getattr(p, 'heading', 70) * 0.5 + getattr(p, 'jumping', 70) * 0.3 + getattr(p, 'strength', 70) * 0.2)
 			tm_name = getattr(self.target_man, 'short_name', '') or self.target_man.name
-			self.match.logger("HAIL MARY: {} manager pushes center-back {} up front as an emergency striker!".format(self.name, tm_name))
+			self.match.logger("Desperate stakes now for {}—{} has been pushed right up into the penalty area as an emergency target man!".format(self.name, tm_name))
 
 	def _log_mentality_shift(self, old_m, new_m, minute, goal_diff):
 		order_key = "{}_{}".format(new_m, minute // 15)
@@ -72,17 +72,16 @@ class GameStateManager:
 			return
 		self.tactical_orders.add(order_key)
 
-		manager_name = getattr(self.team, 'manager', None) or "{} Manager".format(self.name)
 		if new_m == 'park_the_bus':
-			msg = "TACTICAL SHIFT: {} manager {} orders PARK THE BUS! Defending the penalty box with a deep low block.".format(self.name, manager_name)
+			msg = "{} are digging in now, retreating ten men behind the ball and defending the edge of their box.".format(self.name)
 		elif new_m == 'controlled_counter':
-			msg = "TACTICAL SHIFT: {} manager {} adopts a CONTROLLED COUNTER stance, protecting the lead while hunting on the break.".format(self.name, manager_name)
+			msg = "{} look happy to absorb a bit of pressure now, keeping their shape and waiting to strike on the counter.".format(self.name)
 		elif new_m == 'attacking_overload':
-			msg = "TACTICAL SHIFT: {} manager {} calls for ATTACKING OVERLOAD! Fullbacks pressing high and committing bodies into the final third.".format(self.name, manager_name)
+			msg = "Urgency creeping in for {} now—fullbacks are bombing forward and bodies are flooding into the final third.".format(self.name)
 		elif new_m == 'desperation_hail_mary':
-			msg = "TACTICAL SHIFT: {} manager {} signals ALL-OUT DESPERATION! Pumping direct aerial balls into the box!".format(self.name, manager_name)
+			msg = "It's all hands on deck for {}—throwing caution to the wind and pumping direct aerial balls into the box!".format(self.name)
 		else:
-			msg = "TACTICAL SHIFT: {} resets to a BALANCED tactical shape.".format(self.name)
+			msg = "{} look to settle back into their standard rhythm and shape.".format(self.name)
 
 		self.match.logger(msg)
 

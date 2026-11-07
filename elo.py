@@ -1,67 +1,75 @@
+import json
 import math
+import os
 
-CLUB_ELO = {
-	'Real Madrid': 2030,
-	'Manchester City': 2025,
-	'Arsenal': 1990,
-	'Liverpool': 1995,
-	'FC Barcelona': 1980,
-	'FC Bayern München': 1975,
-	'Inter Milan': 1965,
-	'Paris Saint-Germain': 1940,
-	'Bayer 04 Leverkusen': 1935,
-	'Atlético de Madrid': 1910,
-	'Chelsea': 1890,
-	'Juventus FC': 1885,
-	'Spurs': 1870,
-	'Borussia Dortmund': 1875,
-	'AC Milan': 1860,
-	'Aston Villa': 1855,
-	'Newcastle United': 1850,
-	'Atalanta': 1845,
-	'Sporting CP': 1840,
-	'SL Benfica': 1835,
-	'Manchester United': 1830,
-	'Napoli': 1825,
-	'AS Monaco': 1820,
-	'RB Leipzig': 1815,
-	'Lazio': 1810,
-	'Roma': 1805,
-	'Athletic Club': 1800,
-	'Real Sociedad': 1795,
-	'Eintracht Frankfurt': 1790,
-	'Brighton & Hove Albion': 1785,
-	'West Ham United': 1775,
-	'Villarreal CF': 1780,
-	'AFC Bournemouth': 1740,
-	'Fulham': 1745,
-	'Everton': 1730,
-	'Brentford': 1735,
-	'Crystal Palace': 1730,
-	'Wolverhampton Wanderers': 1720,
-	'Nottingham Forest': 1725,
-	'Leicester City': 1710,
-	'Ipswich Town': 1680,
-	'Southampton': 1675
-}
+_CACHED_CLUB_ELO = None
+
+def calculate_team_elo(team_obj):
+	if not team_obj:
+		return 1650
+
+	players = []
+	if hasattr(team_obj, 'starters') and team_obj.starters:
+		players.extend(team_obj.starters)
+	elif hasattr(team_obj, 'xi') and team_obj.xi:
+		players.extend(team_obj.xi)
+
+	if hasattr(team_obj, 'bench') and team_obj.bench:
+		players.extend(team_obj.bench)
+
+	if not players:
+		squad = getattr(team_obj, 'squad', []) or getattr(team_obj, 'active', []) or getattr(team_obj, 'players', [])
+		players = squad[:16]
+
+	if not players:
+		return 1650
+
+	avg_ovr = sum(float(getattr(p, 'overall', 75.0)) for p in players) / float(len(players))
+	return int(round(1500 + (avg_ovr - 75.0) * 45.0))
+
+def _load_elo_file():
+	global _CACHED_CLUB_ELO
+	if _CACHED_CLUB_ELO is not None:
+		return _CACHED_CLUB_ELO
+
+	base_dir = os.path.dirname(os.path.abspath(__file__))
+	path = os.path.join(base_dir, 'data', 'elo.json')
+	if not os.path.exists(path):
+		path = 'data/elo.json'
+
+	if os.path.exists(path):
+		try:
+			with open(path, 'r', encoding='utf-8') as f:
+				_CACHED_CLUB_ELO = json.load(f)
+				return _CACHED_CLUB_ELO
+		except Exception:
+			pass
+
+	_CACHED_CLUB_ELO = {}
+	return _CACHED_CLUB_ELO
 
 def get_club_elo(club_name, team_obj=None):
-	clean_name = str(club_name).strip()
-	if clean_name in CLUB_ELO:
-		return CLUB_ELO[clean_name]
+	if team_obj and (getattr(team_obj, 'xi', None) or getattr(team_obj, 'starters', None)):
+		return calculate_team_elo(team_obj)
 
-	for k, v in CLUB_ELO.items():
+	data = _load_elo_file()
+	clean_name = str(club_name).strip()
+
+	if clean_name in data:
+		return data[clean_name]
+
+	for k, v in data.items():
 		if k.lower() == clean_name.lower():
 			return v
+
+	for k, v in data.items():
 		if k.lower() in clean_name.lower() or clean_name.lower() in k.lower():
 			return v
 
-	if team_obj and hasattr(team_obj, 'xi') and team_obj.xi:
-		ovrs = [p.overall for p in team_obj.xi]
-		avg_ovr = sum(ovrs) / float(len(ovrs))
-		return int(1200 + (avg_ovr - 65.0) * 35.0)
+	if team_obj:
+		return calculate_team_elo(team_obj)
 
-	return 1700
+	return 1650
 
 def elo_win_probability(elo_a, elo_b, home_advantage=65):
 	diff = (elo_a + home_advantage) - elo_b
@@ -108,4 +116,3 @@ def get_tactical_friction(home_philosophy, away_philosophy):
 		h_bonus *= 0.94
 
 	return h_bonus, a_bonus
-

@@ -187,11 +187,11 @@ class PossessionEngine:
 				fouler.inns[-1].out = True
 				if fouler in fouling_team.xi:
 					fouling_team.xi.remove(fouler)
-				self.match.logger("RED CARD! Second yellow for {}! {} is sent off and {} are down to {} players!".format(
-					fouler_name, fouler_name, fouling_team.name, len(fouling_team.xi)
+				self.match.logger("He's off! A second booking for {}, and the referee brandishes red! {} are down to {} men!".format(
+					fouler_name, fouling_team.name, len(fouling_team.xi)
 				))
 			else:
-				self.match.logger("Booking: {} receives a yellow card for a foul on {}.".format(fouler_name, victim_name))
+				self.match.logger("Yellow card. {} goes into the referee's notebook following a cynical challenge on {}.".format(fouler_name, victim_name))
 		elif card_roll < 0.133:
 			if len(fouler.inns) > 0:
 				fouler.inns[-1].red_cards += 1
@@ -234,7 +234,7 @@ class PossessionEngine:
 
 			int_name = (getattr(interceptor, 'short_name', '') or interceptor.name) if interceptor else 'the opposition'
 			p_name = (getattr(passer, 'short_name', '') or passer.name) if passer else 'the defender'
-			self.match.logger("HIGH PRESS TURNOVER! {} pounces on a loose backline pass from {} in the defensive third!".format(int_name, p_name))
+			self.match.logger("Caught in possession! {} intercepts a careless backline pass from {} deep in dangerous territory!".format(int_name, p_name))
 
 			self.state = PossessionState(opp_team, 'final_third', 15 if opp_team == self.match.home else 4)
 			self.transition_danger = True
@@ -341,7 +341,7 @@ class PossessionEngine:
 			return
 
 		r_name = getattr(runner, 'short_name', '') or runner.name
-		self.match.logger("FAST BREAK! {} exploits space behind the defensive line on a swift counter-attack!".format(r_name))
+		self.match.logger("Here come the attackers on the break! {} surges into open space on a lightning counter-attack!".format(r_name))
 
 		self._record_passes(passer, runner, 1, 1, is_home)
 		self.state.phase = 'final_third'
