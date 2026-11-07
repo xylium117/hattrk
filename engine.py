@@ -1,4 +1,7 @@
 import random, shutil, datetime, os, sys
+from grid import PitchGrid
+from gamestate import GameStateManager
+from possession import PossessionEngine
 
 if sys.stdout.encoding and sys.stdout.encoding.lower() != 'utf-8':
 	try:
@@ -1601,6 +1604,10 @@ class fixture:
 		self.away_subs_made = 0
 		self.home_coach = None
 		self.away_coach = None
+		self.grid = PitchGrid()
+		self.home_game_state = None
+		self.away_game_state = None
+		self.possession_engine = None
 
 	def decay_momentum(self):
 		for k in self.momentum:
@@ -1732,6 +1739,9 @@ class fixture:
 			self.venue = STADIUM_MAP.get(self.home.name, self.venue or (self.home.name + ' Ground'))
 		self.header()
 		self.kickoff()
+		self.home_game_state = GameStateManager(self.home, self, is_home=True)
+		self.away_game_state = GameStateManager(self.away, self, is_home=False)
+		self.possession_engine = PossessionEngine(self, self.grid, self.home_game_state, self.away_game_state)
 
 		p1 = period(self, 1)
 		self.periods.append(p1)
@@ -1801,6 +1811,9 @@ class fixture:
 	def playerlog(self):
 		for t in [self.home, self.away]:
 			if t != '':
+				if not hasattr(t, 'xi') or not t.xi:
+					pool = getattr(t, 'active', []) or getattr(t, 'squad', []) or getattr(t, 'players', [])
+					t.xi = list(pool[:11])
 				if not hasattr(t, 'starters') or not t.starters:
 					t.starters = list(t.xi)
 				if not hasattr(t, 'bench') or not t.bench:
@@ -2172,6 +2185,8 @@ class period:
 		total_mins = half_len + self.injury_time
 		half_name = 'First Half' if self.half == 1 else ('Second Half' if self.half == 2 else ('Extra Time First Half' if self.half == 3 else 'Extra Time Second Half'))
 		self.match.logger('Kick-off: {} begins.'.format(half_name))
+		if hasattr(self.match, 'possession_engine') and self.match.possession_engine:
+			self.match.possession_engine.reset_kickoff(self.att_team)
 		while self.minutes < total_mins and self.active:
 			self.minute_event()
 			self.match.minute += 1
@@ -2196,9 +2211,13 @@ class period:
 			outfield = att_team.xi
 
 		takers = sorted(outfield, key=lambda p: p.crossing * 0.7 + p.curve * 0.3, reverse=True)
+		if not takers:
+			return
 		taker = takers[0]
 
 		aerial_targets = sorted(outfield, key=lambda p: p.heading * 0.5 + p.jumping * 0.3 + p.strength * 0.2, reverse=True)
+		if not aerial_targets:
+			return
 		target = aerial_targets[0]
 
 		gk = next((p for p in def_team.xi if p.position == 'GK'), None)
@@ -2256,6 +2275,8 @@ class period:
 		if not outfield:
 			outfield = att_team.xi
 		takers = sorted(outfield, key=lambda p: p.free_kick * 0.6 + p.shot_power * 0.2 + p.curve * 0.2, reverse=True)
+		if not takers:
+			return
 		taker = takers[0]
 		gk = next((p for p in def_team.xi if p.position == 'GK'), None)
 		gk_stat = gk.gk_overall if gk else 70.0
@@ -2312,6 +2333,8 @@ class period:
 		if not outfield:
 			outfield = att_team.xi
 		takers = sorted(outfield, key=lambda p: p.penalties * 0.70 + p.composure * 0.30, reverse=True)
+		if not takers:
+			return
 		taker = takers[0]
 		t_name = getattr(taker, 'short_name', '') or taker.name
 
@@ -2360,6 +2383,9 @@ class period:
 			self.match.logger("PENALTY MISSED! {} {}!".format(t_name, woodwork.format(pos_pro) if '{}' in woodwork else woodwork))
 
 	def minute_event(self):
+		if hasattr(self.match, 'possession_engine') and self.match.possession_engine:
+			self.match.possession_engine.simulate_minute(self, self.match.minute)
+			return
 		m = self.match.minute
 
 		h_diff = self.match.home_score - self.match.away_score
@@ -2833,26 +2859,27 @@ class period:
 						self.corner_event(att_team, def_team)
 
 	def pick_shooter(self, xi):
+		outfield = [p for p in xi if getattr(p, 'position', '') != 'GK']
+		if not outfield:
+			return xi[0] if xi else None
 		weights = []
-		for p in xi:
-			if p.position == 'GK':
-				weights.append(0.0)
-				continue
+		for p in outfield:
 			fit = getattr(p, 'fitness', 1.0)
-			if p.position == 'ATT':
-				w = 55 + p.positioning * 0.45 + p.finishing * 0.35
-			elif p.position == 'AMF':
-				w = 35 + p.positioning * 0.35 + p.long_shots * 0.30
-			elif p.position == 'MID':
-				w = 16 + p.long_shots * 0.30 + p.positioning * 0.20
-			elif p.position == 'DMF':
-				w = 6 + p.shot_power * 0.20
-			elif p.position == 'DEF':
-				w = 4 + p.heading * 0.20
+			pos = getattr(p, 'position', 'MID')
+			if pos == 'ATT':
+				w = 55 + getattr(p, 'positioning', 70) * 0.45 + getattr(p, 'finishing', 70) * 0.35
+			elif pos == 'AMF':
+				w = 35 + getattr(p, 'positioning', 70) * 0.35 + getattr(p, 'long_shots', 70) * 0.30
+			elif pos == 'MID':
+				w = 16 + getattr(p, 'long_shots', 70) * 0.30 + getattr(p, 'positioning', 70) * 0.20
+			elif pos == 'DMF':
+				w = 6 + getattr(p, 'shot_power', 70) * 0.20
+			elif pos == 'DEF':
+				w = 4 + getattr(p, 'heading', 70) * 0.20
 			else:
 				w = 0.5
 			weights.append(max(0.1, w * fit))
-		return random.choices(xi, weights=weights, k=1)[0]
+		return random.choices(outfield, weights=weights, k=1)[0]
 
 	def pick_assister(self, xi, scorer, shot_type='box'):
 		pool = [p for p in xi if p != scorer and p.position != 'GK']
