@@ -4,49 +4,49 @@ This document outlines the comprehensive architectural plan and empirical calibr
 
 ---
 
-## 1. System Architecture: The Six Realism Pillars
+## 1. System Architecture: The Six Realism Stages
 
 ```mermaid
 flowchart TD
-    subgraph Pillar1["Pillar 1: Spatial Geometry"]
+    subgraph Stage1["Stage 1: Spatial Geometry"]
         A1["18-Zone Tactical Grid"] --> A2["Pitch Control & Passing Lanes"]
         A2 --> A3["Pressing Triggers & Spatial Traps"]
     end
-    subgraph Pillar2["Pillar 2: Continuous Flow"]
+    subgraph Stage2["Stage 2: Continuous Flow"]
         B1["Build-up Phase"] --> B2["Progression Phase"]
         B2 --> B3["Final Third Phase"]
         B3 --> B4["Shot / Turnover / Transition"]
     end
-    subgraph Pillar3["Pillar 3: Game-State AI"]
+    subgraph Stage3["Stage 3: Game-State AI"]
         C1["Score Differential & Clock"] --> C2["Dynamic Mentality Shifts"]
         C2 --> C3["Formation & Risk Adjustments"]
     end
-    subgraph Pillar4["Pillar 4: Statistical Calibration & Anti-Blowout Engine"]
+    subgraph Stage4["Stage 4: Statistical Calibration & Anti-Blowout Engine"]
         D1["Opta xG Baseline Normalization"] --> D2["Defender Shot Blocks & Deflections"]
         D2 --> D3["Goalkeeper Resistance Modeling"]
         D3 --> D4["Lead Retention & Underdog Low Block"]
     end
-    subgraph Pillar5["Pillar 5: Biomechanical Stamina & Dynamic Substitutions"]
+    subgraph Stage5["Stage 5: Biomechanical Stamina & Dynamic Substitutions"]
         E1["Non-Linear Stamina Decay"] --> E2["Attribute Degradation & Errors"]
         E2 --> E3["AI Manager Substitutions & Super-Subs"]
         E3 --> E4["Late-Match Surge & Stoppage Time"]
     end
-    subgraph Pillar6["Pillar 6: Set-Piece Choreography & Matchday Physics"]
+    subgraph Stage6["Stage 6: Set-Piece Choreography & Matchday Physics"]
         F1["Set-Piece Routines (Near-Post, Overloads)"] --> F2["Referee Strictness & Whistle Profiles"]
         F2 --> F3["VAR Review Drama & Marginal Offside"]
         F3 --> F4["Environmental Weather & Pitch Skid Physics"]
     end
-    Pillar1 --> Engine["Hattrk 2.0 Match Engine"]
-    Pillar2 --> Engine
-    Pillar3 --> Engine
-    Pillar4 --> Engine
-    Pillar5 --> Engine
-    Pillar6 --> Engine
+    Stage1 --> Engine["Hattrk 2.0 Match Engine"]
+    Stage2 --> Engine
+    Stage3 --> Engine
+    Stage4 --> Engine
+    Stage5 --> Engine
+    Stage6 --> Engine
 ```
 
 ---
 
-## 2. Pillar 1: Spatial Pitch Geometry (Implemented)
+## 2. Stage 1: Spatial Pitch Geometry
 
 ### 1. The 18-Zone Tactical Grid
 Rather than requiring a heavyweight 3D physics engine, professional tactical analytics (Opta, StatsBomb, Guardiola's positional play) divide a $105 \times 68\text{m}$ pitch into **18 distinct tactical zones**:
@@ -79,7 +79,7 @@ Rather than requiring a heavyweight 3D physics engine, professional tactical ana
 
 ---
 
-## 3. Pillar 2: Continuous Possession & Phase-Based Flow (Implemented)
+## 3. Stage 2: Continuous Possession & Phase-Based Flow
 
 ### 1. The Possession State Machine
 Matches advance through sequential **Possession Chains** across four phases:
@@ -113,7 +113,7 @@ stateDiagram-v2
 
 ---
 
-## 4. Pillar 3: Dynamic Game-State Adaptation (Implemented)
+## 4. Stage 3: Dynamic Game-State Adaptation
 
 ### 1. Game-State Urgency Matrix
 Every 5 minutes (and immediately following any goal or card), team tactical urgency is evaluated:
@@ -152,7 +152,7 @@ A 100-match empirical test across 20 distinct tier matchups (Tier 1 Elite Derbie
 
 ---
 
-## 6. Pillar 4: Statistical Calibration & Anti-Blowout Engine (The Upgrade Plan)
+## 6. Stage 4: Statistical Calibration & Anti-Blowout Engine
 
 ### Problem Diagnosis
 1. **Average xG per Shot is Doubled**:
@@ -220,10 +220,10 @@ $$\text{conv\_prob} = \frac{\text{xG}_{\text{normalized}}}{1.0 + 0.35 \times (\t
 
 ---
 
-## 7. Pillar 5: Biomechanical Stamina Curves, Dynamic In-Match Substitutions & Late-Match Surge Dynamics
+## 7. Stage 5: Biomechanical Stamina Curves, Dynamic In-Match Substitutions & Late-Match Surge Dynamics
 
 ### Problem Diagnosis: The Static Second Half
-While Pillars 1–4 have calibrated spatial positioning, pass volumes, xG baseline values, and scoreline blowouts, a critical physical and psychological dimension of real-world football remains unmodeled:
+While Stages 1–4 have calibrated spatial positioning, pass volumes, xG baseline values, and scoreline blowouts, a critical physical and psychological dimension of real-world football remains unmodeled:
 1. **Linear / Neglected Stamina in Continuous Possession**:
    - In real top-flight football, players cover $10.5\text{–}13.0\text{ km}$ per match, with high-intensity sprinting and counter-pressing draining anaerobic capacity non-linearly.
    - At present, players maintain virtually identical passing precision, sprint speeds, and defensive awareness at minute 88 as they do at minute 8.
@@ -238,7 +238,7 @@ While Pillars 1–4 have calibrated spatial positioning, pass volumes, xG baseli
 
 ---
 
-### Pillar 5 Architectural Blueprint
+### Stage 5 Architectural Blueprint
 
 ```mermaid
 flowchart TD
@@ -308,10 +308,10 @@ AI managers evaluate the match at minutes 60, 70, and 78 with clear tactical obj
 
 ---
 
-## 8. Pillar 6: Tactical Set-Piece Choreography, Referee Profiles & Environmental Matchday Physics
+## 8. Stage 6: Tactical Set-Piece Choreography, Referee Profiles & Environmental Matchday Physics
 
 ### Problem Diagnosis: The Monolithic Rules & Generic Restarts
-While Pillars 1–5 have established spatial pitch control, phase-based continuous flow, game-state urgency, anti-blowout bounds, and biomechanical stamina/substitutions, critical dead-ball, officiating, and atmospheric dimensions of real-world football remain abstracted:
+While Stages 1–5 have established spatial pitch control, phase-based continuous flow, game-state urgency, anti-blowout bounds, and biomechanical stamina/substitutions, critical dead-ball, officiating, and atmospheric dimensions of real-world football remain abstracted:
 1. **Generic, Unchoreographed Set Pieces**:
    - In modern football, **28%–35% of all match goals** originate from dead-ball restarts (corners, indirect free-kicks, direct free-kicks, long throw-ins). Teams employ specialized set-piece tacticians (e.g. Nicolas Jover at Arsenal, Bernardo Cueva at Chelsea/Brentford).
    - Currently, corners and free kicks rely on generic random aerial rolls rather than choreographed tactical routines (near-post flick-ons, far-post overloads, short corner cutbacks, screens on the goalkeeper).
@@ -327,7 +327,7 @@ While Pillars 1–5 have established spatial pitch control, phase-based continuo
 
 ---
 
-### Pillar 6 Architectural Blueprint
+### Stage 6 Architectural Blueprint
 
 ```mermaid
 flowchart TD
@@ -399,12 +399,12 @@ Matches draw dynamic weather and pitch conditions based on season and region:
 
 ## 9. Implementation Checklist
 
-- [x] **Pillar 1**: 18-zone tactical pitch grid (`grid.py`) with positional anchors.
-- [x] **Pillar 2**: 4-phase continuous possession engine (`possession.py`) with micro-ticks and realistic pass volumes (907 passes/match).
-- [x] **Pillar 3**: Dynamic game-state AI manager (`gamestate.py`) with 5 tactical mentalities and formation fluidity.
+- [x] **Stage 1**: 18-zone tactical pitch grid (`grid.py`) with positional anchors.
+- [x] **Stage 2**: 4-phase continuous possession engine (`possession.py`) with micro-ticks and realistic pass volumes (907 passes/match).
+- [x] **Stage 3**: Dynamic game-state AI manager (`gamestate.py`) with 5 tactical mentalities and formation fluidity.
 - [x] **Data Refactoring**: 2-column `data/managers.csv` (`club,name`) and `data/club_managers.json` covering all 444 clubs from Wikipedia without hardcoded fallbacks.
 - [x] **Baseline Stress-Testing**: Automated 100-match realism benchmark (`test_realism_benchmark.py`).
-- [x] **Pillar 4 Calibration**:
+- [x] **Stage 4 Calibration**:
   - [x] Implement defender shot-blocking and deflection logic in `possession.py`.
   - [x] Recalibrate base xG values to Opta standard baselines.
   - [x] Incorporate goalkeeper attributes (`gk_diving`, `gk_reflexes`) into conversion resistance.
@@ -412,7 +412,7 @@ Matches draw dynamic weather and pitch conditions based on season and region:
   - [x] Implement trailing low-block compactness and lead-protection game killing.
   - [x] Rerun 100-match benchmark to verify total goals (2.74) and blowout rate (17.0%).
 - [x] **Comprehensive Test Suite**: 45/45 passing pytest suite in `tests/` covering grid, gamestate, tactics, elo, data integrity, and realism.
-- [x] **Pillar 5 Implementation**:
+- [x] **Stage 5 Implementation**:
   - [x] Implement non-linear stamina decay in `possession.py` with tactical pressing multipliers.
   - [x] Implement fatigue attribute degradation (pace, defending, passing composure, card risk).
   - [x] Implement AI Manager in-match substitution decision engine at min 60, 68, 75, 82 (up to 5 substitutions).
@@ -420,7 +420,7 @@ Matches draw dynamic weather and pitch conditions based on season and region:
   - [x] Implement defensive fortress substitution (back-5 transition to protect leads).
   - [x] Implement dynamic stoppage time calculation based on match events.
   - [x] Verify 76'–90'+ goal distribution reaches authentic 22%–26% proportion.
-- [ ] **Pillar 6 Implementation**:
+- [ ] **Stage 6 Implementation**:
   - [ ] Implement tactical set-piece choreography engine (near-post flick, far-post overload, short corner routines).
   - [ ] Implement referee personality profiles (strictness index, card thresholds, crowd pressure scalar).
   - [ ] Implement VAR review engine with marginal offside checks, penalty reviews, and commentary drama.

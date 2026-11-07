@@ -5,12 +5,12 @@
 ### From Heuristic Simulator to Grounded Probabilistic Predictor
 Hattrk has evolved from a single-run, heuristic event simulator into an **empirically grounded, phase-based football match engine and probabilistic predictor**.
 
-Through the implementation of the **Match Engine Realism Pillars**:
-1. **Pillar 1 (Spatial Geometry)**: 18-zone tactical pitch grid (`grid.py`) with positional anchors and passing lane control.
-2. **Pillar 2 (Continuous Flow)**: 4-phase micro-possession state machine (`possession.py`) producing authentic pass volumes (893 passes/match at 88.3% accuracy).
-3. **Pillar 3 (Game-State AI)**: Dynamic tactical mentalities and urgency scaling based on scoreline and match clock (`gamestate.py`).
-4. **Pillar 4 (Statistical Calibration)**: Opta base xG normalization, defender shot-blocking, goalkeeper save resistance, and lead-retention anti-blowout bounds (blowouts reduced from 47% to 17%).
-5. **Pillar 5 (Biomechanical Stamina & Substitutions)**: Non-linear fatigue curves, dynamic in-match manager substitutions, super-sub pace mismatches, and late-game surge physics.
+Through the implementation of the **Match Engine Realism Stages**:
+1. **Stage 1 (Spatial Geometry)**: 18-zone tactical pitch grid (`grid.py`) with positional anchors and passing lane control.
+2. **Stage 2 (Continuous Flow)**: 4-phase micro-possession state machine (`possession.py`) producing authentic pass volumes (893 passes/match at 88.3% accuracy).
+3. **Stage 3 (Game-State AI)**: Dynamic tactical mentalities and urgency scaling based on scoreline and match clock (`gamestate.py`).
+4. **Stage 4 (Statistical Calibration)**: Opta base xG normalization, defender shot-blocking, goalkeeper save resistance, and lead-retention anti-blowout bounds (blowouts reduced from 47% to 17%).
+5. **Stage 5 (Biomechanical Stamina & Substitutions)**: Non-linear fatigue curves, dynamic in-match manager substitutions, super-sub pace mismatches, and late-game surge physics.
 
 ### Architecture Comparison
 | Dimension | Legacy Simulator | Current Calibrated Predictor | Production Predictor Target |
@@ -26,28 +26,28 @@ Through the implementation of the **Match Engine Realism Pillars**:
 
 ```mermaid
 flowchart TD
-    subgraph Phase1["Phase 1: Monte Carlo Predictor Engine (Completed)"]
+    subgraph Phase1["Phase 1: Monte Carlo Predictor Engine"]
         A1["Headless Batch Execution (N = 500 - 1000)"] --> A2["Outcome Probabilities P(H), P(D), P(A)"]
         A2 --> A3["Scoreline Matrix & Betting Markets (BTTS, O/U)"]
         A3 --> A4["Player Props (Goalscorers & Cards) & JSON Export"]
     end
 
-    subgraph Phase2["Phase 2: Macro Calibration & Elo Anchor (Completed)"]
+    subgraph Phase2["Phase 2: Macro Calibration & Elo Anchor"]
         B1["444-Club Elo Database"] --> B2["Bradley-Terry Win Probability Formula"]
         B2 --> B3["Goal Difference Anchor (λ_h - λ_a)"]
         B3 --> B4["Home Advantage & Blowout Dampening"]
     end
 
-    subgraph Phase3["Phase 3: Real-World Dynamic Context (Completed)"]
+    subgraph Phase3["Phase 3: Real-World Dynamic Context"]
         C1["Rolling Form Parsing (WWDDL)"] --> C2["Tactical Philosophy Friction (High Press vs Tiki-Taka)"]
         C2 --> C3["Formation Matchups (e.g. 4-3-3 vs 3-5-2)"]
         C3 --> C4["Squad Absences & Key Player Drop-Off"]
     end
 
-    subgraph Phase4["Phase 4: Historical Backtesting & Hyperparameter Loss Tuning (Active)"]
+    subgraph Phase4["Phase 4: Historical Backtesting & Hyperparameter Loss Tuning"]
         D1["Historical Season Datasets (380 EPL Matches)"] --> D2["Objective Loss Scoring (RPS < 0.188, Brier < 0.208)"]
         D2 --> D3["Automated Parameter Optimization (Optuna)"]
-        D3 --> D4["Pillar 5 Stamina & Super-Sub Integration"]
+        D3 --> D4["Stage 5 Stamina & Super-Sub Integration"]
     end
 
     Phase1 --> Engine["Calibrated Hattrk Prediction Suite"]
@@ -58,11 +58,11 @@ flowchart TD
 
 ---
 
-### Phase 1: Monte Carlo Ensemble Predictor Module (`predictor.py`) — `[COMPLETED]`
+### Phase 1: Monte Carlo Ensemble Predictor Module (`predictor.py`)
 
 A single simulation has high variance. `predictor.py` runs an ensemble of headless simulations to extract true probability distributions.
 
-#### Implemented Deliverables:
+#### Deliverables:
 1. **Headless High-Speed Execution**:
    - Console stdout suppressed during iterations (`open(os.devnull, 'w')`) and scorecard writing disabled (`set_save_scorecard(False)`).
    - Fast execution of $N = 500 \text{ to } 1,000$ iterations head-to-head.
@@ -84,11 +84,11 @@ A single simulation has high variance. `predictor.py` runs an ensemble of headle
 
 ---
 
-### Phase 2: Macro Calibration & Bayesian Prior (`elo.py`) — `[COMPLETED]`
+### Phase 2: Macro Calibration & Bayesian Prior (`elo.py`)
 
 Relying purely on individual FIFA attributes created blind spots where squad cohesion and team-level power were lost.
 
-#### Implemented Deliverables:
+#### Deliverables:
 1. **Club Elo Database & Team Anchor**:
    - Integrated Club Elo rankings for all 444 clubs with tier-anchored ratings (`elo.py`).
    - Elo win probability calculation based on the Bradley-Terry logistic model:
@@ -102,9 +102,9 @@ Relying purely on individual FIFA attributes created blind spots where squad coh
 
 ---
 
-### Phase 3: Real-World Dynamic Context & Tactical Archetypes — `[COMPLETED]`
+### Phase 3: Real-World Dynamic Context & Tactical Archetypes
 
-#### Implemented Deliverables:
+#### Deliverables:
 1. **Rolling Form String Parser**:
    - Ingests 5-match form strings (e.g. `WWDDL`, `LLLLL`, `WWWWW`).
    - Computes weighted form momentum: recent matches carry heavier weight ($w = [1.0, 1.25, 1.5, 1.75, 2.0]$).
@@ -122,11 +122,11 @@ Relying purely on individual FIFA attributes created blind spots where squad coh
 
 ---
 
-### Phase 4: Automated Backtesting, Hyperparameter Loss Tuning & Pillar 5 Integration — `[ACTIVE]`
+### Phase 4: Automated Backtesting, Hyperparameter Loss Tuning & Stage 5 Integration
 
 To elevate Hattrk into an industry-grade prediction model, the simulator parameters must be optimized against empirical loss functions over historical match results.
 
-#### Active Key Deliverables:
+#### Key Deliverables:
 1. **Historical Backtesting Pipeline**:
    - Ingestion of real-world league seasons (Premier League, La Liga, Serie A - 380 matches each).
    - Automated backtesting script evaluating forecast probabilities against actual historical scorelines.
@@ -146,7 +146,7 @@ To elevate Hattrk into an industry-grade prediction model, the simulator paramet
      - Defender shot-block resistance coefficient
      - Goalkeeper save dampening factor
      - Momentum reversion half-life
-4. **Pillar 5 Biomechanical Stamina & Super-Sub Integration**:
+4. **Stage 5 Biomechanical Stamina & Super-Sub Integration**:
    - Incorporate non-linear stamina degradation into the Monte Carlo loop.
    - Simulate the predictive impact of bench depth: a team with elite substitutes (e.g. Manchester City bringing on fresh 85+ OVR attackers at 70') exhibits significantly higher late-game win conversion than a team with shallow squad depth.
 5. **Multi-Market Derivative Pricing Engine**:
@@ -187,5 +187,6 @@ Current performance of `predictor.py` across calibrated benchmark matchups:
 - [x] **Phase 4: Automated Optimization & Derivative Markets** (`predictor.py`)
   - [x] Ingest European benchmark historical datasets and backtesting suite (`run_backtest_suite`).
   - [x] Build automated parameter optimization pipeline (`optimize_hyperparameters` with coordinate loss search).
-  - [x] Integrate Pillar 5 Biomechanical Stamina & Super-Sub bench depth into Monte Carlo predictions.
+  - [x] Integrate Stage 5 Biomechanical Stamina & Super-Sub bench depth into Monte Carlo predictions.
   - [x] Implement Asian Handicap (-0.5, -1.0, -1.5), Draw No Bet (DNB), Double Chance, and Expected Points (xP) pricing.
+- [ ] **Phase 5: Automated Live Fixture Scraping & In-Play Live Odds Engine**
