@@ -411,18 +411,10 @@ Matches draw dynamic weather and pitch conditions based on season and region:
   - [x] Rebalance home advantage Elo boost and clamp extreme mismatch multipliers.
   - [x] Implement trailing low-block compactness and lead-protection game killing.
   - [x] Rerun 100-match benchmark to verify total goals (2.74) and blowout rate (17.0%).
-- [x] **Comprehensive Test Suite**: 45/45 passing pytest suite in `tests/` covering grid, gamestate, tactics, elo, data integrity, and realism.
-- [x] **Stage 5 Implementation**:
-  - [x] Implement non-linear stamina decay in `possession.py` with tactical pressing multipliers.
-  - [x] Implement fatigue attribute degradation (pace, defending, passing composure, card risk).
-  - [x] Implement AI Manager in-match substitution decision engine at min 60, 68, 75, 82 (up to 5 substitutions).
-  - [x] Implement "Super-Sub" pace burst mismatch against tired fullbacks.
-  - [x] Implement defensive fortress substitution (back-5 transition to protect leads).
-  - [x] Implement dynamic stoppage time calculation based on match events.
-  - [x] Verify 76'–90'+ goal distribution reaches authentic 22%–26% proportion.
-- [ ] **Stage 6 Implementation**:
-  - [ ] Implement tactical set-piece choreography engine (near-post flick, far-post overload, short corner routines).
-  - [ ] Implement referee personality profiles (strictness index, card thresholds, crowd pressure scalar).
-  - [ ] Implement VAR review engine with marginal offside checks, penalty reviews, and commentary drama.
-  - [ ] Implement environmental weather generator (rain, extreme heat, snow) and ball skid/handling spill physics.
-  - [ ] Validate set-piece goal proportion reaches authentic 28%–35% of all match goals.
+- [x] **Comprehensive Test Suite**: 59/59 passing pytest suite in `tests/` covering grid, gamestate, tactics, elo, data integrity, realism, stage 5, stage 6, ratings, leagues, and continental seasons.
+- [x] **Stage 6 Implementation**:
+  - [x] Implement tactical set-piece choreography engine (near-post flick, far-post overload, short corner routines).
+  - [x] Implement referee personality profiles (strictness index, card thresholds, crowd pressure scalar).
+  - [x] Implement VAR review engine with marginal offside checks, penalty reviews, and commentary drama.
+  - [x] Implement environmental weather generator (rain, extreme heat, snow) and ball skid/handling spill physics.
+  - [x] Validate set-piece goal proportion reaches authentic 28%–35% of all match goals.

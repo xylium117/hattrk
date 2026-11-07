@@ -4,9 +4,10 @@
 
 [![MIT License](https://img.shields.io/badge/License-MIT-blue.svg?logo=opensourceinitiative&logoColor=white)](LICENSE)
 [![Python 3.12+](https://img.shields.io/badge/Python-3.12%2B-3776AB.svg?logo=python&logoColor=white)](https://www.python.org/)
-[![Pytest Suite](https://img.shields.io/badge/Pytest-45%2F45%20Passed-brightgreen.svg?logo=pytest&logoColor=white)](tests/)
+[![Pytest Suite](https://img.shields.io/badge/Pytest-59%2F59%20Passed-brightgreen.svg?logo=pytest&logoColor=white)](tests/)
 [![Opta xG Calibrated](https://img.shields.io/badge/Opta_xG-Calibrated-orange.svg)](SIMULATOR_REALISM_PLAN.md)
-[![Bradley-Terry Elo](https://img.shields.io/badge/Elo_Prior-444_Clubs-purple.svg)](elo.py)
+[![Database](https://img.shields.io/badge/Clubs_Database-745_Clubs-purple.svg)](data/)
+[![Leagues](https://img.shields.io/badge/Leagues-65_Global-blue.svg)](data/leagues.json)
 [![Spatial 18-Zone Grid](https://img.shields.io/badge/Spatial_Grid-18_Zones-success.svg)](grid.py)
 [![Monte Carlo Ensemble](https://img.shields.io/badge/Monte_Carlo-1000_Sims%2Fsec-red.svg)](predictor.py)
 [![Prediction Loss](https://img.shields.io/badge/RPS_Loss-0.174-teal.svg)](PREDICTION_PLAN.md)
@@ -468,9 +469,9 @@ $$\text{StoppageTime} = \text{round} \left( 1.0 + 0.5 \times N_{\text{subs}} + 0
 
 ---
 
-## 12. Tactical Set-Piece Choreography & Matchday Physics (Stage 6)
+## 12. Tactical Set-Piece Choreography, Officiating & Environmental Physics (Stage 6)
 
-*Formulated and planned in [`SIMULATOR_REALISM_PLAN.md`](SIMULATOR_REALISM_PLAN.md).*
+Stage 6 introduces dead-ball choreography, referee personality profiles, dynamic VAR review mechanics, environmental matchday physics, and calibrated realistic match ratings.
 
 ```mermaid
 flowchart TD
@@ -498,6 +499,79 @@ flowchart TD
     REF --> MATCH_ENGINE
     PHYS --> MATCH_ENGINE
 ```
+
+### 12.1 Choreographed Dead-Ball Routines
+Dead-ball restarts transition from generic aerial rolls into four choreographed set-piece routines in `matchday.py`:
+- **Near-Post Flick-on**: Darting near-post run glances delivery across the face of goal, generating high-danger back-post tap-ins.
+- **Far-Post Aerial Overload**: Physical dominance routine isolating aerial threats against smaller fullbacks in Zone 17/18.
+- **Goalkeeper Screen**: Attackers legally screen the goalkeeper in the 6-yard box, creating unguarded aerial opportunities.
+- **Short Corner & Half-Space Cutback**: Quick 1-2 passing exchange bypassing aerial congestion to create a clean angled shooting corridor from the edge of the box.
+
+### 12.2 Referee Personalities and Whistle Strictness
+Every match is officiated by an authentic referee profile with specific strictness traits:
+- **Strict Disciplinarian ($S = 1.30$)**: Lower foul threshold, $+30\%$ card frequency, and $+25\%$ penalty award probability.
+- **Lenient Flow Referee ($S = 0.80$)**: High contact tolerance, lower card rates, favoring fast physical counter-attacks.
+- **Crowd Pressure Bias**: Hostile home crowds ($60,000+$ attendance) apply psychological bias to marginal decisions.
+
+### 12.3 VAR Review Delays and Disallowed Goals
+- Approximately $4.8\%\text{–}6.5\%$ of scored candidate goals and contentious penalty appeals undergo VAR review.
+- Checks evaluate marginal build-up offsides, lead-up handballs, and attacking-phase fouls.
+- Disallowed goals trigger instant psychological momentum shifts and inject $+1.2\text{–}1.8$ minutes into second-half dynamic stoppage time.
+
+### 12.4 Environmental Pitch Skid and Precipitation Physics
+Matches generate authentic atmospheric conditions:
+- **Wet / Heavy Rain**: Ground pass speed increases by $+12\%$, sliding tackle foul risk rises by $+20\%$, and goalkeeper handling spill rate increases by $+30\%$ (yielding high-danger rebound tap-ins).
+- **Extreme Heat**: Accelerates biomechanical stamina decay by $+20\%$, forcing earlier second-half fatigue crashes in high-pressing systems.
+- **Freezing / Snow**: Reduces ground pass velocity and long-ball accuracy by $-15\%$.
+
+### 12.5 Calibrated Realistic Match Ratings
+Previously, player match ratings scaled linearly with raw goals, leading to unrealistic 10.0 ratings awarded for routine braces or hat-tricks. Match ratings in `engine.py` are now calibrated against modern European benchmarks (WhoScored, Sofascore, Opta):
+- **Baseline starter**: 5.8 – 6.8
+- **Solid / Good performance**: 7.0 – 7.8
+- **Man of the Match (MOTM)**: 8.0 – 8.8
+- **Exceptional brace / masterclass**: 8.9 – 9.4
+- **Historic 10.0**: Asymptotically capped; only accessible with 4+ goals, clean-sheet double-digit saves, or multi-goal/multi-assist demolition masterclasses.
+
+---
+
+## 13. Domestic League System & Probabilistic Season Finishes (`league.py` & `predictor.py --league`)
+
+### 13.1 Double Round-Robin Scheduling & Matchdays
+`league.py` models full domestic league campaigns across 65 cataloged leagues:
+- Generates balanced double round-robin home-and-away schedules with round rotation.
+- Simulates concurrent matchday fixtures with rolling 5-game form integration (`WWDDL`), live goal difference tracking, clean sheets, and Golden Boot top-scorer tracking.
+- Standings tables format with standard European criteria: Rank, Club, P, W, D, L, GF, GA, GD, Pts, and Rolling Form.
+
+### 13.2 Probabilistic League Finish Predictor (`predictor.py --league`)
+The prediction engine models an entire season's finish distribution via Monte Carlo simulation:
+```bash
+python predictor.py --league "Premier League" --runs 500
+```
+Taking rolling team form, squad quality, and player form into account, the engine outputs:
+- **Champion %**: Probability of lifting the domestic title.
+- **Continental % (UCL/UEL/UECL)**: Probability of qualifying for European spots.
+- **Relegation %**: Probability of falling below the relegation line.
+- **Expected Points ($xP$)**: Probabilistic average points tally across campaigns.
+- **Expected Goal Difference ($xGD$)** and **Average Finish Position**.
+
+---
+
+## 14. Multi-Continental Season Simulator & Dynasty Hall of Fame (`season.py`)
+
+### 14.1 Multi-Continental Competitions
+`season.py` links domestic leagues and premier continental knockout tournaments across 5 global confederations:
+- **Europe (UEFA)**: UEFA Champions League (UCL, 16 clubs), UEFA Europa League (UEL, 16 clubs), UEFA Conference League (UECL, 16 clubs), and UEFA Women's Champions League (UWCL, 8 clubs).
+- **South America (CONMEBOL)**: Copa Libertadores (16 clubs) and Copa Sudamericana (16 clubs).
+- **North America (CONCACAF)**: CONCACAF Champions Cup (16 clubs).
+- **Asia (AFC)**: AFC Champions League Elite (16 clubs).
+- **Africa (CAF)**: CAF Champions League (8 clubs).
+
+### 14.2 Two-Legged Knockout Ties & Neutral Finals
+- Continental rounds simulate home-and-away two-legged ties with aggregate score settlement.
+- Finals are contested as single-leg neutral showdowns featuring extra time and penalty shootouts if level.
+
+### 14.3 Multi-Season Dynasty Hall of Fame
+Users can simulate $S$ consecutive seasons across selected continents. The engine tracks historical domestic crowns, continental silverware, and aggregates a comprehensive **Trophy Cabinet & Dynasty Hall of Fame**.
 
 ---
 
@@ -737,7 +811,10 @@ for _ in range(500):
 
 ```
 ├── data/
-│   ├── database.csv              # 444 club rosters, player attributes & positions
+│   ├── database.csv              # Player attribute dataset (18,000+ players)
+│   ├── clubs.json                # Complete database of 745 clubs across 65 leagues
+│   ├── leagues.json              # Complete database of 65 domestic leagues & continental spots
+│   ├── league_clubs.csv          # Relational mapping between clubs and leagues
 │   ├── managers.csv              # Manager directory and gender mapping
 │   ├── club_managers.json        # Club-to-manager relational mapping
 │   └── stadiums.json             # Authentic venues and capacities
@@ -746,9 +823,12 @@ for _ in range(500):
 │   ├── test_elo.py               # Bradley-Terry Elo, win probs, form parsing
 │   ├── test_gamestate.py         # Tactical urgency and dynamic mentalities
 │   ├── test_grid.py              # 18-zone pitch geometry and coordinates
+│   ├── test_league_and_season.py # Domestic league, predictor finish, continental cups
 │   ├── test_match_engine.py      # Core match simulation and starting XI selection
-│   ├── test_stage5_and_prediction.py # Stamina decay, super-subs, stoppage time, RPS
+│   ├── test_ratings.py           # Calibrated match ratings & historic 10.0 bounds
 │   ├── test_realism.py           # Statistical calibration, xG, shot blocks, anti-blowout
+│   ├── test_stage5_and_prediction.py # Stamina decay, super-subs, stoppage time, RPS
+│   ├── test_matchday.py          # Set-piece choreography, referee profiles, VAR, weather
 │   └── test_tactics.py           # Formations, player familiarity, fluidity
 ├── variables/
 │   ├── customteams.txt           # User-created custom team definitions
@@ -760,9 +840,12 @@ for _ in range(500):
 ├── game.py                       # Fixture setup, XI generation, and bench picking
 ├── gamestate.py                  # Real-time game-state urgency AI
 ├── grid.py                       # 18-zone spatial pitch grid and passing geometry
-├── main.py                       # Interactive CLI launcher
+├── league.py                     # Domestic round-robin league engine and standings
+├── main.py                       # Interactive CLI launcher with full menu options
+├── matchday.py                   # Set-piece choreography, referee profiles, VAR & weather
 ├── possession.py                 # 4-phase micro-possession engine & stamina decay
-├── predictor.py                  # Headless Monte Carlo ensemble prediction suite
+├── predictor.py                  # Headless Monte Carlo ensemble & league finish predictor
+├── season.py                     # Multi-continental season & tournament cup simulator
 ├── tactics.py                    # Formations, fluidity, and manager tactical philosophies
 ├── pyproject.toml                # Build configuration and pytest metadata
 ├── SIMULATOR_REALISM_PLAN.md     # 6-stage match engine realism blueprint
@@ -878,24 +961,27 @@ The `--backtest` flag runs historical benchmark fixtures across European top-tie
 
 ## 26. Testing and Validation
 
-### 26.1 Pytest 45/45 Suite Architecture
-The test suite consists of 45 comprehensive unit and integration tests located in `tests/`:
+### 26.1 Pytest 59/59 Suite Architecture
+The test suite consists of 59 comprehensive unit and integration tests located in `tests/`:
 
 ```
 ============================= test session starts =============================
 platform win32 -- Python 3.14.7, pytest-9.1.1
-collected 45 items
+collected 59 items
 
-tests/test_data_integrity.py ............                               [ 11%]
-tests/test_elo.py .................                                     [ 24%]
-tests/test_gamestate.py ..........                                       [ 33%]
-tests/test_grid.py .................                                    [ 48%]
-tests/test_match_engine.py ........                                     [ 57%]
-tests/test_stage5_and_prediction.py ...............                    [ 71%]
-tests/test_realism.py .................                                 [ 86%]
-tests/test_tactics.py ................                                  [100%]
+tests/test_data_integrity.py .....                                      [  8%]
+tests/test_elo.py ......                                                [ 18%]
+tests/test_gamestate.py ....                                            [ 25%]
+tests/test_grid.py .......                                              [ 37%]
+tests/test_league_and_season.py .....                                   [ 45%]
+tests/test_match_engine.py ....                                         [ 52%]
+tests/test_ratings.py ....                                              [ 59%]
+tests/test_realism.py .......                                           [ 71%]
+tests/test_stage5_and_prediction.py ......                              [ 81%]
+tests/test_matchday.py .....                                              [ 89%]
+tests/test_tactics.py ......                                            [100%]
 
-============================= 45 passed in 2.53s ==============================
+============================= 59 passed in 10.59s =============================
 ```
 
 ### 26.2 Verification of Zero Comments and Docstrings
@@ -965,7 +1051,7 @@ The realism roadmap details the complete 6-stage progression to transform the ma
 - [x] **Stage 3: Dynamic Game-State Adaptation** ([Section 4](./SIMULATOR_REALISM_PLAN.md#4-stage-3-dynamic-game-state-adaptation))
 - [x] **Stage 4: Statistical Calibration & Anti-Blowout Engine** ([Section 6](./SIMULATOR_REALISM_PLAN.md#6-stage-4-statistical-calibration--anti-blowout-engine))
 - [x] **Stage 5: Biomechanical Stamina Curves & Dynamic Substitutions** ([Section 7](./SIMULATOR_REALISM_PLAN.md#7-stage-5-biomechanical-stamina-curves-dynamic-in-match-substitutions--late-match-surge-dynamics))
-- [ ] **Stage 6: Tactical Set-Piece Choreography, Referee Personalities & Environmental Matchday Physics** ([Section 8](./SIMULATOR_REALISM_PLAN.md#8-stage-6-tactical-set-piece-choreography-referee-profiles--environmental-matchday-physics))
+- [x] **Stage 6: Tactical Set-Piece Choreography, Referee Personalities & Environmental Matchday Physics** ([Section 8](./SIMULATOR_REALISM_PLAN.md#8-stage-6-tactical-set-piece-choreography-referee-profiles--environmental-matchday-physics))
 
 ### 30.2 Probabilistic Modeling Evolution: [`PREDICTION_PLAN.md`](./PREDICTION_PLAN.md)
 The prediction roadmap outlines the transformation of Hattrk into an industry-grade forecasting suite:
@@ -973,7 +1059,8 @@ The prediction roadmap outlines the transformation of Hattrk into an industry-gr
 - [x] **Phase 2: Macro Calibration & Bayesian Prior** ([Section 2.2](./PREDICTION_PLAN.md#phase-2-macro-calibration--bayesian-prior-elopy))
 - [x] **Phase 3: Real-World Dynamic Context & Tactical Archetypes** ([Section 2.3](./PREDICTION_PLAN.md#phase-3-real-world-dynamic-context--tactical-archetypes))
 - [x] **Phase 4: Automated Optimization & Derivative Markets** ([Section 2.4](./PREDICTION_PLAN.md#phase-4-automated-backtesting-hyperparameter-loss-tuning--stage-5-integration))
-- [ ] **Phase 5: Automated Live Fixture Scraping & In-Play Live Odds Engine**
+- [x] **Phase 5: Domestic League Outcome Forecasts & Continental Simulations** ([Section 2.5](./PREDICTION_PLAN.md#phase-5-domestic-league-outcome-forecasts--continental-simulations-predictorpy-leaguepy-seasonpy))
+- [ ] **Phase 6: Automated Live Fixture Scraping & In-Play Live Odds Engine**
 
 ### 30.3 Milestone Delivery Schedule
 

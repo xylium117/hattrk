@@ -4,6 +4,7 @@ from gamestate import GameStateManager
 from possession import PossessionEngine
 from elo import get_club_elo
 from tactics import ManagerPOV, get_formation_matchup, calculate_team_fluidity, load_club_tactics
+from matchday import Referee, Weather, VAREngine, SetPieceChoreography
 
 if sys.stdout.encoding and sys.stdout.encoding.lower() != 'utf-8':
 	try:
@@ -199,44 +200,70 @@ class MatchPerformance:
 
 		if self.passes_attempted >= 8:
 			acc = self.passes_completed / float(self.passes_attempted)
-			acc_delta = (acc - 0.82) * 1.6
-			vol_bonus = min(0.65, (self.passes_completed / 55.0) * 0.45)
+			acc_delta = (acc - 0.82) * 0.9
+			vol_bonus = min(0.35, (self.passes_completed / 60.0) * 0.25)
 			r += acc_delta + vol_bonus
 
-		r += self.tackles * 0.16
-		r += self.interceptions * 0.18
-		r += self.aerials_won * 0.12
+		r += self.tackles * 0.08
+		r += self.interceptions * 0.09
+		r += self.aerials_won * 0.06
 
-		r += self.goals * 1.35
-		r += self.assists * 0.85
-		r += self.key_passes * 0.22
-		r += self.shots_on_target * 0.12
-		r += max(0, self.shots - self.shots_on_target) * 0.04
-		r += self.xg * 0.15
-		r += self.xa * 0.15
+		if self.goals == 1:
+			r += 0.75
+		elif self.goals == 2:
+			r += 1.45
+		elif self.goals >= 3:
+			r += 1.45 + (self.goals - 2) * 0.85
+
+		if self.assists == 1:
+			r += 0.45
+		elif self.assists >= 2:
+			r += 0.45 + (self.assists - 1) * 0.40
+
+		r += self.key_passes * 0.10
+		r += self.shots_on_target * 0.06
+		r += max(0, self.shots - self.shots_on_target) * 0.02
+		r += self.xg * 0.08
+		r += self.xa * 0.08
 
 		if p and (p.position == 'GK' or getattr(p, 'primary_position', '') == 'GK'):
-			r += self.saves * 0.32
+			r += self.saves * 0.18
 
-		r -= self.fouls_committed * 0.08
-		r -= self.yellow_cards * 0.45
-		r -= self.red_cards * 2.2
+		r -= self.fouls_committed * 0.06
+		r -= self.yellow_cards * 0.35
+		r -= self.red_cards * 1.8
 
 		if match and p and p.position in ['GK', 'DEF', 'DMF']:
 			home_team_name = match.home.name if hasattr(match.home, 'name') else str(match.home)
 			opp_score = match.away_score if (p.team == home_team_name or p.team == match.home) else match.home_score
 			if opp_score == 0:
-				r += 0.5
+				r += 0.35
 			elif opp_score >= 2:
-				r -= min(0.6, (opp_score - 1) * 0.15)
+				r -= min(0.5, (opp_score - 1) * 0.12)
 
-		ovr_bias = (p.overall - 80) * 0.008
+		ovr_bias = (p.overall - 80) * 0.005
 		seed_val = (hash(p.name + str(self.passes_completed) + str(mins)) % 31) - 15
-		noise = (seed_val / 100.0)
+		noise = (seed_val / 150.0)
 		r += ovr_bias + noise
 
 		if mins < 35 and (self.goals + self.assists) == 0:
-			r = 6.0 + (r - 6.0) * 0.65
+			r = 6.0 + (r - 6.0) * 0.60
+
+		if r > 8.5:
+			r = 8.5 + (r - 8.5) * 0.42
+
+		is_historic = False
+		if self.goals >= 4 or (self.goals >= 3 and self.assists >= 2) or (self.goals + self.assists >= 5):
+			is_historic = True
+		elif p and p.position == 'GK' and self.saves >= 11:
+			if match:
+				home_team_name = match.home.name if hasattr(match.home, 'name') else str(match.home)
+				opp_score = match.away_score if (p.team == home_team_name or p.team == match.home) else match.home_score
+				if opp_score == 0:
+					is_historic = True
+
+		if not is_historic and r > 9.6:
+			r = 9.4 + min(0.25, (r - 9.4) * 0.2)
 
 		r = max(4.0, min(10.0, r))
 		self.rating = round(r, 1)
@@ -1182,8 +1209,8 @@ class CoachAI:
 			self.team.manager_pov.record_substitution(self.team)
 		out_disp = getattr(p_out, 'short_name', '') or p_out.name
 		in_disp = getattr(p_in, 'short_name', '') or p_in.name
-		self.match.logger("SUBSTITUTION ({}): {} replaces {} ({})".format(
-			self.team.name, in_disp, out_disp, role_note
+		self.match.logger("SUBSTITUTION: {} replaces {} for {}.".format(
+			in_disp, out_disp, self.team.name
 		))
 
 class fixture:
@@ -1242,6 +1269,10 @@ class fixture:
 		self.away_game_state = None
 		self.possession_engine = None
 		self.home_elo = 1750
+		self.referee = Referee.generate_random()
+		self.weather = Weather.generate_random()
+		self.var_engine = VAREngine()
+		self.stoppage_delays = 0.0
 		self.away_elo = 1750
 
 	def decay_momentum(self):
@@ -1833,17 +1864,18 @@ class period:
 		self.injury_time = random.randint(1, 3) if half == 1 else random.randint(3, 5)
 
 	def calculate_dynamic_stoppage(self):
+		delays = getattr(self.match, 'stoppage_delays', 0.0)
 		if self.half == 1:
 			base = 1.0
-			extra = (len(self.match.card) * 0.5) + ((self.match.home_yellows + self.match.away_yellows) * 0.3)
+			extra = (len(self.match.card) * 0.5) + ((self.match.home_yellows + self.match.away_yellows) * 0.3) + (delays * 0.5)
 			return max(1, min(4, round(base + extra)))
 		elif self.half == 2:
 			base = 2.0
 			n_subs = len(getattr(self.match.home, 'subs_used', [])) + len(getattr(self.match.away, 'subs_used', []))
 			n_goals = self.match.home_score + self.match.away_score
 			n_cards = (self.match.home_yellows + self.match.away_yellows + self.match.home_reds + self.match.away_reds)
-			stoppage = base + (0.5 * n_subs) + (0.75 * n_goals) + (0.4 * n_cards)
-			return max(3, min(8, round(stoppage)))
+			stoppage = base + (0.5 * n_subs) + (0.75 * n_goals) + (0.4 * n_cards) + delays
+			return max(3, min(9, round(stoppage)))
 		else:
 			return random.randint(1, 3)
 
@@ -1918,17 +1950,23 @@ class period:
 
 		att_mgr = getattr(att_team, 'manager_pov', None)
 		set_piece_focus = att_mgr.set_piece_focus if att_mgr else 'balanced'
+		routine = SetPieceChoreography.select_routine(set_piece_focus, taker, outfield)
 
 		t_name = getattr(target, 'short_name', '') or target.name
 		k_name = getattr(taker, 'short_name', '') or taker.name
 		m_disp = (getattr(marker, 'short_name', '') or marker.name) if marker else 'the defense'
 		gk_disp = (getattr(gk, 'short_name', '') or gk.name) if gk else 'the keeper'
 
-		if set_piece_focus == 'short_routine' and random.random() < 0.35:
+		spill_mult = getattr(self.match.weather, 'spill_mult', 1.0) if hasattr(self.match, 'weather') else 1.0
+		cross_qual = (taker.crossing * 0.65 + taker.curve * 0.35) / 80.0
+		target_aer = _aerial_score(target) / 80.0
+		marker_def = marker_rating / 80.0
+
+		if routine == 'short_cutback':
 			edge_cands = [p for p in outfield if p != taker and p != target]
 			edge_p = max(edge_cands, key=lambda p: getattr(p, 'long_shots', 70) * 0.6 + getattr(p, 'shot_power', 70) * 0.4) if edge_cands else target
 			e_name = getattr(edge_p, 'short_name', '') or edge_p.name
-			short_xg = 0.065 * (getattr(edge_p, 'long_shots', 75) / 80.0) * getattr(edge_p, 'fitness', 1.0)
+			short_xg = 0.055 * (getattr(edge_p, 'long_shots', 75) / 80.0) * getattr(edge_p, 'fitness', 1.0)
 			if len(edge_p.inns) > 0:
 				edge_p.inns[-1].shots += 1
 				edge_p.inns[-1].xg += short_xg
@@ -1947,9 +1985,10 @@ class period:
 					self.match.home_shots_target += 1
 				else:
 					self.match.away_shots_target += 1
+				self.match.logger(SetPieceChoreography.generate_commentary(routine, k_name, e_name, gk_disp, is_goal=True))
 				self.log_goal(edge_p, taker, att_team, 'box')
 				return
-			elif roll < 0.30:
+			elif roll < 0.28:
 				if len(edge_p.inns) > 0:
 					edge_p.inns[-1].shots_on_target += 1
 				if att_team == self.match.home:
@@ -1958,23 +1997,24 @@ class period:
 					self.match.away_shots_target += 1
 				if gk and len(gk.inns) > 0:
 					gk.inns[-1].saves += 1
-				self.match.logger("Short corner worked to {}, who curls a snapshot through traffic towards goal, but {} parries it cleanly away!".format(e_name, gk_disp))
+				self.match.logger(SetPieceChoreography.generate_commentary(routine, k_name, e_name, gk_disp, is_save=True))
 				return
 			else:
-				self.match.logger("Short corner routine attempted by {}, but the low delivery is blocked at the near post by {}.".format(k_name, m_disp))
+				self.match.logger(SetPieceChoreography.generate_commentary(routine, k_name, e_name, gk_disp))
 				return
 
-		cross_qual = (taker.crossing * 0.65 + taker.curve * 0.35) / 80.0
-		target_aer = _aerial_score(target) / 80.0
-		marker_def = marker_rating / 80.0
-		corner_xg = 0.034 * cross_qual * (target_aer / max(0.5, marker_def)) * getattr(target, 'fitness', 1.0)
+		if routine == 'near_post_flick':
+			corner_xg = 0.048 * cross_qual * (target_aer / max(0.5, marker_def)) * spill_mult
+		elif routine == 'far_post_overload':
+			corner_xg = 0.052 * cross_qual * (target_aer / max(0.5, marker_def)) * spill_mult
+		else:
+			corner_xg = 0.046 * cross_qual * (target_aer / max(0.5, gk_stat / 80.0)) * spill_mult
+
 		if target.has_playstyle('aerial fortress') or target.has_playstyle('power header'):
 			corner_xg += 0.015
 		if taker.has_playstyle('whipped pass'):
 			corner_xg += 0.010
-		if set_piece_focus == 'aerial_overload':
-			corner_xg *= 1.25
-		corner_xg = max(0.015, min(0.075, corner_xg))
+		corner_xg = max(0.020, min(0.090, corner_xg))
 
 		if len(target.inns) > 0:
 			target.inns[-1].shots += 1
@@ -1994,8 +2034,9 @@ class period:
 				self.match.home_shots_target += 1
 			else:
 				self.match.away_shots_target += 1
+			self.match.logger(SetPieceChoreography.generate_commentary(routine, k_name, t_name, gk_disp, is_goal=True))
 			self.log_goal(target, taker, att_team, 'header')
-		elif roll < 0.24:
+		elif roll < 0.28:
 			if len(target.inns) > 0:
 				target.inns[-1].shots_on_target += 1
 			if att_team == self.match.home:
@@ -2004,15 +2045,11 @@ class period:
 				self.match.away_shots_target += 1
 			if gk and len(gk.inns) > 0:
 				gk.inns[-1].saves += 1
-			self.match.logger("Corner! {} whips a dangerous cross into the box, {} connects with a thumping header, but {} makes a sensational fingertip save over the bar!".format(k_name, t_name, gk_disp))
-		elif roll < 0.30:
-			self.match.logger("Glancing header from {} off {}'s corner, but it rattles the outside of the post and bounces clear!".format(t_name, k_name))
+			self.match.logger(SetPieceChoreography.generate_commentary(routine, k_name, t_name, gk_disp, is_save=True))
 		else:
 			if marker and len(marker.inns) > 0:
 				marker.inns[-1].aerials_won += 1
-			self.match.logger("Corner swung in towards the penalty spot by {}, but {} climbs highest and thumps a commanding clearing header away.".format(k_name, m_disp))
-			if set_piece_focus == 'aerial_overload' and random.random() < 0.22:
-				self.match.logger("With center-backs pushed forward for the corner, {} quickly gather the loose ball and break at pace!".format(def_team.name))
+			self.match.logger(SetPieceChoreography.generate_commentary(routine, k_name, t_name, gk_disp))
 
 	def freekick_event(self, att_team, def_team, is_indirect=None):
 		outfield = [p for p in att_team.xi if p.position != 'GK']
@@ -2746,6 +2783,15 @@ class period:
 		return random.choices(pool, weights=weights, k=1)[0]
 
 	def log_goal(self, scorer, assister, team, shot_type='box'):
+		s_name = getattr(scorer, 'short_name', '') or (scorer.name if scorer else 'Unknown')
+		a_name = (getattr(assister, 'short_name', '') or assister.name) if assister else None
+		if hasattr(self.match, 'var_engine') and self.match.var_engine:
+			is_overturned, reason, var_lines = self.match.var_engine.check_candidate_goal(self.match, s_name, a_name, shot_type)
+			for line in var_lines:
+				self.match.logger(line)
+			if is_overturned:
+				return
+
 		if team == self.match.home:
 			self.match.home_score += 1
 		else:

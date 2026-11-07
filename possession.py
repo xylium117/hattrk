@@ -70,6 +70,8 @@ class PossessionEngine:
 
 					stam = getattr(p, 'stamina', 75.0)
 					decay = base_decay * (1.0 + (90.0 - stam) / 100.0) * m_tactics * m_pos
+					if hasattr(self.match, 'weather') and self.match.weather:
+						decay *= getattr(self.match.weather, 'stamina_mult', 1.0)
 					if hasattr(p, 'has_playstyle') and p.has_playstyle('relentless'):
 						decay *= 0.70
 					p.fitness = max(0.40, getattr(p, 'fitness', 1.0) - decay)
@@ -197,6 +199,11 @@ class PossessionEngine:
 		yellow_thresh = 0.08 if has_yellow else 0.185
 		if getattr(fouler, 'fitness', 1.0) < 0.60:
 			yellow_thresh *= 1.30
+		if hasattr(self.match, 'referee') and self.match.referee:
+			if self.match.referee.profile == 'disciplinarian':
+				yellow_thresh *= 1.25
+			elif self.match.referee.profile == 'lenient':
+				yellow_thresh *= 0.80
 
 		if card_roll < yellow_thresh:
 			if len(fouler.inns) > 0:

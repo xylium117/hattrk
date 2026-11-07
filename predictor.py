@@ -3,7 +3,7 @@ import json
 import os
 import random
 import sys
-from collections import Counter
+from collections import Counter, defaultdict
 import engine
 import game
 from elo import get_club_elo, elo_win_probability, elo_goal_difference_anchor, parse_form_string, get_tactical_friction
@@ -418,11 +418,78 @@ def optimize_hyperparameters(runs=30):
 	print("=" * 74)
 	return best_params
 
+def predict_league_outcomes(league_name_or_id, runs=50):
+	from league import get_league
+	lg_template = get_league(league_name_or_id)
+	if not lg_template:
+		return None
+
+	club_stats = defaultdict(lambda: {
+		'champion_count': 0,
+		'ucl_count': 0,
+		'relegation_count': 0,
+		'total_points': 0,
+		'total_gd': 0,
+		'total_pos': 0,
+		'positions': defaultdict(int)
+	})
+
+	for s_idx in range(runs):
+		sim_lg = get_league(league_name_or_id)
+		standings = sim_lg.simulate_season(quiet=True)
+		n_teams = len(standings)
+		for pos, entry in enumerate(standings, 1):
+			c_name = entry.club_name
+			st = club_stats[c_name]
+			st['total_points'] += entry.points
+			st['total_gd'] += entry.gd
+			st['total_pos'] += pos
+			st['positions'][pos] += 1
+			if pos == 1:
+				st['champion_count'] += 1
+			if pos <= sim_lg.ucl_spots:
+				st['ucl_count'] += 1
+			if pos > (n_teams - sim_lg.rel_spots):
+				st['relegation_count'] += 1
+
+	results = []
+	for c_name, st in club_stats.items():
+		results.append({
+			'club': c_name,
+			'avg_points': round(st['total_points'] / float(runs), 1),
+			'avg_gd': round(st['total_gd'] / float(runs), 1),
+			'avg_pos': round(st['total_pos'] / float(runs), 1),
+			'champion_pct': round((st['champion_count'] / float(runs)) * 100, 1),
+			'ucl_pct': round((st['ucl_count'] / float(runs)) * 100, 1),
+			'relegation_pct': round((st['relegation_count'] / float(runs)) * 100, 1)
+		})
+
+	results = sorted(results, key=lambda x: (x['champion_pct'], x['avg_points'], x['avg_gd']), reverse=True)
+	return {
+		'league': lg_template.name,
+		'country': lg_template.country,
+		'continent': lg_template.continent,
+		'simulations': runs,
+		'table': results
+	}
+
+def print_league_prediction_report(res):
+	print("\n" + "=" * 88)
+	print(f"HATTRK PREDICTOR: {res['league'].upper()} PROBABILISTIC FINISH FORECAST".center(88))
+	print(f"Simulated {res['simulations']} complete seasons with rolling dynamic form".center(88))
+	print("=" * 88)
+	print(f"{'Club':<26} {'Exp Pts':>8} {'Exp GD':>8} {'Avg Pos':>8} {'Champion %':>12} {'UCL / Top %':>12} {'Relegated %':>12}")
+	print("-" * 88)
+	for r in res['table']:
+		print(f"{r['club']:<26} {r['avg_points']:>8.1f} {r['avg_gd']:>+8.1f} {r['avg_pos']:>8.1f} {r['champion_pct']:>11.1f}% {r['ucl_pct']:>11.1f}% {r['relegation_pct']:>11.1f}%")
+	print("=" * 88)
+
 def main():
 	parser = argparse.ArgumentParser(description="Hattrk Match Predictor & Monte Carlo Ensemble Engine")
 	parser.add_argument("--home", type=str, default="Arsenal", help="Home team name")
 	parser.add_argument("--away", type=str, default="Chelsea", help="Away team name")
 	parser.add_argument("--runs", type=int, default=500, help="Number of Monte Carlo simulations")
+	parser.add_argument("--league", type=str, default="", help="League name or ID to predict full season finish chances")
 	parser.add_argument("--home-form", type=str, default="", help="Home recent form (e.g. WWWDW)")
 	parser.add_argument("--away-form", type=str, default="", help="Away recent form (e.g. LLWDL)")
 	parser.add_argument("--home-formation", type=str, default="", help="Home tactical formation (e.g. 4-3-3, 3-5-2)")
@@ -434,6 +501,18 @@ def main():
 	parser.add_argument("--optimize", action="store_true", help="Run hyperparameter optimization")
 
 	args = parser.parse_args()
+
+	if args.league:
+		res = predict_league_outcomes(args.league, runs=min(args.runs, 100))
+		if res:
+			print_league_prediction_report(res)
+			if args.json:
+				with open(args.json, 'w', encoding='utf-8') as f:
+					json.dump(res, f, indent=2)
+				print(f"\nPrediction results exported to {args.json}")
+		else:
+			print(f"Error: League '{args.league}' not found in database.")
+		return
 
 	if args.backtest:
 		run_backtest_suite()

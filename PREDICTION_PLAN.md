@@ -189,4 +189,9 @@ Current performance of `predictor.py` across calibrated benchmark matchups:
   - [x] Build automated parameter optimization pipeline (`optimize_hyperparameters` with coordinate loss search).
   - [x] Integrate Stage 5 Biomechanical Stamina & Super-Sub bench depth into Monte Carlo predictions.
   - [x] Implement Asian Handicap (-0.5, -1.0, -1.5), Draw No Bet (DNB), Double Chance, and Expected Points (xP) pricing.
-- [ ] **Phase 5: Automated Live Fixture Scraping & In-Play Live Odds Engine**
+- [x] **Phase 5: Domestic League Outcome Forecasts & Continental Simulations** (`predictor.py`, `league.py`, `season.py`)
+  - [x] Ingest complete domestic league catalog (65 leagues, 745 clubs) into `data/leagues.json`, `data/clubs.json`, and `data/league_clubs.csv`.
+  - [x] Implement full domestic league engine (`league.py`) with double round-robin scheduling, dynamic rolling form (`WWDDL`), and standings.
+  - [x] Implement probabilistic league finish predictions (`predictor.py --league`) with Champion %, UCL/Continental %, Relegation %, Expected Points ($xP$), and Avg Pos distributions.
+  - [x] Implement multi-continental multi-season simulation (`season.py`) across 5 continents (UEFA UCL/UEL/UECL/UWCL, Copa Libertadores, Copa Sudamericana, CONCACAF, AFC, CAF) with Dynasty Trophy Cabinets.
+- [ ] **Phase 6: Automated Live Fixture Scraping & In-Play Live Odds Engine**
