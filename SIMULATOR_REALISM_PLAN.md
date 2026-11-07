@@ -4,7 +4,7 @@ This document outlines the comprehensive architectural plan and empirical calibr
 
 ---
 
-## 1. System Architecture: The Four Realism Pillars
+## 1. System Architecture: The Five Realism Pillars
 
 ```mermaid
 flowchart TD
@@ -26,10 +26,16 @@ flowchart TD
         D2 --> D3["Goalkeeper Resistance Modeling"]
         D3 --> D4["Lead Retention & Underdog Low Block"]
     end
+    subgraph Pillar5["Pillar 5: Biomechanical Stamina & Dynamic Substitutions"]
+        E1["Non-Linear Stamina Decay"] --> E2["Attribute Degradation & Errors"]
+        E2 --> E3["AI Manager Substitutions & Super-Subs"]
+        E3 --> E4["Late-Match Surge & Stoppage Time"]
+    end
     Pillar1 --> Engine["Hattrk 2.0 Match Engine"]
     Pillar2 --> Engine
     Pillar3 --> Engine
     Pillar4 --> Engine
+    Pillar5 --> Engine
 ```
 
 ---
@@ -208,7 +214,95 @@ $$\text{conv\_prob} = \frac{\text{xG}_{\text{normalized}}}{1.0 + 0.35 \times (\t
 
 ---
 
-## 7. Implementation Checklist
+## 7. Pillar 5: Biomechanical Stamina Curves, Dynamic In-Match Substitutions & Late-Match Surge Dynamics
+
+### Problem Diagnosis: The Static Second Half
+While Pillars 1–4 have calibrated spatial positioning, pass volumes, xG baseline values, and scoreline blowouts, a critical physical and psychological dimension of real-world football remains unmodeled:
+1. **Linear / Neglected Stamina in Continuous Possession**:
+   - In real top-flight football, players cover $10.5\text{–}13.0\text{ km}$ per match, with high-intensity sprinting and counter-pressing draining anaerobic capacity non-linearly.
+   - At present, players maintain virtually identical passing precision, sprint speeds, and defensive awareness at minute 88 as they do at minute 8.
+2. **Missing In-Match Substitution Strategy ("The Super-Sub Effect")**:
+   - Real managers make 3 to 5 tactical substitutions between the 60th and 82nd minute.
+   - Bringing on a fresh winger with 100% stamina against an exhausted defender at 58% stamina is one of football's most potent offensive weapons. The current engine lacks this dynamic mismatch.
+3. **Flat Goal Time Distribution vs Real-World Late Surges**:
+   - In UEFA Champions League and Premier League data, **22%–26% of all goals occur in the final 15 minutes (76'–90'+)** due to stretched defensive lines, cognitive fatigue, and desperation attacking.
+   - Without dynamic fatigue degradation and tactical desperation shape changes, late-game goal density is artificially flat.
+4. **Static Stoppage Time**:
+   - Injury time is currently static or trivial, ignoring the real accumulation of goals, substitutions, cards, injuries, and game-management delays.
+
+---
+
+### Pillar 5 Architectural Blueprint
+
+```mermaid
+flowchart TD
+    subgraph StaminaEngine["Biomechanical Stamina Model"]
+        Decay["Non-Linear Stamina Decay<br/>(Aerobic base + Tactical Pressing Multiplier)"]
+        Decay --> Threshold{"Stamina < 60%?<br/>(Min 65 - 80)"}
+        Threshold -- "Yes" --> Degrade["Attribute Degradation:<br/>-12% Pace, -15% Defending, +40% Foul Risk"]
+    end
+
+    subgraph ManagerAI["In-Match Substitution AI"]
+        Scan["Evaluate XI at Min 60, 70, 78"]
+        Scan --> TriggerCheck{"Trigger Criteria:<br/>1. Stamina < 55%<br/>2. Tactical Trailing/Leading<br/>3. Yellow Card Hazard"}
+        TriggerCheck -- "Sub Executed" --> FreshLegs["Super-Sub Deployed (100% Stamina)<br/>+ Pace Mismatch against Tired Markers"]
+        TriggerCheck -- "Shape Shift" --> TacticalSwap["Tactical Shape Shift:<br/>Chasing: 4-2-4 / 3-4-3<br/>Protecting: 5-3-2 / 5-4-1"]
+    end
+
+    subgraph LateGame["Late-Game Surge & Stoppage Time"]
+        Degrade --> Stretch["Pitch Stretching & Defensive Gaps"]
+        FreshLegs --> Stretch
+        TacticalSwap --> Stretch
+        Stretch --> LateGoals["Late-Game Goal Surge (23% - 25% in 76'-90'+)"]
+        MatchEvents["Goals, Subs, Cards, Delays"] --> DynStoppage["Dynamic Stoppage Time (2 - 8 mins)"]
+    end
+```
+
+#### 1. Non-Linear Biomechanical Stamina Decay Model
+Stamina decays per minute $m$ as a function of player stamina attribute, physical role work-rate, and team tactical pressing trigger:
+$$\Delta \text{Stamina}(m) = \text{base\_decay} \times \left(1.0 + \frac{90 - \text{StaminaStat}}{100}\right) \times M_{\text{tactics}} \times M_{\text{position}}$$
+- **Tactical Pressing Multipliers ($M_{\text{tactics}}$)**:
+  - `counterpress` / `high_press`: $1.32\times$
+  - `press_on_touch` / `balanced`: $1.00\times$
+  - `regroup` / `low_block`: $0.78\times$
+- **Positional Demand Multipliers ($M_{\text{position}}$)**:
+  - Box-to-Box Midfielders (CM, B2B) & Wingbacks (LWB, RWB): $1.25\times$ (highest distance covered)
+  - Wingers & Forwards (LW, RW, ST): $1.10\times$ (burst sprinting)
+  - Center-Backs (CB): $0.85\times$ (positional discipline)
+  - Goalkeeper (GK): $0.15\times$
+
+#### 2. Dynamic Attribute Degradation & Error Cascade
+When a player's stamina drops below $65\%$, exponential cognitive and physical penalties apply:
+$$\text{Pace}_{\text{eff}} = \text{Pace} \times (0.85 + 0.15 \times \text{StaminaRatio})$$
+$$\text{Defending}_{\text{eff}} = \text{Defending} \times (0.82 + 0.18 \times \text{StaminaRatio})$$
+$$\text{PassAccuracy}_{\text{eff}} = \text{PassAccuracy} \times (0.88 + 0.12 \times \text{StaminaRatio})$$
+- **Fatigue Turnover Explosion**: Misplaced passes in the defensive/middle third increase by $+35\%$ when midfielder stamina falls below $50\%$.
+- **Disciplinary Surge**: Exhausted defenders are $+45\%$ more likely to commit tactical/cynical fouls when beaten for pace, naturally driving second-half yellow and red card distributions to mirror real football (where $62\%$ of cards occur after the 55th minute).
+
+#### 3. AI Manager Dynamic In-Match Substitutions ("Super-Sub Engine")
+AI managers evaluate the match at minutes 60, 70, and 78 with clear tactical objectives:
+1. **The Fatigue Swap**: Replace outfielders whose stamina falls below $55\%$ with bench players of appropriate position.
+2. **The Super-Sub Offensive Injection**: If chasing or tied at 68'+, introduce high-pace attacking wingers or strikers ($100\%$ fresh stamina). Against fatigued fullbacks ($< 60\%$ stamina), the fresh sub gains a $+25\%$ burst advantage on 1-on-1 dribbles and transition sprints.
+3. **The Defensive Fortress Closure**: If protecting a 1- or 2-goal lead after minute 75, withdraw an attacker to bring on a defensive midfielder (destroyer) or 3rd center-back, transitioning into a compact back-5 (e.g. 5-3-2 or 5-4-1) with a $+20\%$ central box clearance bonus.
+4. **Card Caution Risk Management**: If an aggressive defender or midfielder is on a yellow card and stamina $< 65\%$, proactively substitute them before an impending second yellow.
+
+#### 4. Late-Game Physics & Dynamic Stoppage Time
+- **Dynamic Added Time Formula**:
+  $$\text{StoppageTime} = \text{round}\left(1.0 + 0.5 \times N_{\text{subs}} + 0.75 \times N_{\text{goals}} + 0.5 \times N_{\text{cards}} + \text{delays}\right)$$
+  - First Half: Typically $1\text{–}3$ minutes.
+  - Second Half: Typically $3\text{–}7$ minutes.
+- **Calibrated Goal Timing Distribution**:
+  With fatigued defenders, high-urgency attacking overloads, and fresh super-subs, the goal timing curve matches the empirical Opta/UEFA profile:
+  - 1'–15': 12%–14%
+  - 16'–30': 14%–16%
+  - 31'–45'+: 16%–18%
+  - 46'–60': 14%–16%
+  - 61'–75': 16%–18%
+  - **76'–90'+: 22%–26%**
+
+---
+
+## 8. Implementation Checklist
 
 - [x] **Pillar 1**: 18-zone tactical pitch grid (`grid.py`) with positional anchors.
 - [x] **Pillar 2**: 4-phase continuous possession engine (`possession.py`) with micro-ticks and realistic pass volumes (907 passes/match).
@@ -222,3 +316,12 @@ $$\text{conv\_prob} = \frac{\text{xG}_{\text{normalized}}}{1.0 + 0.35 \times (\t
   - [x] Rebalance home advantage Elo boost and clamp extreme mismatch multipliers.
   - [x] Implement trailing low-block compactness and lead-protection game killing.
   - [x] Rerun 100-match benchmark to verify total goals (2.74) and blowout rate (17.0%).
+- [x] **Comprehensive Test Suite**: 39/39 passing pytest suite in `tests/` covering grid, gamestate, tactics, elo, data integrity, and realism.
+- [ ] **Pillar 5 Implementation**:
+  - [ ] Implement non-linear stamina decay in `possession.py` with tactical pressing multipliers.
+  - [ ] Implement fatigue attribute degradation (pace, defending, passing composure, card risk).
+  - [ ] Implement AI Manager in-match substitution decision engine at min 60, 70, 78.
+  - [ ] Implement "Super-Sub" pace burst mismatch against tired fullbacks.
+  - [ ] Implement defensive fortress substitution (back-5 transition to protect leads).
+  - [ ] Implement dynamic stoppage time calculation based on match events.
+  - [ ] Verify 76'–90'+ goal distribution reaches authentic 22%–26% proportion.
