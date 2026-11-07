@@ -4,7 +4,7 @@ This document outlines the comprehensive architectural plan and empirical calibr
 
 ---
 
-## 1. System Architecture: The Five Realism Pillars
+## 1. System Architecture: The Six Realism Pillars
 
 ```mermaid
 flowchart TD
@@ -31,11 +31,17 @@ flowchart TD
         E2 --> E3["AI Manager Substitutions & Super-Subs"]
         E3 --> E4["Late-Match Surge & Stoppage Time"]
     end
+    subgraph Pillar6["Pillar 6: Set-Piece Choreography & Matchday Physics"]
+        F1["Set-Piece Routines (Near-Post, Overloads)"] --> F2["Referee Strictness & Whistle Profiles"]
+        F2 --> F3["VAR Review Drama & Marginal Offside"]
+        F3 --> F4["Environmental Weather & Pitch Skid Physics"]
+    end
     Pillar1 --> Engine["Hattrk 2.0 Match Engine"]
     Pillar2 --> Engine
     Pillar3 --> Engine
     Pillar4 --> Engine
     Pillar5 --> Engine
+    Pillar6 --> Engine
 ```
 
 ---
@@ -302,7 +308,96 @@ AI managers evaluate the match at minutes 60, 70, and 78 with clear tactical obj
 
 ---
 
-## 8. Implementation Checklist
+## 8. Pillar 6: Tactical Set-Piece Choreography, Referee Profiles & Environmental Matchday Physics
+
+### Problem Diagnosis: The Monolithic Rules & Generic Restarts
+While Pillars 1–5 have established spatial pitch control, phase-based continuous flow, game-state urgency, anti-blowout bounds, and biomechanical stamina/substitutions, critical dead-ball, officiating, and atmospheric dimensions of real-world football remain abstracted:
+1. **Generic, Unchoreographed Set Pieces**:
+   - In modern football, **28%–35% of all match goals** originate from dead-ball restarts (corners, indirect free-kicks, direct free-kicks, long throw-ins). Teams employ specialized set-piece tacticians (e.g. Nicolas Jover at Arsenal, Bernardo Cueva at Chelsea/Brentford).
+   - Currently, corners and free kicks rely on generic random aerial rolls rather than choreographed tactical routines (near-post flick-ons, far-post overloads, short corner cutbacks, screens on the goalkeeper).
+2. **Homogeneous "Robot" Referees**:
+   - In real-world football, match officiating varies wildly: strict disciplinarians average 5.4 yellows and 26 fouls per match, while lenient flow-oriented referees average 2.8 yellows and 16 fouls.
+   - Home crowd pressure has an empirical, documented effect: 60,000+ hostile crowds reduce away penalty awards and increase home foul leniency.
+3. **Absence of VAR (Video Assistant Referee) Dramatic Tension**:
+   - Approximately **4%–6% of all goals scored in top-flight European football are overturned by VAR** (marginal offsides, fouls in build-up, handball in lead-up).
+   - VAR reviews introduce psychological momentum shifts and directly contribute 1.5–3.0 minutes to dynamic added time.
+4. **Sterile Environmental Match Conditions**:
+   - All matches currently simulate in identical dry, neutral conditions.
+   - Real-world wet turf increases ground pass velocity by 12%, causes skidding long-range shots that force goalkeeper handling spills (rebound tap-ins), and increases sliding tackle foul frequency by 20%.
+
+---
+
+### Pillar 6 Architectural Blueprint
+
+```mermaid
+flowchart TD
+    subgraph DeadBall["1. Tactical Set-Piece Engine"]
+        SP["Corner / Free Kick / Throw-in"] --> Routine{"Routine Selection<br/>(Near-Post Flick, Back-Post Overload,<br/>Short Cutback, Goalkeeper Screen)"}
+        Routine --> Delivery["Delivery Trajectory<br/>(Inswinging vs Outswinging Curve)"]
+        Delivery --> AerialDuel["Spatial Aerial Scramble & Second-Ball Tap-in"]
+    end
+
+    subgraph RefereeVAR["2. Referee AI & VAR Reviews"]
+        Incident["Foul / Goal / Penalty Event"] --> RefProfile{"Referee Strictness Profile<br/>(Disciplinarian vs Lenient Flow)"}
+        RefProfile --> CrowdBias["Home Crowd Bias Scalar (Venue Attendance)"]
+        CrowdBias --> VARCheck{"VAR Review Trigger<br/>(Marginal Offside, Lead-up Foul, Hand-Ball)"}
+        VARCheck -- "Overturned" --> Disallow["Goal Disallowed / Penalty Revoked<br/>+ Psychological Momentum Reversal"]
+        VARCheck -- "Upheld" --> Confirmed["Decision Confirmed + Stoppage Time Added (+2m)"]
+    end
+
+    subgraph Environment["3. Environmental Matchday Physics"]
+        Weather["Weather Generator<br/>(Clear, Heavy Rain/Wet, Extreme Heat, Snow)"]
+        Weather --> BallPhysics["Ball Skid Velocity & GK Spill Rate (+30% Rebounds)"]
+        Weather --> Grip["Tackle Friction & Slip Turnovers (+20% Fouls)"]
+    end
+
+    DeadBall --> GoalOutcome["Calibrated Matchday Reality"]
+    RefereeVAR --> GoalOutcome
+    Environment --> GoalOutcome
+```
+
+#### 1. Tactical Set-Piece Choreography Engine
+Dead-ball situations move from raw random rolls into 5 distinct choreographed routines:
+- **Near-Post Flick-On**: Attacker makes darting front-post run to glance delivery across the face of goal ($xG$ boost for secondary far-post runner).
+- **Far-Post Aerial Overload**: Multiple tall center-backs (e.g. Gabriel, Van Dijk) isolate against smaller fullbacks in Zone 17/18.
+- **Short Corner & Cutback Routine**: Quick 1-2 pass to create an open crossing angle from the edge of the box (bypassing goalkeeper aerial dominance).
+- **Goalkeeper Screen / Traffic Overload**: Physical player occupies the 6-yard box to impede goalkeeper jumping clearance.
+- **Direct Free-Kick Ballistics**: Curve, dip, and knuckleball physics modeled against wall height and goalkeeper positioning.
+
+#### 2. Referee Personalities & Whistle Leniency Profiles
+Every match is assigned an authentic referee profile with three behavioral traits:
+- **Strictness Index ($S \in [0.70, 1.35]$)**:
+  - *Lenient / Premier League Flow*: High threshold for physical duels; average 17 fouls/match, 2.8 yellows.
+  - *Strict / Continental Disciplinarian*: Low threshold; average 25 fouls/match, 5.2 yellows, $+35\%$ penalty award rate.
+- **Home Crowd Pressure Scalar ($C_{\text{crowd}} \in [0.90, 1.15]$)**:
+  - Derived from stadium capacity and home fan intensity ($60,000+\text{ venues}$ like Santiago Bernabéu, San Siro, Signal Iduna Park).
+  - Shifts 50/50 marginal penalty decisions toward the home side ($+12\%$ penalty confirmation rate).
+
+#### 3. VAR Review Drama & Marginal Offside Physics
+- **Review Trigger Frequency**: Approximately 1 review every 1.8 matches.
+- **Intervention Categories**:
+  - **Marginal Offside in Build-Up**: Fractional millimeter offside tracking reverses $4.5\%$ of scored goals.
+  - **Penalty Check & On-Field Monitor Review**: Overturns incorrect penalties ($15\%$ reversal rate).
+  - **Serious Foul Play Red Card Upgrade**: Reckless tackles reviewed for studs-up contact.
+- **Match Impact**:
+  - Reviews inject authentic $+1.5\text{–}2.5$ minutes directly into second-half dynamic stoppage time.
+  - Generates realistic dramatic commentary ("VAR check in progress... The referee is heading over to the pitchside monitor!").
+  - Reversed goals flip team momentum by $-1.2$ points.
+
+#### 4. Environmental Matchday & Pitch Physics
+Matches draw dynamic weather and pitch conditions based on season and region:
+- **Heavy Rain / Wet Slick Pitch**:
+  - Ground pass speed increases by $+12\%$.
+  - Goalkeeper handling penalty ($+30\%$ spill rate on wet shots, creating second-chance rebound tap-ins).
+  - Sliding tackle slip rate increases foul frequency by $+18\%$.
+- **Extreme Heat / Humidity**:
+  - Accelerates biomechanical stamina decay by $+20\%$, causing earlier fatigue crashes in high-pressing systems.
+- **Freezing / Snow**:
+  - Decreases long-range ground pass accuracy by $-15\%$, forcing teams into more aerial direct transitions.
+
+---
+
+## 9. Implementation Checklist
 
 - [x] **Pillar 1**: 18-zone tactical pitch grid (`grid.py`) with positional anchors.
 - [x] **Pillar 2**: 4-phase continuous possession engine (`possession.py`) with micro-ticks and realistic pass volumes (907 passes/match).
@@ -316,7 +411,7 @@ AI managers evaluate the match at minutes 60, 70, and 78 with clear tactical obj
   - [x] Rebalance home advantage Elo boost and clamp extreme mismatch multipliers.
   - [x] Implement trailing low-block compactness and lead-protection game killing.
   - [x] Rerun 100-match benchmark to verify total goals (2.74) and blowout rate (17.0%).
-- [x] **Comprehensive Test Suite**: 39/39 passing pytest suite in `tests/` covering grid, gamestate, tactics, elo, data integrity, and realism.
+- [x] **Comprehensive Test Suite**: 45/45 passing pytest suite in `tests/` covering grid, gamestate, tactics, elo, data integrity, and realism.
 - [x] **Pillar 5 Implementation**:
   - [x] Implement non-linear stamina decay in `possession.py` with tactical pressing multipliers.
   - [x] Implement fatigue attribute degradation (pace, defending, passing composure, card risk).
@@ -325,3 +420,9 @@ AI managers evaluate the match at minutes 60, 70, and 78 with clear tactical obj
   - [x] Implement defensive fortress substitution (back-5 transition to protect leads).
   - [x] Implement dynamic stoppage time calculation based on match events.
   - [x] Verify 76'–90'+ goal distribution reaches authentic 22%–26% proportion.
+- [ ] **Pillar 6 Implementation**:
+  - [ ] Implement tactical set-piece choreography engine (near-post flick, far-post overload, short corner routines).
+  - [ ] Implement referee personality profiles (strictness index, card thresholds, crowd pressure scalar).
+  - [ ] Implement VAR review engine with marginal offside checks, penalty reviews, and commentary drama.
+  - [ ] Implement environmental weather generator (rain, extreme heat, snow) and ball skid/handling spill physics.
+  - [ ] Validate set-piece goal proportion reaches authentic 28%–35% of all match goals.
