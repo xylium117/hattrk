@@ -34,9 +34,9 @@ class PossessionEngine:
 	def _get_elo_multiplier(self, is_home):
 		h_elo = getattr(self.match, 'home_elo', 1750)
 		a_elo = getattr(self.match, 'away_elo', 1750)
-		diff = (h_elo + 65) - a_elo
-		raw = 1.0 + (diff / 400.0) * 0.20 if is_home else 1.0 - (diff / 400.0) * 0.20
-		return max(0.70, min(1.40, raw))
+		diff = (h_elo + 10) - a_elo
+		raw = 1.0 + (diff / 380.0) * 0.22 if is_home else 1.0 - (diff / 380.0) * 0.22
+		return max(0.74, min(1.32, raw))
 
 	def _decay_fitness(self, minute):
 		for p in (self.match.home.xi + self.match.away.xi):
@@ -151,8 +151,10 @@ class PossessionEngine:
 		f_weights = []
 		for fp in fouler_pool:
 			w = getattr(fp, 'aggression', 70.0) * 0.5 + getattr(fp, 'standing_tackle', 70.0) * 0.3
-			if getattr(fp, 'position', '') in ['DEF', 'DMF']:
+			if getattr(fp, 'position', '') in ['DEF', 'DMF', 'CB', 'LB', 'RB']:
 				w += 20.0
+			if len(fp.inns) > 0 and fp.inns[-1].yellow_cards >= 1:
+				w *= 0.35
 			f_weights.append(max(1.0, w))
 		fouler = random.choices(fouler_pool, weights=f_weights, k=1)[0]
 		victim = random.choice(victim_pool)
@@ -173,7 +175,10 @@ class PossessionEngine:
 			return True
 
 		card_roll = random.random()
-		if card_roll < 0.13:
+		has_yellow = (len(fouler.inns) > 0 and fouler.inns[-1].yellow_cards >= 1)
+		yellow_thresh = 0.08 if has_yellow else 0.185
+
+		if card_roll < yellow_thresh:
 			if len(fouler.inns) > 0:
 				fouler.inns[-1].yellow_cards += 1
 			if fouling_team == self.match.home:
@@ -195,8 +200,10 @@ class PossessionEngine:
 					fouler_name, fouling_team.name, len(fouling_team.xi)
 				))
 			else:
-				self.match.logger("Yellow card. {} goes into the referee's notebook following a cynical challenge on {}.".format(fouler_name, victim_name))
-		elif card_roll < 0.133:
+				self.match.logger("Yellow Card! Cynical challenge from {}, bringing down {} and going straight into the book.".format(
+					fouler_name, victim_name
+				))
+		elif not has_yellow and card_roll < 0.191:
 			if len(fouler.inns) > 0:
 				fouler.inns[-1].red_cards += 1
 				fouler.inns[-1].minutes_played = minute
@@ -210,8 +217,12 @@ class PossessionEngine:
 			self.match.logger("STRAIGHT RED CARD! Reckless tackle by {} on {}! The referee sends {} off!".format(
 				fouler_name, victim_name, fouler_name
 			))
+		else:
+			self.match.logger("Foul: {} catches {} with an untidy challenge. Free-kick awarded.".format(
+				fouler_name, victim_name
+			))
 
-		if random.random() < 0.25:
+		if random.random() < 0.18:
 			is_indirect = (random.random() < 0.50)
 			period_obj.freekick_event(victim_team, fouling_team, is_indirect=is_indirect)
 
@@ -229,10 +240,11 @@ class PossessionEngine:
 		a_f_mod = getattr(self.match, 'away_formation_mod', 1.0)
 		ctrl_f_mod = h_f_mod if is_home else a_f_mod
 		ctrl_fluidity = getattr(ctrl_team, 'fluidity', 1.0)
+		elo_mult = self._get_elo_multiplier(is_home)
 
-		risk = (risk * opp_mgr.get_press_modifier() * 0.40) / (self._get_elo_multiplier(is_home) * ctrl_f_mod * (ctrl_fluidity ** 0.5))
+		risk = (risk * opp_mgr.get_press_modifier() * 0.40) / ((elo_mult ** 1.1) * ctrl_f_mod * (ctrl_fluidity ** 0.5))
 
-		if random.random() < (0.035 * opp_mgr.get_press_modifier()):
+		if random.random() < (0.065 * opp_mgr.get_press_modifier()):
 			if self._check_foul(period_obj, opp_team, ctrl_team, minute, in_box=False):
 				return
 
@@ -246,11 +258,15 @@ class PossessionEngine:
 
 			int_name = (getattr(interceptor, 'short_name', '') or interceptor.name) if interceptor else 'the opposition'
 			p_name = (getattr(passer, 'short_name', '') or passer.name) if passer else 'the defender'
-			self.match.logger("Caught in possession! {} intercepts a careless backline pass from {} deep in dangerous territory!".format(int_name, p_name))
 
-			self.state = PossessionState(opp_team, 'final_third', 15 if opp_team == self.match.home else 4)
-			self.transition_danger = True
-			self._resolve_shot_chance(period_obj, opp_team, ctrl_team, not is_home, opp_mgr, ctrl_mgr, minute, is_high_press_turnover=True)
+			if random.random() < 0.20:
+				self.match.logger("Caught in possession! {} intercepts a careless backline pass from {} deep in dangerous territory!".format(int_name, p_name))
+				self.state = PossessionState(opp_team, 'final_third', 15 if opp_team == self.match.home else 4)
+				self.transition_danger = True
+				self._resolve_shot_chance(period_obj, opp_team, ctrl_team, not is_home, opp_mgr, ctrl_mgr, minute, is_high_press_turnover=True)
+			else:
+				self.match.logger("Turnover in defense: {} steps up to cut out a pass from {}.".format(int_name, p_name))
+				self.state = PossessionState(opp_team, 'progression', 9 if not is_home else 10)
 		else:
 			comp_p = att_p if random.random() < 0.90 else max(1, att_p - 1)
 			self._record_passes(passer, receiver, att_p, comp_p, is_home)
@@ -293,10 +309,11 @@ class PossessionEngine:
 		a_f_mod = getattr(self.match, 'away_formation_mod', 1.0)
 		ctrl_f_mod = h_f_mod if is_home else a_f_mod
 		ctrl_fluidity = getattr(ctrl_team, 'fluidity', 1.0)
+		elo_mult = self._get_elo_multiplier(is_home)
 
-		risk = (risk * ctrl_mgr.get_pass_risk_modifier()) / (self._get_elo_multiplier(is_home) * ctrl_f_mod * (ctrl_fluidity ** 0.5))
+		risk = (risk * ctrl_mgr.get_pass_risk_modifier()) / ((elo_mult ** 1.2) * ctrl_f_mod * (ctrl_fluidity ** 0.5))
 
-		if random.random() < 0.040:
+		if random.random() < 0.075:
 			if self._check_foul(period_obj, opp_team, ctrl_team, minute, in_box=False):
 				return
 
@@ -321,7 +338,16 @@ class PossessionEngine:
 			self.state.chain_length += comp_p
 			self.state.carrier = receiver
 
-			advance_prob = 0.24 * ctrl_mgr.get_pass_risk_modifier()
+			h_s = self.match.home_score
+			a_s = self.match.away_score
+			lead = (h_s - a_s) if is_home else (a_s - h_s)
+
+			advance_prob = 0.22 * ctrl_mgr.get_pass_risk_modifier() * (elo_mult ** 0.75)
+			if lead >= 2:
+				advance_prob *= 0.55
+			if lead >= 3:
+				advance_prob *= 0.35
+
 			if random.random() < advance_prob:
 				self.state.phase = 'final_third'
 				self.state.zone = 15 if is_home else 4
@@ -329,41 +355,24 @@ class PossessionEngine:
 				self.state.phase = 'progression'
 
 	def _phase_final_third(self, period_obj, ctrl_team, opp_team, is_home, ctrl_mgr, opp_mgr, minute):
-		creator = self._pick_carrier(ctrl_team, ['AMF', 'ATT', 'LW', 'RW', 'MID', 'ST', 'CF', 'CAM'])
-		target = self._pick_receiver(ctrl_team, creator, ['ATT', 'ST', 'CF', 'AMF', 'LW', 'RW'])
+		creator = self._pick_carrier(ctrl_team, ['AMF', 'MID', 'LW', 'RW', 'CM'])
+		target = self._pick_receiver(ctrl_team, creator, ['ST', 'CF', 'ATT', 'LW', 'RW', 'AMF'])
+		if not creator or not target:
+			self.state = PossessionState(opp_team, 'build_up', 3 if not is_home else 16)
+			return
 
-		opp_mgr_pov = getattr(opp_team, 'manager_pov', None)
-		if opp_mgr_pov and opp_mgr_pov.offside_trap != 'conservative':
-			trap_risk = opp_mgr_pov.get_offside_trap_risk()
-			if random.random() < trap_risk:
-				def_cbs = [p for p in opp_team.xi if getattr(p, 'primary_position', '') == 'CB' or getattr(p, 'position', '') == 'DEF']
-				avg_def_awareness = sum([p.def_awareness for p in def_cbs]) / float(len(def_cbs)) if def_cbs else 70.0
-				fluidity = getattr(opp_team, 'fluidity', 1.0)
-				success_prob = 0.72 * (avg_def_awareness / 75.0) * fluidity
-
-				t_name = (getattr(target, 'short_name', '') or target.name) if target else 'the striker'
-				if random.random() < success_prob:
-					self.match.logger("The flag is up! A coordinated step up from the backline catches {} half a yard offside!".format(t_name))
-					self.state = PossessionState(opp_team, 'build_up', 3 if not is_home else 16)
-					return
-				elif opp_mgr_pov.offside_trap == 'aggressive' and random.random() < 0.35:
-					self.match.logger("The offside trap is completely blown! The backline stepped up too late and {} has broken clean through on goal!".format(t_name))
-					self._resolve_shot_chance(period_obj, ctrl_team, opp_team, is_home, ctrl_mgr, opp_mgr, minute, creator=creator, shooter=target, is_1on1=True)
-					return
-
-		att_p = random.randint(2, 3)
-		risk = self.grid.calculate_pass_interception_risk(creator, target, opp_team, is_home) * 0.90
-		if opp_mgr.mentality == 'park_the_bus':
-			risk *= 1.35
+		att_p = random.randint(2, 4)
+		risk = self.grid.calculate_pass_interception_risk(creator, target, opp_team, is_home)
 
 		h_f_mod = getattr(self.match, 'home_formation_mod', 1.0)
 		a_f_mod = getattr(self.match, 'away_formation_mod', 1.0)
 		ctrl_f_mod = h_f_mod if is_home else a_f_mod
 		ctrl_fluidity = getattr(ctrl_team, 'fluidity', 1.0)
+		elo_mult = self._get_elo_multiplier(is_home)
 
-		risk /= (self._get_elo_multiplier(is_home) * ctrl_f_mod * (ctrl_fluidity ** 0.5))
+		risk /= ((elo_mult ** 1.1) * ctrl_f_mod * (ctrl_fluidity ** 0.5))
 
-		if random.random() < 0.045:
+		if random.random() < 0.080:
 			if self._check_foul(period_obj, opp_team, ctrl_team, minute, in_box=(random.random() < 0.15)):
 				return
 
@@ -373,14 +382,14 @@ class PossessionEngine:
 
 			def_stopper = self._pick_carrier(opp_team, ['CB', 'DEF', 'LB', 'RB', 'GK'])
 			if def_stopper and len(def_stopper.inns) > 0:
-				if random.random() < 0.45:
+				if random.random() < 0.50:
 					def_stopper.inns[-1].tackles += 1
-				elif random.random() < 0.75:
+				elif random.random() < 0.85:
 					def_stopper.inns[-1].interceptions += 1
 				else:
 					def_stopper.inns[-1].aerials_won += 1
 
-			if random.random() < 0.35:
+			if random.random() < 0.52:
 				period_obj.corner_event(ctrl_team, opp_team)
 				self.state = PossessionState(ctrl_team, 'final_third', 15 if is_home else 4)
 			else:
@@ -388,8 +397,12 @@ class PossessionEngine:
 		else:
 			comp_p = att_p if random.random() < 0.78 else max(1, att_p - 1)
 			self._record_passes(creator, target, att_p, comp_p, is_home)
-			if random.random() < 0.32:
+			roll_outcome = random.random()
+			if roll_outcome < 0.28:
 				self._resolve_shot_chance(period_obj, ctrl_team, opp_team, is_home, ctrl_mgr, opp_mgr, minute, creator=creator, shooter=target)
+			elif roll_outcome < 0.44:
+				period_obj.corner_event(ctrl_team, opp_team)
+				self.state = PossessionState(ctrl_team, 'final_third', 15 if is_home else 4)
 			else:
 				if random.random() < 0.50:
 					self.state.phase = 'progression'
@@ -427,50 +440,74 @@ class PossessionEngine:
 		if att_mgr.mentality == 'desperation_hail_mary' and att_mgr.target_man and random.random() < 0.45:
 			shooter = att_mgr.target_man
 
-		shot_type = 'box'
-		base_xg = 0.14
+		sh_name = getattr(shooter, 'short_name', '') or shooter.name
+		cr_name = (getattr(creator, 'short_name', '') or creator.name) if creator else ''
+
 		if is_1on1:
 			shot_type = 'big_chance'
-			base_xg = 0.42
+			base_xg = 0.38
 		elif is_high_press_turnover:
 			shot_type = 'big_chance'
-			base_xg = 0.38
+			base_xg = 0.28
 		elif is_counter:
 			shot_type = 'big_chance'
-			base_xg = 0.32
+			base_xg = 0.24
 		else:
 			roll = random.random()
 			if roll < 0.25:
 				shot_type = 'cutback'
-				base_xg = 0.22
+				base_xg = 0.15
 			elif roll < 0.45:
 				shot_type = 'header'
-				base_xg = 0.10
+				base_xg = 0.09
 			elif roll < 0.65:
 				shot_type = 'long'
-				base_xg = 0.04
+				base_xg = 0.035
 			else:
 				shot_type = 'box'
-				base_xg = 0.14
+				base_xg = 0.125
 
 		sh_fit = getattr(shooter, 'fitness', 1.0)
 		sh_finishing = getattr(shooter, 'finishing', 70.0)
 		sh_composure = getattr(shooter, 'composure', 70.0)
-		sh_shot_power = getattr(shooter, 'shot_power', 70.0)
 
 		gk = next((p for p in def_team.xi if getattr(p, 'position', '') == 'GK'), None)
 		gk_stat = ((getattr(gk, 'gk_diving', 75) + getattr(gk, 'gk_reflexes', 75)) * 0.5) if gk else 75.0
 		gk_fit = getattr(gk, 'fitness', 1.0) if gk else 1.0
+		gk_disp = (getattr(gk, 'short_name', '') or gk.name) if gk else 'the goalkeeper'
 
-		xg_val = base_xg * (sh_finishing / 75.0) * (sh_composure / 75.0) * sh_fit
-		if def_mgr.mentality == 'park_the_bus':
-			xg_val *= 0.75
+		defenders = [p for p in def_team.xi if getattr(p, 'position', '') in ['CB', 'LB', 'RB', 'LWB', 'RWB', 'SW', 'DEF']]
+		cb = max(defenders, key=lambda p: getattr(p, 'defending', 70)) if defenders else None
+		cb_def = getattr(cb, 'defending', 70.0) if cb else 70.0
+		cb_aware = getattr(cb, 'def_awareness', cb_def) if cb else 70.0
+		cb_name = (getattr(cb, 'short_name', '') or cb.name) if cb else 'the defender'
+
+		h_s = self.match.home_score
+		a_s = self.match.away_score
+		lead = (h_s - a_s) if is_home else (a_s - h_s)
+
+		fin_mult = ((sh_finishing / 75.0) ** 1.30)
+		comp_mult = (sh_composure / 75.0)
+		separation = max(0.82, min(1.22, (sh_finishing + getattr(shooter, 'strength', 70.0)) / (cb_def + cb_aware)))
+		xg_val = base_xg * fin_mult * comp_mult * sh_fit * separation
+
+		if def_mgr.mentality in ['park_the_bus', 'low_block']:
+			xg_val *= 0.70
+		if lead >= 2:
+			xg_val *= 0.68
+		if lead >= 3:
+			xg_val *= 0.45
+		if lead >= 4:
+			xg_val *= 0.30
+		if lead <= -2 and minute >= 60:
+			xg_val *= 0.85
+
 		if hasattr(shooter, 'has_playstyle'):
-			if shooter.has_playstyle('finesse shot') and shot_type in ['box', 'cutback', 'big_chance']: xg_val += 0.05
-			if shooter.has_playstyle('power shot') and shot_type == 'long': xg_val += 0.03
-			if shooter.has_playstyle('aerial fortress') and shot_type == 'header': xg_val += 0.04
+			if shooter.has_playstyle('finesse shot') and shot_type in ['box', 'cutback', 'big_chance']: xg_val += 0.03
+			if shooter.has_playstyle('power shot') and shot_type == 'long': xg_val += 0.02
+			if shooter.has_playstyle('aerial fortress') and shot_type == 'header': xg_val += 0.03
 
-		xg_val = max(0.02, min(0.72, xg_val))
+		xg_val = max(0.015, min(0.60, xg_val))
 
 		if len(shooter.inns) > 0:
 			shooter.inns[-1].shots += 1
@@ -486,12 +523,33 @@ class PossessionEngine:
 			self.match.away_shots += 1
 			self.match.away_xg += xg_val
 
-		sh_name = getattr(shooter, 'short_name', '') or shooter.name
-		cr_name = (getattr(creator, 'short_name', '') or creator.name) if creator else ''
-		gk_disp = (getattr(gk, 'short_name', '') or gk.name) if gk else 'the goalkeeper'
+		block_prob = 0.12 + ((cb_def + cb_aware) / 160.0) * 0.16
+		if is_1on1:
+			block_prob *= 0.10
+		elif is_counter:
+			block_prob *= 0.28
+		elif shot_type == 'long':
+			block_prob *= 0.75
+		elif def_mgr.mentality in ['park_the_bus', 'low_block'] or lead <= -2:
+			block_prob *= 1.45
+		elif lead <= -3:
+			block_prob *= 1.70
 
-		conv_prob = xg_val * 0.90 * self._get_elo_multiplier(is_home)
-		on_target_prob = min(0.68, 0.30 + (sh_finishing / 220.0))
+		if random.random() < block_prob:
+			if cb and len(cb.inns) > 0:
+				cb.inns[-1].tackles += 1
+			block_roll = random.random()
+			if block_roll < 0.65:
+				self.match.logger("Heroic Block! {} strikes goalwards, but {} deflects it behind for a corner!".format(sh_name, cb_name))
+				period_obj.corner_event(att_team, def_team)
+			else:
+				self.match.logger("Blocked: {} throws their body in the way of {}'s shot to clear the danger.".format(cb_name, sh_name))
+			self.state = PossessionState(def_team, 'build_up', 3 if not is_home else 16)
+			return
+
+		gk_factor = ((gk_stat / 75.0) ** 0.75) * (gk_fit ** 0.5)
+		conv_prob = (xg_val * 1.25 * self._get_elo_multiplier(is_home)) / max(0.75, gk_factor)
+		on_target_prob = min(0.65, 0.32 + (sh_finishing / 240.0))
 
 		shot_roll = random.random()
 		if shot_roll < conv_prob:
@@ -513,13 +571,12 @@ class PossessionEngine:
 			if gk and len(gk.inns) > 0:
 				gk.inns[-1].saves += 1
 
-			if random.random() < 0.45:
+			if random.random() < 0.65:
 				self.match.logger("Brilliant Save! {} fires towards goal, but {} tips it around the post for a corner!".format(sh_name, gk_disp))
 				period_obj.corner_event(att_team, def_team)
-				self.state = PossessionState(att_team, 'final_third', 15 if is_home else 4)
 			else:
 				self.match.logger("Shot on Target: {} strikes firmly, but {} smothers the effort cleanly.".format(sh_name, gk_disp))
-				self.state = PossessionState(def_team, 'build_up', 3 if not is_home else 16)
+			self.state = PossessionState(def_team, 'build_up', 3 if not is_home else 16)
 		else:
 			period_obj._near_miss_commentary(att_team, shooter, shot_type)
 			self.state = PossessionState(def_team, 'build_up', 3 if not is_home else 16)
