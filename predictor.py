@@ -7,6 +7,7 @@ from collections import Counter
 import engine
 import game
 from elo import get_club_elo, elo_win_probability, elo_goal_difference_anchor, parse_form_string, get_tactical_friction
+from tactics import load_club_tactics, get_formation_matchup
 
 def evaluate_rps(probs, outcome):
 	p_h, p_d, p_a = probs
@@ -52,7 +53,8 @@ def apply_squad_absences(team_obj, missing_names):
 			team_obj.xi.append(sub_in)
 			team_obj.bench.remove(sub_in)
 
-def run_monte_carlo(home_name, away_name, runs=500, home_missing=None, away_missing=None, home_form=None, away_form=None):
+def run_monte_carlo(home_name, away_name, runs=500, home_missing=None, away_missing=None,
+					home_form=None, away_form=None, home_formation=None, away_formation=None):
 	clean_home = game.find_club(home_name) or home_name
 	clean_away = game.find_club(away_name) or away_name
 
@@ -64,9 +66,18 @@ def run_monte_carlo(home_name, away_name, runs=500, home_missing=None, away_miss
 	h_form_mod = parse_form_string(home_form)
 	a_form_mod = parse_form_string(away_form)
 
+	h_cfg = load_club_tactics(clean_home)
+	a_cfg = load_club_tactics(clean_away)
+	actual_h_form = home_formation or h_cfg.get('formation', '4-3-3')
+	actual_a_form = away_formation or a_cfg.get('formation', '4-3-3')
+
+	h_form_tact, a_form_tact = get_formation_matchup(actual_h_form, actual_a_form)
+
 	h_phil = engine.CLUB_PHILOSOPHIES.get(clean_home, 'balanced')
 	a_phil = engine.CLUB_PHILOSOPHIES.get(clean_away, 'balanced')
 	h_tact_mult, a_tact_mult = get_tactical_friction(h_phil, a_phil)
+	h_tact_mult *= h_form_tact
+	a_tact_mult *= a_form_tact
 
 	home_wins = 0
 	draws = 0
@@ -100,6 +111,13 @@ def run_monte_carlo(home_name, away_name, runs=500, home_missing=None, away_miss
 			fix.savecard = False
 			fix.home_elo = elo_h
 			fix.away_elo = elo_a
+
+			if home_formation:
+				fix.home.formation = home_formation
+				fix.home.xi = game.firstxi(fix.home, home_formation)
+			if away_formation:
+				fix.away.formation = away_formation
+				fix.away.xi = game.firstxi(fix.away, away_formation)
 
 			if home_missing:
 				apply_squad_absences(fix.home, home_missing)
@@ -194,22 +212,15 @@ def run_monte_carlo(home_name, away_name, runs=500, home_missing=None, away_miss
 			'percentage': f'{(cnt / float(runs)) * 100:.1f}%'
 		})
 
-	top_cards = []
-	for name, cnt in player_cards.most_common(6):
-		top_cards.append({
-			'player': name,
-			'probability': round(cnt / float(runs), 4),
-			'percentage': f'{(cnt / float(runs)) * 100:.1f}%'
-		})
-
-	results = {
+	return {
 		'fixture': {
 			'home': clean_home,
 			'away': clean_away,
-			'simulations': runs,
 			'home_elo': elo_h,
 			'away_elo': elo_a,
-			'elo_expected_home_win': f'{elo_exp_h * 100:.1f}%'
+			'home_formation': actual_h_form,
+			'away_formation': actual_a_form,
+			'simulations': runs
 		},
 		'probabilities': {
 			'home_win': p_home,
@@ -217,27 +228,25 @@ def run_monte_carlo(home_name, away_name, runs=500, home_missing=None, away_miss
 			'away_win': p_away,
 			'home_win_pct': f'{p_home * 100:.1f}%',
 			'draw_pct': f'{p_draw * 100:.1f}%',
-			'away_win_pct': f'{p_away * 100:.1f}%',
-			'implied_odds': {
-				'home': implied_odds_h,
-				'draw': implied_odds_d,
-				'away': implied_odds_a
-			}
+			'away_win_pct': f'{p_away * 100:.1f}%'
+		},
+		'implied_odds': {
+			'home': implied_odds_h,
+			'draw': implied_odds_d,
+			'away': implied_odds_a
 		},
 		'expected_goals': {
 			'home_goals_avg': round(tot_home_goals / float(runs), 2),
 			'away_goals_avg': round(tot_away_goals / float(runs), 2),
+			'total_goals_avg': round((tot_home_goals + tot_away_goals) / float(runs), 2),
 			'home_xg_avg': round(tot_home_xg / float(runs), 2),
-			'away_xg_avg': round(tot_away_xg / float(runs), 2),
-			'total_goals_avg': round((tot_home_goals + tot_away_goals) / float(runs), 2)
+			'away_xg_avg': round(tot_away_xg / float(runs), 2)
 		},
-		'market_metrics': {
+		'markets': {
 			'over_1_5': f'{(over_1_5 / float(runs)) * 100:.1f}%',
-			'under_1_5': f'{((runs - over_1_5) / float(runs)) * 100:.1f}%',
 			'over_2_5': f'{(over_2_5 / float(runs)) * 100:.1f}%',
 			'under_2_5': f'{((runs - over_2_5) / float(runs)) * 100:.1f}%',
 			'over_3_5': f'{(over_3_5 / float(runs)) * 100:.1f}%',
-			'under_3_5': f'{((runs - over_3_5) / float(runs)) * 100:.1f}%',
 			'btts_yes': f'{(btts_yes / float(runs)) * 100:.1f}%',
 			'btts_no': f'{((runs - btts_yes) / float(runs)) * 100:.1f}%',
 			'home_clean_sheet': f'{(home_clean_sheets / float(runs)) * 100:.1f}%',
@@ -247,28 +256,26 @@ def run_monte_carlo(home_name, away_name, runs=500, home_missing=None, away_miss
 		},
 		'top_scorelines': sorted_scores,
 		'top_home_scorers': top_h_scorers,
-		'top_away_scorers': top_a_scorers,
-		'top_card_probabilities': top_cards
+		'top_away_scorers': top_a_scorers
 	}
-	return results
 
 def print_prediction_report(res):
 	f = res['fixture']
 	p = res['probabilities']
 	xg = res['expected_goals']
-	m = res['market_metrics']
+	m = res['markets']
 
 	print("=" * 74)
-	print(f"HATTRK MATCH PREDICTION REPORT: {f['home']} vs {f['away']}".center(74))
-	print(f"Ensemble Simulations: {f['simulations']} Monte Carlo Runs".center(74))
+	print("HATTRK MATCH PREDICTION ENSEMBLE REPORT".center(74))
+	print(f"Simulated {f['simulations']} full matches via spatial possession engine".center(74))
 	print("=" * 74)
-	print(f"Club Elo Ratings: {f['home']} ({f['home_elo']}) vs {f['away']} ({f['away_elo']})")
-	print(f"Elo Baseline Model Expectation: {f['elo_expected_home_win']} Home Advantage Tilt")
+	print(f"MATCHUP: {f['home']} (Elo: {f['home_elo']}) vs. {f['away']} (Elo: {f['away_elo']})")
+	print(f"TACTICAL FORMATIONS: {f['home']} ({f['home_formation']}) vs. {f['away']} ({f['away_formation']})")
 	print("-" * 74)
-	print("MATCH OUTCOME PROBABILITIES & IMPLIED ODDS:")
-	print(f"  {f['home']} Win:  {p['home_win_pct']:>6}  (Fair Odds: {p['implied_odds']['home']:.2f})")
-	print(f"  Draw:              {p['draw_pct']:>6}  (Fair Odds: {p['implied_odds']['draw']:.2f})")
-	print(f"  {f['away']} Win:  {p['away_win_pct']:>6}  (Fair Odds: {p['implied_odds']['away']:.2f})")
+	print("OUTCOME PROBABILITIES (1X2):")
+	print(f"  {f['home']} Win:  {p['home_win_pct']:>6}  (Fair Odds: {res['implied_odds']['home']:.2f})")
+	print(f"  Draw:      {p['draw_pct']:>6}  (Fair Odds: {res['implied_odds']['draw']:.2f})")
+	print(f"  {f['away']} Win:  {p['away_win_pct']:>6}  (Fair Odds: {res['implied_odds']['away']:.2f})")
 	print("-" * 74)
 	print("GOAL EXPECTATIONS (xG):")
 	print(f"  {f['home']} Projected Goals: {xg['home_goals_avg']} (Simulated xG: {xg['home_xg_avg']})")
@@ -298,8 +305,8 @@ def run_backtest_suite():
 		('Liverpool', 'Manchester City', 'draw'),
 		('FC Barcelona', 'FC Bayern München', 'draw'),
 		('Inter Milan', 'Juventus FC', 'home'),
-		('Paris Saint-Germain', 'AS Monaco', 'home'),
-		('Bayer 04 Leverkusen', 'Borussia Dortmund', 'home'),
+		('PSG', 'AS Monaco', 'home'),
+		('Leverkusen', 'Borussia Dortmund', 'home'),
 		('Aston Villa', 'Newcastle United', 'draw'),
 		('Atlético de Madrid', 'Real Sociedad', 'home'),
 		('AC Milan', 'Napoli', 'draw')
@@ -339,6 +346,8 @@ def main():
 	parser.add_argument("--runs", type=int, default=500, help="Number of Monte Carlo simulations")
 	parser.add_argument("--home-form", type=str, default="", help="Home recent form (e.g. WWWDW)")
 	parser.add_argument("--away-form", type=str, default="", help="Away recent form (e.g. LLWDL)")
+	parser.add_argument("--home-formation", type=str, default="", help="Home tactical formation (e.g. 4-3-3, 3-5-2)")
+	parser.add_argument("--away-formation", type=str, default="", help="Away tactical formation (e.g. 4-2-3-1, 5-3-2)")
 	parser.add_argument("--home-missing", type=str, default="", help="Comma-separated missing players for home team")
 	parser.add_argument("--away-missing", type=str, default="", help="Comma-separated missing players for away team")
 	parser.add_argument("--json", type=str, default="", help="Export JSON results to filepath")
@@ -360,7 +369,9 @@ def main():
 		home_missing=h_missing,
 		away_missing=a_missing,
 		home_form=args.home_form,
-		away_form=args.away_form
+		away_form=args.away_form,
+		home_formation=args.home_formation or None,
+		away_formation=args.away_formation or None
 	)
 
 	print_prediction_report(res)

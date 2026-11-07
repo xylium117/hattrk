@@ -1,0 +1,4442 @@
+{
+  "ICON": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "ICON F": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Real Madrid": {
+    "formation": "4-1-2-1-2",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "direct_vertical",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 46,
+    "win_streak": 4
+  },
+  "PSG": {
+    "formation": "4-3-3",
+    "defensive_line": "high",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "short_routine",
+    "offside_trap": "aggressive",
+    "games_together": 36,
+    "win_streak": 4
+  },
+  "OL Féminin": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "London City Lionesses": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "FC Barcelona F": {
+    "formation": "4-3-3",
+    "defensive_line": "high",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "short_routine",
+    "offside_trap": "aggressive",
+    "games_together": 52,
+    "win_streak": 6
+  },
+  "FC Barcelona": {
+    "formation": "4-3-3",
+    "defensive_line": "high",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "aggressive",
+    "games_together": 36,
+    "win_streak": 5
+  },
+  "Man Utd": {
+    "formation": "3-4-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "direct_vertical",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 26,
+    "win_streak": 1
+  },
+  "Manchester City": {
+    "formation": "4-2-3-1",
+    "defensive_line": "high",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "short_routine",
+    "offside_trap": "aggressive",
+    "games_together": 48,
+    "win_streak": 5
+  },
+  "Portland Thorns": {
+    "formation": "4-4-2",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "direct_vertical",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "AFC Bournemouth": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "FC Bayern München": {
+    "formation": "4-2-3-1",
+    "defensive_line": "high",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "direct_vertical",
+    "set_piece_focus": "aerial_overload",
+    "offside_trap": "aggressive",
+    "games_together": 40,
+    "win_streak": 3
+  },
+  "Real Madrid F": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "direct_vertical",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 34,
+    "win_streak": 3
+  },
+  "KC Current": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Manchester City Women": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Trabzonspor": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "PSG Féminine": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Arsenal": {
+    "formation": "4-3-3",
+    "defensive_line": "high",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "aerial_overload",
+    "offside_trap": "aggressive",
+    "games_together": 44,
+    "win_streak": 4
+  },
+  "Angel City FC": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Arsenal Women": {
+    "formation": "4-3-3",
+    "defensive_line": "high",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "aggressive",
+    "games_together": 40,
+    "win_streak": 4
+  },
+  "Chelsea Women": {
+    "formation": "4-2-3-1",
+    "defensive_line": "high",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "aerial_overload",
+    "offside_trap": "aggressive",
+    "games_together": 48,
+    "win_streak": 5
+  },
+  "Borussia Dortmund": {
+    "formation": "4-2-3-1",
+    "defensive_line": "high",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "direct_vertical",
+    "set_piece_focus": "balanced",
+    "offside_trap": "aggressive",
+    "games_together": 34,
+    "win_streak": 2
+  },
+  "HALL OF FUT": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Sunderland": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Atlético de Madrid": {
+    "formation": "5-3-2",
+    "defensive_line": "deep",
+    "pressing_trigger": "regroup",
+    "build_up_style": "direct_vertical",
+    "set_piece_focus": "balanced",
+    "offside_trap": "conservative",
+    "games_together": 50,
+    "win_streak": 3
+  },
+  "AS Monaco": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Liverpool": {
+    "formation": "4-3-3",
+    "defensive_line": "high",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "direct_vertical",
+    "set_piece_focus": "aerial_overload",
+    "offside_trap": "aggressive",
+    "games_together": 38,
+    "win_streak": 4
+  },
+  "Athletic Club": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "ACF Fiorentina": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Rayo Vallecano": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "OGC Nice": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "SSC Napoli": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Inter Miami CF": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Chicago Stars FC": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Man Utd Women": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Al Nassr": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Club Tijuana": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Orlando City": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Newcastle Utd": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "AS Roma": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "West Ham": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Chelsea": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 2
+  },
+  "Orlando Pride": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Villarreal CF": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "RC Deportivo": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "FC Bayern München Frauen": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Juventus FC": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "regroup",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 30,
+    "win_streak": 2
+  },
+  "Aston Villa": {
+    "formation": "4-2-3-1",
+    "defensive_line": "high",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "direct_vertical",
+    "set_piece_focus": "aerial_overload",
+    "offside_trap": "aggressive",
+    "games_together": 38,
+    "win_streak": 3
+  },
+  "SJ Earthquakes": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Sampdoria": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Beşiktaş": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "RB Leipzig": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Al Ahli": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Como 1907": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Spurs": {
+    "formation": "4-3-3",
+    "defensive_line": "high",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "aerial_overload",
+    "offside_trap": "aggressive",
+    "games_together": 32,
+    "win_streak": 2
+  },
+  "Inter Milan": {
+    "formation": "3-5-2",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "direct_vertical",
+    "set_piece_focus": "aerial_overload",
+    "offside_trap": "balanced",
+    "games_together": 48,
+    "win_streak": 4
+  },
+  "Leverkusen": {
+    "formation": "3-4-3",
+    "defensive_line": "high",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "short_routine",
+    "offside_trap": "aggressive",
+    "games_together": 46,
+    "win_streak": 4
+  },
+  "Chicago Fire FC": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "FC Porto": {
+    "formation": "4-3-3",
+    "defensive_line": "high",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "direct_vertical",
+    "set_piece_focus": "balanced",
+    "offside_trap": "aggressive",
+    "games_together": 35,
+    "win_streak": 3
+  },
+  "RC Lens": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Boca Juniors": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Washington Spirit": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "FC Schalke 04": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Club Brugge": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "AC Milan": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 32,
+    "win_streak": 2
+  },
+  "Fulham": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "VfB Stuttgart": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Gotham FC": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Fenerbahçe": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Paris FC Féminine": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "SS Lazio": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "1. FSV Mainz 05": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "LAFC": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Bay FC": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Galatasaray": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Brighton": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "OL": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Eintracht Frankfurt Frauen": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Stade Brestois 29": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Brentford": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "VfL Wolfsburg Frauen": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Monterrey": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Nott'm Forest": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Watford": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Al Qadsiah": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Badalona Women": {
+    "formation": "4-4-2",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "direct_vertical",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Ipswich": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "San Diego Wave": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "US Lecce": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "AZ": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Real Sociedad": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Feyenoord": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Real Sociedad F": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Al Hilal": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Sporting CP": {
+    "formation": "3-4-3",
+    "defensive_line": "high",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "direct_vertical",
+    "set_piece_focus": "aerial_overload",
+    "offside_trap": "aggressive",
+    "games_together": 44,
+    "win_streak": 5
+  },
+  "Juventus FC Women": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Botafogo": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "FC Basel 1893": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Atlético de Madrid F": {
+    "formation": "4-4-2",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "direct_vertical",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Göztepe": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "AS Roma Women": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Atalanta BC": {
+    "formation": "3-4-3",
+    "defensive_line": "high",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "direct_vertical",
+    "set_piece_focus": "balanced",
+    "offside_trap": "aggressive",
+    "games_together": 42,
+    "win_streak": 3
+  },
+  "NC Courage": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Sevilla FC F": {
+    "formation": "4-4-2",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "direct_vertical",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Gençlerbirliği": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "FC Famalicão": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "San Diego FC": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Fortuna Sittard": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Wolves": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Real Betis": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Houston Dash": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "SL Benfica": {
+    "formation": "4-2-3-1",
+    "defensive_line": "high",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "aggressive",
+    "games_together": 36,
+    "win_streak": 3
+  },
+  "Philadelphia": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Lech Poznań": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "LOSC": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Hull City": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Al Shabab": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "OM Féminin": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Rac. Louisville": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "SC Freiburg": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Sassuolo": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Whitecaps FC": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Everton": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Diriyah": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Ajax": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Middlesbrough": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Denver Summit": {
+    "formation": "4-4-2",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "direct_vertical",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Brighton Women": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Rangers": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "1. FC Köln": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Amed": {
+    "formation": "4-4-2",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "direct_vertical",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Nashville SC": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "OM": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "RB Leipzig Frauen": {
+    "formation": "4-4-2",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "direct_vertical",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Toulouse FC": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Liverpool Women": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Stade Rennais FC": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Udinese Calcio": {
+    "formation": "4-4-2",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "direct_vertical",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "TSG Hoffenheim": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "River Plate": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Celta": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Gangwon FC": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Celtic": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "PSV": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Molde FK": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "1. FC Köln Frauen": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "FC Twente Vrouwen": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Coventry City": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "AJ Auxerre": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Paris FC": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Boston Legacy": {
+    "formation": "4-4-2",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "direct_vertical",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "St. Louis CITY SC": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Lanús": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Athletic Club F": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "TSG Hoffenheim Frauen": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "sc Heerenveen": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Burnley": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Olympiacos FC": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "New York City FC": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "KRC Genk": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Palermo": {
+    "formation": "4-4-2",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "direct_vertical",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Bologna FC": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Rosario Central": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "RCD Espanyol": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "LA Galaxy": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Sevilla FC": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "R. Union St.-G.": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "R. Racing Club": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Cardiff City": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "SC Braga": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Getafe CF": {
+    "formation": "4-4-2",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "direct_vertical",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Bayer Leverkusen Frauen": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Incheon United": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Al Ittihad": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "AEK Athens": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Ind. Rivadavia": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Crystal Palace": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Leeds United": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "FC Lugano": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "M'gladbach": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Spurs Women": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Seattle Reign": {
+    "formation": "4-4-2",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "direct_vertical",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "FC Seoul": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "UD Almería": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "RSC Anderlecht": {
+    "formation": "4-4-2",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "direct_vertical",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "SK Sturm Graz": {
+    "formation": "4-4-2",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "direct_vertical",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Girona FC": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Panathinaikos": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "CA Osasuna": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Strasbourg Féminine": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Kasımpaşa": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Torino FC": {
+    "formation": "4-4-2",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "direct_vertical",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Frosinone Calcio": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Portsmouth": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Club América": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Pumas": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "QPR": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Oxford United": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Cagliari Calcio": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "San Lorenzo": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Valencia CF": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "AGF": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Estudiantes": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "West Ham Women": {
+    "formation": "4-4-2",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "direct_vertical",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "New England": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Belgrano": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Club León": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Servette FC": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Venezia FC": {
+    "formation": "4-4-2",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "direct_vertical",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "CF Cruz Azul": {
+    "formation": "4-4-2",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "direct_vertical",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Talleres": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "FK Bodø/Glimt": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "R. Sporting": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Frankfurt": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Pisa": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "PAOK FC": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Hamburger SV": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Racing Club": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "KV Mechelen": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Club Tigres": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "SV Darmstadt 98": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Modena": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Everton Women": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "FC Cincinnati": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "FC Twente": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Jeonbuk Hyundai": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Aston Villa Women": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Slavia Praha": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Toluca FC": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "FC Utrecht": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Al Khaleej": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "LASK": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "FC Augsburg": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Ulsan HD FC": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Viking FK": {
+    "formation": "4-4-2",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "direct_vertical",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Leicester City": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Sounders FC": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Hammarby IF": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Málaga CF": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Neom SC": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "FC Lorient": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Club Guadalajara": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Union Berlin": {
+    "formation": "4-4-2",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "direct_vertical",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Strasbourg": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "VfL Wolfsburg": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Utah Royals": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "AS Saint-Étienne": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Levante UD": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Genoa CFC": {
+    "formation": "4-4-2",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "direct_vertical",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "F.C. København": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "SC Freiburg Frauen": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Hellas Verona": {
+    "formation": "4-4-2",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "direct_vertical",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Southampton": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Norwich": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "UD Las Palmas": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Kaiserslautern": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Başakşehir": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Atlanta United": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "AC Monza": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "FC Fleury 91": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Argentinos Jrs.": {
+    "formation": "4-4-2",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "direct_vertical",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "KV Kortrijk": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "LDU Quito": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Dynamo Kyiv": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "FC Rapid 1923": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Wrexham": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Elche CF": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Unión": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Derby County": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "SV Werder Bremen": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Cerro Porteño": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "BK Häcken": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Atlas FC": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Ajax Vrouwen": {
+    "formation": "4-4-2",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "direct_vertical",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "R. Oviedo": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "BSC Young Boys": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Widzew Łódź": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Peñarol": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Qarabağ FK": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Ferencvárosi TC": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Birmingham City Women": {
+    "formation": "4-4-2",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "direct_vertical",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Dinamo Zagreb": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "RCD Mallorca": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Jagiellonia": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "CD Leganés": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Buriram United": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Bahia": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Çorum FK": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "1. FC Magdeburg": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Konyaspor": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "RB Salzburg": {
+    "formation": "4-4-2",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "direct_vertical",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "West Brom": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "CD Tenerife F": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Houston Dynamo": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Arouca": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Gil Vicente": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Toronto FC": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "FC Midtjylland": {
+    "formation": "4-4-2",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "direct_vertical",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Preston": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Hajduk Split": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Malmö FF": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Real Salt Lake": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "FC Dallas": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Standard Liège": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "SK Rapid": {
+    "formation": "4-4-2",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "direct_vertical",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Arminia Bielefeld": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Union Berlin Frauen": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "VfB Stuttgart Frauen": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "FCSB": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Bolton": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Erzurum FK": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "FC Dinamo 1948": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Univ. Craiova": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "KAA Gent": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Olimpia": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Defensa": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "SV Elversberg": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Viktoria Plzeň": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "1. FC Nürnberg": {
+    "formation": "4-4-2",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "direct_vertical",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Birmingham City": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Stoke City": {
+    "formation": "4-4-2",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "direct_vertical",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Sheffield Wed": {
+    "formation": "4-4-2",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "direct_vertical",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "FC Juárez": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "ESTAC Troyes": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Estoril Praia": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "D. Alavés": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Tigre": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Sparta Praha": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Millwall": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "VfL Bochum 1848": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Vélez Sarsfield": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Granada CF": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Swansea City": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "RCD Espanyol F": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Atl. Nacional": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "SL Benfica Feminino": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Omonia FC": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Cremonese": {
+    "formation": "4-4-2",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "direct_vertical",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Padova": {
+    "formation": "4-4-2",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "direct_vertical",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Hannover 96": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Hibernian": {
+    "formation": "4-4-2",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "direct_vertical",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Parma Calcio": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Kocaelispor": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "SC Paderborn 07": {
+    "formation": "4-4-2",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "direct_vertical",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "IDV": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "FC Sion": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Columbus Crew": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "N.E.C. Nijmegen": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "FC Univ. Cluj": {
+    "formation": "4-4-2",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "direct_vertical",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Heidenheim": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "MK Dons": {
+    "formation": "4-4-2",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "direct_vertical",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "PFC Ludogorets": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Bristol City": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Lincoln City": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Gaziantep": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Huracán": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Casa Pia AC": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "MSV Duisburg": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Charlton Ath": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "FC Nordsjælland": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Minnesota United": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "VfL Osnabrück": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Shakhtar Donetsk": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Raków": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Südtirol": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Korona Kielce": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Nacional": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Instituto": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Junior": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Legia Warszawa": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Stade de Reims": {
+    "formation": "4-4-2",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "direct_vertical",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Hertha BSC": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Independiente": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "CD Castellón": {
+    "formation": "4-4-2",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "direct_vertical",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Górnik Zabrze": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Rio Ave FC": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Hamburger SV Frauen": {
+    "formation": "4-4-2",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "direct_vertical",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Cádiz CF": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Gimcheon Sangmu": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "GKS Katowice": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Havre AC": {
+    "formation": "4-4-2",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "direct_vertical",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "FC St. Pauli": {
+    "formation": "4-4-2",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "direct_vertical",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Radomiak Radom": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "América de Cali": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "APOEL FC": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Pogoń Szczecin": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Braunschweig": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Daejeon Hana": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Indep. Santa Fe": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "FK Austria Wien": {
+    "formation": "4-4-2",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "direct_vertical",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Córdoba CF": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Bolívar": {
+    "formation": "4-4-2",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "direct_vertical",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "SV Werder Bremen Frauen": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Platense": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Portland Timbers": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Huddersfield": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Atlético de SL": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "FC Nantes": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "OH Leuven": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Angers SCO": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Vicenza": {
+    "formation": "4-4-2",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "direct_vertical",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Randers FC": {
+    "formation": "4-4-2",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "direct_vertical",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Le Mans FC": {
+    "formation": "4-4-2",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "direct_vertical",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "CD Tenerife": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Barcelona SC": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "FC Alverca": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Cracovia": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Club Pachuca": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Albacete BP": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Go Ahead Eagles": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Wehen Wiesbaden": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Marítimo M.": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Samsunspor": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Cesena": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Deportes Tolima": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Hearts": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Burgos CF": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Vålerenga Fotball": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Brøndby IF": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Sheffield Utd": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Salford City": {
+    "formation": "4-4-2",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "direct_vertical",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Gimnasia La Plata": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Dynamo Dresden": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Barracas Central": {
+    "formation": "4-4-2",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "direct_vertical",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Energie Cottbus": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Blackburn Rovers": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Indep. Medellín": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Aldosivi": {
+    "formation": "4-4-2",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "direct_vertical",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Rosenborg BK": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Reading": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "1. FSV Mainz 05 Frauen": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Odense BK": {
+    "formation": "4-4-2",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "direct_vertical",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "AD Ceuta FC": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "R. Valladolid CF": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Dundee United": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "FC Argeș": {
+    "formation": "4-4-2",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "direct_vertical",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Sporting Cristal": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "SK Brann": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "1. FC Nürnberg Frauen": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Düsseldorf": {
+    "formation": "4-2-3-1",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Leyton Orient": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "counterpress",
+    "build_up_style": "wing_focus",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Luton Town": {
+    "formation": "4-3-3",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "short_patient",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  },
+  "Blackpool": {
+    "formation": "4-4-2",
+    "defensive_line": "mid_block",
+    "pressing_trigger": "press_on_touch",
+    "build_up_style": "direct_vertical",
+    "set_piece_focus": "balanced",
+    "offside_trap": "balanced",
+    "games_together": 28,
+    "win_streak": 1
+  }
+}

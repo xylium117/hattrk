@@ -11,6 +11,7 @@ class GameStateManager:
 		self.target_man = None
 		self.tactical_orders = set()
 		self.shifts_applied = set()
+		self.manager_pov = getattr(team, 'manager_pov', None)
 
 	def calculate_urgency(self, minute, goal_diff, player_count_diff=0):
 		time_left = max(1, 90 - minute)
@@ -57,6 +58,19 @@ class GameStateManager:
 		if self.mentality == 'desperation_hail_mary' and self.target_man is None:
 			self._assign_target_man()
 
+		if self.manager_pov:
+			if self.mentality == 'desperation_hail_mary':
+				self.manager_pov.defensive_line = 'high'
+				self.manager_pov.pressing_trigger = 'counterpress'
+				self.manager_pov.set_piece_focus = 'aerial_overload'
+			elif self.mentality == 'attacking_overload':
+				self.manager_pov.defensive_line = 'high'
+				self.manager_pov.pressing_trigger = 'counterpress'
+			elif self.mentality == 'park_the_bus':
+				self.manager_pov.defensive_line = 'deep'
+				self.manager_pov.offside_trap = 'conservative'
+				self.manager_pov.pressing_trigger = 'regroup'
+
 		return self.mentality
 
 	def _assign_target_man(self):
@@ -64,7 +78,7 @@ class GameStateManager:
 		if cbs:
 			self.target_man = max(cbs, key=lambda p: getattr(p, 'heading', 70) * 0.5 + getattr(p, 'jumping', 70) * 0.3 + getattr(p, 'strength', 70) * 0.2)
 			tm_name = getattr(self.target_man, 'short_name', '') or self.target_man.name
-			self.match.logger("Desperate stakes now for {}—{} has been pushed right up into the penalty area as an emergency target man!".format(self.name, tm_name))
+			self.match.logger("Desperate stakes now for {} -- {} has been pushed right up into the penalty area as an emergency target man!".format(self.name, tm_name))
 
 	def _log_mentality_shift(self, old_m, new_m, minute, goal_diff):
 		order_key = "{}_{}".format(new_m, minute // 15)
@@ -77,40 +91,52 @@ class GameStateManager:
 		elif new_m == 'controlled_counter':
 			msg = "{} look happy to absorb a bit of pressure now, keeping their shape and waiting to strike on the counter.".format(self.name)
 		elif new_m == 'attacking_overload':
-			msg = "Urgency creeping in for {} now—fullbacks are bombing forward and bodies are flooding into the final third.".format(self.name)
+			msg = "Urgency creeping in for {} now -- fullbacks are bombing forward and bodies are flooding into the final third.".format(self.name)
 		elif new_m == 'desperation_hail_mary':
-			msg = "It's all hands on deck for {}—throwing caution to the wind and pumping direct aerial balls into the box!".format(self.name)
+			msg = "It's all hands on deck for {} -- throwing caution to the wind and pumping direct aerial balls into the box!".format(self.name)
 		else:
 			msg = "{} look to settle back into their standard rhythm and shape.".format(self.name)
 
 		self.match.logger(msg)
 
 	def get_press_modifier(self):
+		base = 1.0
 		if self.mentality == 'attacking_overload':
-			return 1.25
+			base = 1.25
 		elif self.mentality == 'desperation_hail_mary':
-			return 1.40
+			base = 1.40
 		elif self.mentality == 'park_the_bus':
-			return 0.70
+			base = 0.70
 		elif self.mentality == 'controlled_counter':
-			return 0.90
-		return 1.0
+			base = 0.90
+
+		if self.manager_pov:
+			base *= self.manager_pov.get_pressing_modifier()
+
+		return base
 
 	def get_pass_risk_modifier(self):
 		if self.mentality == 'desperation_hail_mary':
-			return 1.50
+			base = 1.50
 		elif self.mentality == 'attacking_overload':
-			return 1.20
+			base = 1.20
 		elif self.mentality == 'park_the_bus':
-			return 0.65
+			base = 0.65
 		elif self.mentality == 'controlled_counter':
-			return 0.85
-		return 1.0
+			base = 0.85
+		else:
+			base = 1.0
+
+		if self.manager_pov:
+			base /= max(0.5, self.manager_pov.get_build_up_modifier())
+
+		return base
 
 	def get_backline_depth(self):
 		if self.mentality == 'park_the_bus':
 			return 'deep'
 		elif self.mentality in ['attacking_overload', 'desperation_hail_mary']:
 			return 'high'
-		return 'standard'
-
+		if self.manager_pov:
+			return self.manager_pov.defensive_line
+		return 'mid_block'

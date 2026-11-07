@@ -3,6 +3,7 @@ from grid import PitchGrid
 from gamestate import GameStateManager
 from possession import PossessionEngine
 from elo import get_club_elo
+from tactics import ManagerPOV, get_formation_matchup, calculate_team_fluidity, load_club_tactics
 
 if sys.stdout.encoding and sys.stdout.encoding.lower() != 'utf-8':
 	try:
@@ -975,6 +976,31 @@ def _load_club_managers():
                     key = men_key
                     seen_men.add(men_key)
             result[key] = full_name
+
+    fallbacks = {
+        'Inter Milan': 'Simone Inzaghi',
+        'AC Milan': 'Paulo Fonseca',
+        'Juventus FC': 'Thiago Motta',
+        'Real Madrid': 'Carlo Ancelotti',
+        'FC Barcelona': 'Hansi Flick',
+        'Manchester City': 'Pep Guardiola',
+        'Arsenal': 'Mikel Arteta',
+        'Liverpool': 'Arne Slot',
+        'Chelsea': 'Enzo Maresca',
+        'Man Utd': 'Rúben Amorim',
+        'FC Bayern München': 'Vincent Kompany',
+        'Borussia Dortmund': 'Nuri Şahin',
+        'Atlético de Madrid': 'Diego Simeone',
+        'PSG': 'Luis Enrique',
+        'Leverkusen': 'Xabi Alonso',
+        'Spurs': 'Ange Postecoglou',
+        'Atalanta BC': 'Gian Piero Gasperini',
+        'Sporting CP': 'Rui Borges'
+    }
+    for k, v in fallbacks.items():
+        if k not in result:
+            result[k] = v
+
     return result
 
 CLUB_MANAGERS = _load_club_managers()
@@ -1115,6 +1141,8 @@ class CoachAI:
 			self.match.players.append(p_in)
 
 		self.subs_made += 1
+		if hasattr(self.team, 'manager_pov') and self.team.manager_pov:
+			self.team.manager_pov.record_substitution(self.team)
 		out_disp = getattr(p_out, 'short_name', '') or p_out.name
 		in_disp = getattr(p_in, 'short_name', '') or p_in.name
 		self.match.logger("SUBSTITUTION ({}): {} replaces {} ({})".format(
@@ -1182,6 +1210,10 @@ class fixture:
 	def decay_momentum(self):
 		for k in self.momentum:
 			self.momentum[k] *= 0.95
+		if hasattr(self.home, 'manager_pov') and self.home.manager_pov:
+			self.home.manager_pov.decay_disruption(self.home)
+		if hasattr(self.away, 'manager_pov') and self.away.manager_pov:
+			self.away.manager_pov.decay_disruption(self.away)
 
 	def update_possession(self):
 		total = self.home_poss_ticks + self.away_poss_ticks
@@ -1303,6 +1335,15 @@ class fixture:
 			self.home_coach = CoachAI(self.home, self)
 		if not self.away_coach and self.away != '':
 			self.away_coach = CoachAI(self.away, self)
+		self.home_manager = getattr(self.home, 'manager_pov', None) or ManagerPOV(self.home.name, formation=getattr(self.home, 'formation', None))
+		self.away_manager = getattr(self.away, 'manager_pov', None) or ManagerPOV(self.away.name, formation=getattr(self.away, 'formation', None))
+		self.home_manager.update_fluidity(self.home)
+		self.away_manager.update_fluidity(self.away)
+		self.home.manager_pov = self.home_manager
+		self.away.manager_pov = self.away_manager
+		self.home.formation = self.home_manager.formation
+		self.away.formation = self.away_manager.formation
+		self.home_formation_mod, self.away_formation_mod = get_formation_matchup(self.home.formation, self.away.formation)
 		self.momentum[self.home.name] = 0.0
 		self.momentum[self.away.name] = 0.0
 		if (not self.venue or self.venue.endswith(' Ground')) and hasattr(self.home, 'name') and self.home.name:
@@ -1784,26 +1825,98 @@ class period:
 		if not outfield:
 			outfield = att_team.xi
 
-		takers = sorted(outfield, key=lambda p: p.crossing * 0.7 + p.curve * 0.3, reverse=True)
+		def _taker_score(p):
+			score = p.crossing * 0.65 + p.curve * 0.35
+			if hasattr(p, 'has_playstyle'):
+				if p.has_playstyle('whipped pass'): score += 10
+				if p.has_playstyle('dead ball'): score += 10
+			return score
+
+		takers = sorted(outfield, key=_taker_score, reverse=True)
 		if not takers:
 			return
 		taker = takers[0]
 
-		aerial_targets = sorted(outfield, key=lambda p: p.heading * 0.5 + p.jumping * 0.3 + p.strength * 0.2, reverse=True)
+		def _aerial_score(p):
+			score = p.heading * 0.45 + p.jumping * 0.35 + p.strength * 0.20
+			if hasattr(p, 'has_playstyle'):
+				if p.has_playstyle('aerial fortress') or p.has_playstyle('power header'): score += 12
+			return score
+
+		aerial_targets = sorted(outfield, key=_aerial_score, reverse=True)
 		if not aerial_targets:
 			return
 		target = aerial_targets[0]
 
 		gk = next((p for p in def_team.xi if p.position == 'GK'), None)
-		def_cbs = [p for p in def_team.xi if p.primary_position == 'CB' or p.position == 'DEF']
-		marker = max(def_cbs, key=lambda p: p.heading * 0.5 + p.jumping * 0.3 + p.strength * 0.2) if def_cbs else None
+		gk_div = getattr(gk, 'gk_diving', 75.0) if gk else 75.0
+		gk_ref = getattr(gk, 'gk_reflexes', 75.0) if gk else 75.0
+		gk_han = getattr(gk, 'gk_handling', 75.0) if gk else 75.0
+		gk_stat = gk_div * 0.35 + gk_ref * 0.35 + gk_han * 0.30
 
-		corner_xg = 0.030 * (target.heading / 80.0) * getattr(target, 'fitness', 1.0)
+		def_cbs = [p for p in def_team.xi if getattr(p, 'assigned_slot', p.position) in ['CB', 'DEF', 'CDM']]
+		marker = max(def_cbs, key=_aerial_score) if def_cbs else None
+		marker_rating = _aerial_score(marker) if marker else 70.0
+
+		att_mgr = getattr(att_team, 'manager_pov', None)
+		set_piece_focus = att_mgr.set_piece_focus if att_mgr else 'balanced'
+
+		t_name = getattr(target, 'short_name', '') or target.name
+		k_name = getattr(taker, 'short_name', '') or taker.name
+		m_disp = (getattr(marker, 'short_name', '') or marker.name) if marker else 'the defense'
+		gk_disp = (getattr(gk, 'short_name', '') or gk.name) if gk else 'the keeper'
+
+		if set_piece_focus == 'short_routine' and random.random() < 0.35:
+			edge_cands = [p for p in outfield if p != taker and p != target]
+			edge_p = max(edge_cands, key=lambda p: getattr(p, 'long_shots', 70) * 0.6 + getattr(p, 'shot_power', 70) * 0.4) if edge_cands else target
+			e_name = getattr(edge_p, 'short_name', '') or edge_p.name
+			short_xg = 0.065 * (getattr(edge_p, 'long_shots', 75) / 80.0) * getattr(edge_p, 'fitness', 1.0)
+			if len(edge_p.inns) > 0:
+				edge_p.inns[-1].shots += 1
+				edge_p.inns[-1].xg += short_xg
+			if att_team == self.match.home:
+				self.match.home_shots += 1
+				self.match.home_xg += short_xg
+			else:
+				self.match.away_shots += 1
+				self.match.away_xg += short_xg
+
+			roll = random.random()
+			if roll < short_xg:
+				if len(edge_p.inns) > 0:
+					edge_p.inns[-1].shots_on_target += 1
+				if att_team == self.match.home:
+					self.match.home_shots_target += 1
+				else:
+					self.match.away_shots_target += 1
+				self.log_goal(edge_p, taker, att_team, 'box')
+				return
+			elif roll < 0.30:
+				if len(edge_p.inns) > 0:
+					edge_p.inns[-1].shots_on_target += 1
+				if att_team == self.match.home:
+					self.match.home_shots_target += 1
+				else:
+					self.match.away_shots_target += 1
+				if gk and len(gk.inns) > 0:
+					gk.inns[-1].saves += 1
+				self.match.logger("Short corner worked to {}, who curls a snapshot through traffic towards goal, but {} parries it cleanly away!".format(e_name, gk_disp))
+				return
+			else:
+				self.match.logger("Short corner routine attempted by {}, but the low delivery is blocked at the near post by {}.".format(k_name, m_disp))
+				return
+
+		cross_qual = (taker.crossing * 0.65 + taker.curve * 0.35) / 80.0
+		target_aer = _aerial_score(target) / 80.0
+		marker_def = marker_rating / 80.0
+		corner_xg = 0.034 * cross_qual * (target_aer / max(0.5, marker_def)) * getattr(target, 'fitness', 1.0)
 		if target.has_playstyle('aerial fortress') or target.has_playstyle('power header'):
 			corner_xg += 0.015
 		if taker.has_playstyle('whipped pass'):
 			corner_xg += 0.010
-		corner_xg = max(0.015, min(0.055, corner_xg))
+		if set_piece_focus == 'aerial_overload':
+			corner_xg *= 1.25
+		corner_xg = max(0.015, min(0.075, corner_xg))
 
 		if len(target.inns) > 0:
 			target.inns[-1].shots += 1
@@ -1815,9 +1928,6 @@ class period:
 			self.match.away_shots += 1
 			self.match.away_xg += corner_xg
 
-		t_name = getattr(target, 'short_name', '') or target.name
-		k_name = getattr(taker, 'short_name', '') or taker.name
-
 		roll = random.random()
 		if roll < corner_xg:
 			if len(target.inns) > 0:
@@ -1827,7 +1937,7 @@ class period:
 			else:
 				self.match.away_shots_target += 1
 			self.log_goal(target, taker, att_team, 'header')
-		elif roll < 0.22:
+		elif roll < 0.24:
 			if len(target.inns) > 0:
 				target.inns[-1].shots_on_target += 1
 			if att_team == self.match.home:
@@ -1836,67 +1946,160 @@ class period:
 				self.match.away_shots_target += 1
 			if gk and len(gk.inns) > 0:
 				gk.inns[-1].saves += 1
-			gk_disp = getattr(gk, 'short_name', '') or (gk.name if gk else 'the keeper')
-			self.match.logger("Corner! {} whipped in a cross, {} rose high but had their header tipped over by {}!".format(k_name, t_name, gk_disp))
+			self.match.logger("Corner! {} whips a dangerous cross into the box, {} connects with a thumping header, but {} makes a sensational fingertip save over the bar!".format(k_name, t_name, gk_disp))
+		elif roll < 0.30:
+			self.match.logger("Glancing header from {} off {}'s corner, but it rattles the outside of the post and bounces clear!".format(t_name, k_name))
 		else:
-			m_disp = getattr(marker, 'short_name', '') or (marker.name if marker else 'the defense')
 			if marker and len(marker.inns) > 0:
 				marker.inns[-1].aerials_won += 1
-			self.match.logger("Corner swung in by {}, but cleared decisively by {}.".format(k_name, m_disp))
+			self.match.logger("Corner swung in towards the penalty spot by {}, but {} climbs highest and thumps a commanding clearing header away.".format(k_name, m_disp))
+			if set_piece_focus == 'aerial_overload' and random.random() < 0.22:
+				self.match.logger("With center-backs pushed forward for the corner, {} quickly gather the loose ball and break at pace!".format(def_team.name))
 
-	def freekick_event(self, att_team, def_team):
+	def freekick_event(self, att_team, def_team, is_indirect=None):
 		outfield = [p for p in att_team.xi if p.position != 'GK']
 		if not outfield:
 			outfield = att_team.xi
-		takers = sorted(outfield, key=lambda p: p.free_kick * 0.6 + p.shot_power * 0.2 + p.curve * 0.2, reverse=True)
-		if not takers:
-			return
-		taker = takers[0]
+
+		if is_indirect is None:
+			is_indirect = (random.random() < 0.50)
+
 		gk = next((p for p in def_team.xi if p.position == 'GK'), None)
-		gk_stat = gk.gk_overall if gk else 70.0
+		gk_div = getattr(gk, 'gk_diving', 75.0) if gk else 75.0
+		gk_ref = getattr(gk, 'gk_reflexes', 75.0) if gk else 75.0
+		gk_stat = (gk_div * 0.5 + gk_ref * 0.5) if gk else 75.0
+		gk_disp = getattr(gk, 'short_name', '') or (gk.name if gk else 'the keeper')
 
-		fk_xg = 0.055 * (taker.free_kick / 80.0) * (taker.curve / 80.0)
-		if taker.has_playstyle('dead ball'):
-			fk_xg += 0.025
-		fk_xg = max(0.025, min(0.085, fk_xg))
+		if not is_indirect:
+			takers = sorted(outfield, key=lambda p: p.free_kick * 0.55 + p.shot_power * 0.25 + p.curve * 0.20, reverse=True)
+			if not takers:
+				return
+			taker = takers[0]
+			t_name = getattr(taker, 'short_name', '') or taker.name
 
-		if len(taker.inns) > 0:
-			taker.inns[-1].shots += 1
-			taker.inns[-1].xg += fk_xg
-		if att_team == self.match.home:
-			self.match.home_shots += 1
-			self.match.home_xg += fk_xg
-		else:
-			self.match.away_shots += 1
-			self.match.away_xg += fk_xg
+			fk_xg = 0.055 * (taker.free_kick / 80.0) * (taker.curve / 80.0) * (taker.shot_power / 80.0) / (gk_stat / 75.0)
+			if taker.has_playstyle('dead ball'):
+				fk_xg += 0.025
+			fk_xg = max(0.025, min(0.095, fk_xg))
 
-		t_name = getattr(taker, 'short_name', '') or taker.name
-		roll = random.random()
-		if roll < fk_xg:
 			if len(taker.inns) > 0:
-				taker.inns[-1].shots_on_target += 1
+				taker.inns[-1].shots += 1
+				taker.inns[-1].xg += fk_xg
 			if att_team == self.match.home:
-				self.match.home_shots_target += 1
+				self.match.home_shots += 1
+				self.match.home_xg += fk_xg
 			else:
-				self.match.away_shots_target += 1
-			self.log_goal(taker, None, att_team, 'long')
-		elif roll < 0.35:
-			if len(taker.inns) > 0:
-				taker.inns[-1].shots_on_target += 1
-			if att_team == self.match.home:
-				self.match.home_shots_target += 1
+				self.match.away_shots += 1
+				self.match.away_xg += fk_xg
+
+			roll = random.random()
+			if roll < fk_xg:
+				if len(taker.inns) > 0:
+					taker.inns[-1].shots_on_target += 1
+				if att_team == self.match.home:
+					self.match.home_shots_target += 1
+				else:
+					self.match.away_shots_target += 1
+				self.log_goal(taker, None, att_team, 'direct_freekick')
+			elif roll < 0.34:
+				if len(taker.inns) > 0:
+					taker.inns[-1].shots_on_target += 1
+				if att_team == self.match.home:
+					self.match.home_shots_target += 1
+				else:
+					self.match.away_shots_target += 1
+				if gk and len(gk.inns) > 0:
+					gk.inns[-1].saves += 1
+				self.match.logger("Terrific strike from the set piece! {} bends the free kick up and over the wall, but {} makes an acrobatic parry!".format(t_name, gk_disp))
+				if random.random() < 0.35:
+					self.corner_event(att_team, def_team)
+			elif roll < 0.40:
+				self.match.logger("Unbelievable strike from {}! The free kick has the keeper beaten all ends up, but crashes against the face of the crossbar!".format(t_name))
 			else:
-				self.match.away_shots_target += 1
-			if gk and len(gk.inns) > 0:
-				gk.inns[-1].saves += 1
-			gk_disp = getattr(gk, 'short_name', '') or (gk.name if gk else 'the keeper')
-			self.match.logger("Terrific strike from the set piece! {} bends the free kick up and over the wall, but {} makes a sensational parry!".format(t_name, gk_disp))
-			if random.random() < 0.35:
-				self.corner_event(att_team, def_team)
+				pos_pro = 'her' if getattr(taker, 'gender', 'Male') == 'Female' else 'his'
+				self.match.logger("Free Kick! {} tries {} luck from distance, but whistles the strike just wide of the target.".format(t_name, pos_pro))
 		else:
-			self.match.logger("Free Kick! {} tried {pos} luck from 25 yards, but whistled the strike just over the bar.".format(
-				t_name, pos='her' if getattr(taker, 'gender', 'Male') == 'Female' else 'his'
-			))
+			takers = sorted(outfield, key=lambda p: p.long_passing * 0.45 + p.crossing * 0.35 + p.curve * 0.20, reverse=True)
+			if not takers:
+				return
+			taker = takers[0]
+			k_name = getattr(taker, 'short_name', '') or taker.name
+
+			aerial_targets = sorted(outfield, key=lambda p: p.heading * 0.45 + p.jumping * 0.35 + p.strength * 0.20, reverse=True)
+			target = aerial_targets[0] if aerial_targets else taker
+			t_name = getattr(target, 'short_name', '') or target.name
+
+			def_cbs = [p for p in def_team.xi if getattr(p, 'assigned_slot', p.position) in ['CB', 'DEF', 'CDM']]
+			marker = max(def_cbs, key=lambda p: p.heading * 0.45 + p.jumping * 0.35 + p.strength * 0.20) if def_cbs else None
+			m_disp = (getattr(marker, 'short_name', '') or marker.name) if marker else 'the defense'
+
+			def_mgr = getattr(def_team, 'manager_pov', None)
+			trap_dir = def_mgr.offside_trap if def_mgr else 'balanced'
+			if trap_dir != 'conservative':
+				trap_risk = def_mgr.get_offside_trap_risk() if def_mgr else 0.020
+				if random.random() < trap_risk:
+					fluidity = getattr(def_team, 'fluidity', 1.0)
+					if random.random() < (0.75 * fluidity):
+						self.match.logger("The flag is up! The defensive backline stepped up in unison, catching {} half a yard offside as the delivery arrived.".format(t_name))
+						return
+					elif trap_dir == 'aggressive' and random.random() < 0.32:
+						self.match.logger("The offside trap was disastrously mistimed! The defensive line pushed up late and {} is completely unmarked to volley home {}'s delivery!".format(t_name, k_name))
+						if len(target.inns) > 0:
+							target.inns[-1].shots += 1
+							target.inns[-1].shots_on_target += 1
+							target.inns[-1].xg += 0.38
+						if att_team == self.match.home:
+							self.match.home_shots += 1
+							self.match.home_shots_target += 1
+							self.match.home_xg += 0.38
+						else:
+							self.match.away_shots += 1
+							self.match.away_shots_target += 1
+							self.match.away_xg += 0.38
+						self.log_goal(target, taker, att_team, 'box')
+						return
+
+			deliv_qual = (taker.long_passing * 0.50 + taker.crossing * 0.35 + taker.curve * 0.15) / 80.0
+			target_aer = (target.heading * 0.45 + target.jumping * 0.35 + target.strength * 0.20) / 80.0
+			marker_def = (marker.heading * 0.45 + marker.jumping * 0.35 + marker.strength * 0.20) / 80.0 if marker else 1.0
+			ifk_xg = 0.042 * deliv_qual * (target_aer / max(0.5, marker_def)) * getattr(target, 'fitness', 1.0)
+			if target.has_playstyle('aerial fortress') or target.has_playstyle('power header'):
+				ifk_xg += 0.015
+			ifk_xg = max(0.018, min(0.080, ifk_xg))
+
+			if len(target.inns) > 0:
+				target.inns[-1].shots += 1
+				target.inns[-1].xg += ifk_xg
+			if att_team == self.match.home:
+				self.match.home_shots += 1
+				self.match.home_xg += ifk_xg
+			else:
+				self.match.away_shots += 1
+				self.match.away_xg += ifk_xg
+
+			roll = random.random()
+			if roll < ifk_xg:
+				if len(target.inns) > 0:
+					target.inns[-1].shots_on_target += 1
+				if att_team == self.match.home:
+					self.match.home_shots_target += 1
+				else:
+					self.match.away_shots_target += 1
+				self.log_goal(target, taker, att_team, 'header')
+			elif roll < 0.25:
+				if len(target.inns) > 0:
+					target.inns[-1].shots_on_target += 1
+				if att_team == self.match.home:
+					self.match.home_shots_target += 1
+				else:
+					self.match.away_shots_target += 1
+				if gk and len(gk.inns) > 0:
+					gk.inns[-1].saves += 1
+				self.match.logger("{} pumps the free kick into the penalty area, {} rises to head towards the bottom corner, but {} reacts sharply to parry it away!".format(k_name, t_name, gk_disp))
+			else:
+				if marker and len(marker.inns) > 0:
+					marker.inns[-1].aerials_won += 1
+				self.match.logger("{} floats the delivery into the mixer, but {} commands the box and thumps a clearing header away.".format(k_name, m_disp))
 
 	def penalty_event(self, att_team, def_team, fouled_player=None, fouling_player=None):
 		f_name = (getattr(fouled_player, 'short_name', '') or fouled_player.name) if fouled_player else 'the attacker'
@@ -1906,14 +2109,16 @@ class period:
 		outfield = [p for p in att_team.xi if p.position != 'GK']
 		if not outfield:
 			outfield = att_team.xi
-		takers = sorted(outfield, key=lambda p: p.penalties * 0.70 + p.composure * 0.30, reverse=True)
+		takers = sorted(outfield, key=lambda p: p.penalties * 0.65 + p.composure * 0.35, reverse=True)
 		if not takers:
 			return
 		taker = takers[0]
 		t_name = getattr(taker, 'short_name', '') or taker.name
 
 		gk = next((p for p in def_team.xi if p.position == 'GK'), None)
-		gk_stat = (getattr(gk, 'gk_diving', 75) * 0.5 + getattr(gk, 'gk_reflexes', 75) * 0.5) if gk else 75.0
+		gk_div = getattr(gk, 'gk_diving', 75.0) if gk else 75.0
+		gk_ref = getattr(gk, 'gk_reflexes', 75.0) if gk else 75.0
+		gk_stat = (gk_div * 0.5 + gk_ref * 0.5) if gk else 75.0
 
 		pen_xg = 0.78
 		if len(taker.inns) > 0:
@@ -1926,8 +2131,8 @@ class period:
 			self.match.away_shots += 1
 			self.match.away_xg += pen_xg
 
-		conv_prob = 0.76 + (taker.penalties - 75) * 0.003 - (gk_stat - 75) * 0.002
-		conv_prob = max(0.55, min(0.91, conv_prob))
+		conv_prob = 0.77 + (taker.penalties - 75) * 0.003 + (taker.composure - 75) * 0.002 - (gk_stat - 75) * 0.0025
+		conv_prob = max(0.55, min(0.92, conv_prob))
 
 		roll = random.random()
 		if roll < conv_prob:
@@ -1948,13 +2153,12 @@ class period:
 			if gk and len(gk.inns) > 0:
 				gk.inns[-1].saves += 1
 			gk_disp = getattr(gk, 'short_name', '') or (gk.name if gk else 'the keeper')
-			self.match.logger("Saved! {} guesses correctly and pulls off a magnificent diving stop to deny {} from the spot!".format(gk_disp, t_name))
+			pos_pro = 'her' if getattr(gk, 'gender', 'Male') == 'Female' else 'his'
+			self.match.logger("Saved! {} guesses correctly, springs to {} left, and turns {}'s spot kick around the post!".format(gk_disp, pos_pro, t_name))
 			if random.random() < 0.40:
 				self.corner_event(att_team, def_team)
 		else:
-			woodwork = random.choice(["rattles the crossbar and bounces away", "drills {} penalty agonisingly against the upright", "blasts {} penalty high over the crossbar"])
-			pos_pro = 'her' if getattr(taker, 'gender', 'Male') == 'Female' else 'his'
-			self.match.logger("He's missed it! {} {}!".format(t_name, woodwork.format(pos_pro) if '{}' in woodwork else woodwork))
+			self.match.logger("He's missed it! {} aims for the top corner but drills the penalty against the crossbar!".format(t_name))
 
 	def minute_event(self):
 		if hasattr(self.match, 'possession_engine') and self.match.possession_engine:
@@ -2533,6 +2737,13 @@ class period:
 				"bulleted an unstoppable header into the net",
 				"glanced a deft header inside the far upright",
 				"arrived on cue to head emphatically into the corner"
+			]
+		elif shot_type == 'direct_freekick':
+			verbs = [
+				"curled a breathtaking direct free kick over the wall and into the top corner",
+				"unleashed an exquisite free kick that dipped viciously under the crossbar",
+				"hammered a sensational set piece through the wall past the stunned keeper",
+				"bent a picture-perfect free kick inside the near post"
 			]
 		elif shot_type == 'penalty':
 			verbs = [

@@ -58,25 +58,29 @@ def default_position_zones(pos_str):
 	pos = str(pos_str).strip().upper()
 	if pos == 'GK':
 		return (3, 3)
-	elif pos in ['LB', 'LWB']:
+	elif pos == 'LB':
 		return (1, 7)
-	elif pos in ['RB', 'RWB']:
+	elif pos == 'LWB':
+		return (1, 7)
+	elif pos == 'RB':
+		return (6, 12)
+	elif pos == 'RWB':
 		return (6, 12)
 	elif pos in ['CB', 'DEF']:
 		return (3, 4)
 	elif pos in ['CDM', 'DMF']:
 		return (9, 10)
-	elif pos in ['LM']:
+	elif pos == 'LM':
 		return (7, 13)
-	elif pos in ['RM']:
+	elif pos == 'RM':
 		return (12, 18)
 	elif pos in ['CM', 'MID']:
 		return (9, 10)
 	elif pos in ['CAM', 'AMF']:
 		return (10, 15)
-	elif pos in ['LW']:
+	elif pos == 'LW':
 		return (8, 14)
-	elif pos in ['RW']:
+	elif pos == 'RW':
 		return (11, 17)
 	elif pos in ['ST', 'CF', 'ATT']:
 		return (10, 16)
@@ -91,16 +95,56 @@ class PitchGrid:
 		self.player_zones.clear()
 		self.zone_players = {z: [] for z in range(1, 19)}
 
-	def update_team_positions(self, team, is_home, in_possession, mentality='balanced'):
+	def update_team_positions(self, team, is_home, in_possession, mentality='balanced', def_line='mid_block'):
+		cb_idx = 0
+		st_idx = 0
+		cm_idx = 0
+
 		for p in team.xi:
-			pos = getattr(p, 'position', 'MID')
-			def_z, att_z = default_position_zones(pos)
+			slot = getattr(p, 'assigned_slot', None) or getattr(p, 'primary_position', None) or getattr(p, 'position', 'MID')
+			slot_upper = str(slot).strip().upper()
+
+			def_z, att_z = default_position_zones(slot_upper)
 			base_z = att_z if in_possession else def_z
 
 			if not is_home:
 				base_z = invert_zone(base_z)
 
 			r, c = zone_to_coord(base_z)
+
+			if slot_upper == 'CB':
+				if cb_idx == 0:
+					c = 1
+				elif cb_idx == 1:
+					c = 3
+				else:
+					c = 4
+				cb_idx += 1
+			elif slot_upper in ['ST', 'CF']:
+				if st_idx == 0:
+					c = 2
+				else:
+					c = 4
+				st_idx += 1
+			elif slot_upper in ['CM', 'CDM']:
+				if cm_idx == 0:
+					c = 2
+				elif cm_idx == 1:
+					c = 3
+				else:
+					c = 4
+				cm_idx += 1
+
+			if def_line == 'high' and slot_upper in ['CB', 'LB', 'RB', 'LWB', 'RWB', 'CDM']:
+				if is_home:
+					r = min(1, r + 1)
+				else:
+					r = max(1, r - 1)
+			elif def_line == 'deep' and slot_upper in ['CB', 'LB', 'RB', 'LWB', 'RWB', 'CDM']:
+				if is_home:
+					r = 0
+				else:
+					r = 2
 
 			if mentality == 'park_the_bus':
 				if is_home:
@@ -109,12 +153,12 @@ class PitchGrid:
 					r = min(2, r + 1)
 			elif mentality in ['attacking_overload', 'desperation_hail_mary']:
 				if is_home:
-					if pos in ['CB', 'DEF'] and mentality == 'desperation_hail_mary':
+					if slot_upper in ['CB', 'DEF'] and mentality == 'desperation_hail_mary':
 						r = 2
 					else:
 						r = min(2, r + 1)
 				else:
-					if pos in ['CB', 'DEF'] and mentality == 'desperation_hail_mary':
+					if slot_upper in ['CB', 'DEF'] and mentality == 'desperation_hail_mary':
 						r = 0
 					else:
 						r = max(0, r - 1)
@@ -125,7 +169,6 @@ class PitchGrid:
 					else:
 						r = min(2, max(1, r))
 
-			work_rate = getattr(p, 'work_rate', 'Medium/Medium')
 			pace = getattr(p, 'pace', 70.0)
 			if random.random() < (pace / 250.0):
 				shift_c = random.choice([-1, 0, 1])
@@ -185,4 +228,3 @@ class PitchGrid:
 		numer = def_power * 0.38 + dist_penalty
 		risk = numer / (numer + denom)
 		return max(0.04, min(0.75, risk))
-

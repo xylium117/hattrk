@@ -1,5 +1,6 @@
 import random, os, sys, csv, unicodedata
 from engine import fixture, team, player, pos_order, pos_to_role, listshow, STADIUM_MAP
+from tactics import FORMATIONS, calculate_player_familiarity, calculate_team_fluidity, load_club_tactics
 
 if sys.stdout.encoding and sys.stdout.encoding.lower() != 'utf-8':
 	try:
@@ -324,7 +325,7 @@ def showteam(t):
 	print('-' * 84)
 	for i, p in enumerate(t.xi, 1):
 		c = ' (C)' if p == capt else ''
-		pos_tag = getattr(p, 'primary_position', p.position).center(3)
+		pos_tag = getattr(p, 'assigned_slot', getattr(p, 'primary_position', p.position)).center(3)
 		disp_name = getattr(p, 'short_name', '') or p.name
 		name_str = (disp_name + c)[:24].ljust(24)
 		print('{:>2}. [{}] {} {:>3.0f}    {:>3.0f}     {:>3.0f}     {:>3.0f}     {:>3.0f}     {:>3.0f}     {:>3.0f}'.format(
@@ -382,7 +383,7 @@ def value(p, role):
 
 	return val + 3.0 * random.random()
 
-def firstxi(team_obj):
+def firstxi(team_obj, formation=None):
 	if len(team_obj.squad) > 0:
 		pool = list(team_obj.squad)
 	elif len(team_obj.active) > 0:
@@ -390,84 +391,60 @@ def firstxi(team_obj):
 	else:
 		pool = list(team_obj.players)
 
+	t_name = getattr(team_obj, 'name', '') or str(team_obj)
+	if not formation:
+		formation = getattr(team_obj, 'formation', None) or load_club_tactics(t_name).get('formation', '4-3-3')
+
+	if formation not in FORMATIONS:
+		formation = '4-3-3'
+
+	slots = FORMATIONS[formation]
 	xi = []
 
-	gks = [p for p in pool if p.position == 'GK' or p.primary_position == 'GK']
-	if gks:
-		best_gk = max(gks, key=lambda p: p.gk_overall + 3.0 * random.random())
-	else:
-		best_gk = max(pool, key=lambda p: p.defense + 3.0 * random.random())
-	xi.append(best_gk)
-	pool = [p for p in pool if p not in xi]
+	for slot in slots:
+		if not pool:
+			break
 
-	cbs = [p for p in pool if p.primary_position == 'CB']
-	cbs.sort(key=lambda p: (p.def_awareness * 0.4 + p.standing_tackle * 0.3 + p.overall * 0.3) + 3.0 * random.random(), reverse=True)
-	for cb in cbs[:2]:
-		xi.append(cb)
-	pool = [p for p in pool if p not in xi]
+		def _candidate_score(cand):
+			fam = calculate_player_familiarity(cand, slot)
+			if slot == 'GK':
+				attr = getattr(cand, 'gk_overall', cand.overall)
+			elif slot == 'CB':
+				attr = cand.def_awareness * 0.40 + cand.standing_tackle * 0.35 + cand.overall * 0.25
+			elif slot in ['LB', 'RB', 'LWB', 'RWB']:
+				attr = cand.pace * 0.30 + cand.def_awareness * 0.25 + cand.crossing * 0.25 + cand.overall * 0.20
+			elif slot in ['CDM']:
+				attr = cand.interceptions * 0.35 + cand.standing_tackle * 0.35 + cand.overall * 0.30
+			elif slot in ['CM']:
+				attr = cand.short_passing * 0.35 + cand.vision * 0.30 + cand.overall * 0.35
+			elif slot in ['CAM']:
+				attr = cand.vision * 0.35 + cand.short_passing * 0.30 + cand.dribbling_stat * 0.35
+			elif slot in ['LM', 'RM', 'LW', 'RW']:
+				attr = cand.pace * 0.35 + cand.crossing * 0.30 + cand.dribbling_stat * 0.35
+			elif slot in ['ST', 'CF']:
+				attr = cand.finishing * 0.45 + cand.positioning * 0.35 + cand.shot_power * 0.20
+			else:
+				attr = cand.overall
 
-	rbs = [p for p in pool if p.primary_position in ['RB', 'RWB']]
-	if rbs:
-		best_rb = max(rbs, key=lambda p: p.overall + 3.0 * random.random())
-		xi.append(best_rb)
-		pool = [p for p in pool if p not in xi]
+			return (attr * (fam ** 1.3)) + 3.0 * random.random()
 
-	lbs = [p for p in pool if p.primary_position in ['LB', 'LWB']]
-	if lbs:
-		best_lb = max(lbs, key=lambda p: p.overall + 3.0 * random.random())
-		xi.append(best_lb)
-		pool = [p for p in pool if p not in xi]
-
-	needed_defs = 4 - len([p for p in xi if p.position == 'DEF'])
-	if needed_defs > 0:
-		other_defs = [p for p in pool if p.position == 'DEF']
-		other_defs.sort(key=lambda p: p.overall + 3.0 * random.random(), reverse=True)
-		for d in other_defs[:needed_defs]:
-			xi.append(d)
-		pool = [p for p in pool if p not in xi]
-
-	cdms = [p for p in pool if p.primary_position == 'CDM' or p.position == 'DMF']
-	if cdms:
-		best_cdm = max(cdms, key=lambda p: (p.interceptions + p.standing_tackle + p.overall) + 3.0 * random.random())
-		xi.append(best_cdm)
-		pool = [p for p in pool if p not in xi]
-
-	mids = [p for p in pool if p.primary_position in ['CM', 'CAM'] or p.position in ['MID', 'AMF']]
-	mids.sort(key=lambda p: (p.short_passing * 0.4 + p.vision * 0.3 + p.overall * 0.3) + 3.0 * random.random(), reverse=True)
-	for m in mids[:2]:
-		xi.append(m)
-	pool = [p for p in pool if p not in xi]
-
-	needed_mids = 3 - len([p for p in xi if p.position in ['DMF', 'MID', 'AMF']])
-	if needed_mids > 0:
-		other_mids = [p for p in pool if p.position in ['DMF', 'MID', 'AMF']]
-		other_mids.sort(key=lambda p: p.overall + 3.0 * random.random(), reverse=True)
-		for m in other_mids[:needed_mids]:
-			xi.append(m)
-		pool = [p for p in pool if p not in xi]
-
-	sts = [p for p in pool if p.primary_position in ['ST', 'CF']]
-	if sts:
-		best_st = max(sts, key=lambda p: (p.finishing * 0.5 + p.positioning * 0.3 + p.overall * 0.2) + 3.0 * random.random())
-		xi.append(best_st)
-		pool = [p for p in pool if p not in xi]
-
-	rws = [p for p in pool if p.primary_position in ['RW', 'RM']]
-	if rws:
-		best_rw = max(rws, key=lambda p: (p.pace * 0.4 + p.crossing * 0.3 + p.overall * 0.3) + 3.0 * random.random())
-		xi.append(best_rw)
-		pool = [p for p in pool if p not in xi]
-
-	lws = [p for p in pool if p.primary_position in ['LW', 'LM']]
-	if lws:
-		best_lw = max(lws, key=lambda p: (p.pace * 0.4 + p.dribbling_stat * 0.3 + p.overall * 0.3) + 3.0 * random.random())
-		xi.append(best_lw)
-		pool = [p for p in pool if p not in xi]
+		best_p = max(pool, key=_candidate_score)
+		best_p.assigned_slot = slot
+		best_p.position_familiarity = calculate_player_familiarity(best_p, slot)
+		best_p.effective_overall = round(best_p.overall * best_p.position_familiarity, 1)
+		xi.append(best_p)
+		pool.remove(best_p)
 
 	pool.sort(key=lambda p: (p.overall + 3.0 * random.random()) if p.position != 'GK' else -100, reverse=True)
 	while len(xi) < 11 and len(pool) > 0:
-		xi.append(pool.pop(0))
+		extra_p = pool.pop(0)
+		extra_p.assigned_slot = getattr(extra_p, 'primary_position', extra_p.position)
+		extra_p.position_familiarity = 0.65
+		extra_p.effective_overall = round(extra_p.overall * 0.65, 1)
+		xi.append(extra_p)
 
+	team_obj.formation = formation
+	team_obj.fluidity = calculate_team_fluidity(team_obj)
 	xi.sort(key=lambda p: pos_order(getattr(p, 'primary_position', p.position)))
 	return xi
 
@@ -532,6 +509,8 @@ def setup(home_name, away_name, savecard=None):
 	t.away.players = list(t.away.active)
 	t.away.league = _CACHED_LEAGUES.get(matched_away, '')
 
+	t.home.formation = load_club_tactics(matched_home).get('formation', '4-3-3')
+	t.away.formation = load_club_tactics(matched_away).get('formation', '4-3-3')
 	t.venue = STADIUM_MAP.get(matched_home, STADIUM_MAP.get(home_name, t.home.name + ' Ground'))
 	return t
 
@@ -539,13 +518,20 @@ def game(fixture_obj, savecard=None):
 	if savecard is not None:
 		fixture_obj.savecard = bool(savecard)
 	for i in [fixture_obj.home, fixture_obj.away]:
+		if not getattr(i, 'formation', None):
+			i.formation = load_club_tactics(i.name).get('formation', '4-3-3')
 		if len(i.active) != 11:
-			i.xi = firstxi(i)
+			i.xi = firstxi(i, i.formation)
 		else:
 			i.xi = list(i.active)
 			i.xi.sort(key=lambda p: pos_order(getattr(p, 'primary_position', p.position)))
+			for p in i.xi:
+				if not hasattr(p, 'position_familiarity'):
+					p.position_familiarity = 1.0
+					p.effective_overall = p.overall
 
 		i.starters = list(i.xi)
+		i.fluidity = calculate_team_fluidity(i)
 		i.bench = pick_bench(i, i.xi, count=5)
 		i.subs_used = []
 
