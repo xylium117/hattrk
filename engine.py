@@ -721,6 +721,31 @@ def _load_stadium_map():
 
 STADIUM_MAP = _load_stadium_map()
 
+def _strip_accents(text):
+	import unicodedata as _ud
+	return ''.join(c for c in _ud.normalize('NFD', str(text)) if _ud.category(c) != 'Mn').lower()
+
+def get_stadium(club_name):
+	if not club_name:
+		return 'Stadium'
+	clean = str(club_name).strip()
+	if clean in STADIUM_MAP:
+		return STADIUM_MAP[clean]
+	lower = clean.lower()
+	if lower in _CSV_TO_INTERNAL:
+		mapped = _CSV_TO_INTERNAL[lower]
+		if mapped in STADIUM_MAP:
+			return STADIUM_MAP[mapped]
+	norm = _strip_accents(lower)
+	for k, v in STADIUM_MAP.items():
+		if _strip_accents(k.lower()) == norm:
+			return v
+	for k, v in STADIUM_MAP.items():
+		k_norm = _strip_accents(k.lower())
+		if len(norm) >= 4 and (norm in k_norm or k_norm in norm):
+			return v
+	return clean + ' Ground'
+
 _WOMEN_TEAM_KEYS = {
     'Chelsea': 'Chelsea Women',
     'Arsenal': 'Arsenal Women',
@@ -949,61 +974,54 @@ _DUAL_TEAM_WOMEN_MAP = {
 }
 
 def _load_club_managers():
-    import csv as _csv
-    import os as _os
-    path = _os.path.join(_os.path.dirname(__file__), 'data', 'managers.csv')
-    if not _os.path.exists(path):
-        return {}
-    result = {}
-    seen_men = set()
-    with open(path, mode='r', encoding='utf-8-sig', errors='replace') as f:
-        reader = _csv.DictReader(f)
-        for row in reader:
-            first = row.get('info.firstname', '').strip()
-            last = row.get('info.surname', '').strip()
-            full_name = (first + ' ' + last).strip()
-            gender = row.get('info.gender', 'Male').strip()
-            csv_team = row.get('team_name', '').strip()
-            if not full_name or not csv_team:
-                continue
-            if gender == 'Female':
-                key = _WOMEN_TEAM_KEYS.get(csv_team) or _CSV_TO_INTERNAL.get(csv_team.lower()) or csv_team
-            else:
-                men_key = _CSV_TO_INTERNAL.get(csv_team.lower(), csv_team)
-                if men_key in seen_men and csv_team in _DUAL_TEAM_WOMEN_MAP:
-                    key = _DUAL_TEAM_WOMEN_MAP[csv_team]
-                else:
-                    key = men_key
-                    seen_men.add(men_key)
-            result[key] = full_name
-
-    fallbacks = {
-        'Inter Milan': 'Simone Inzaghi',
-        'AC Milan': 'Paulo Fonseca',
-        'Juventus FC': 'Thiago Motta',
-        'Real Madrid': 'Carlo Ancelotti',
-        'FC Barcelona': 'Hansi Flick',
-        'Manchester City': 'Pep Guardiola',
-        'Arsenal': 'Mikel Arteta',
-        'Liverpool': 'Arne Slot',
-        'Chelsea': 'Enzo Maresca',
-        'Man Utd': 'Rúben Amorim',
-        'FC Bayern München': 'Vincent Kompany',
-        'Borussia Dortmund': 'Nuri Şahin',
-        'Atlético de Madrid': 'Diego Simeone',
-        'PSG': 'Luis Enrique',
-        'Leverkusen': 'Xabi Alonso',
-        'Spurs': 'Ange Postecoglou',
-        'Atalanta BC': 'Gian Piero Gasperini',
-        'Sporting CP': 'Rui Borges'
-    }
-    for k, v in fallbacks.items():
-        if k not in result:
-            result[k] = v
-
-    return result
+	import csv as _csv
+	import json as _json
+	import os as _os
+	result = {}
+	base_dir = _os.path.dirname(_os.path.abspath(__file__))
+	csv_path = _os.path.join(base_dir, 'data', 'managers.csv')
+	if _os.path.exists(csv_path):
+		try:
+			with open(csv_path, mode='r', encoding='utf-8-sig', errors='replace') as f:
+				reader = _csv.DictReader(f)
+				for row in reader:
+					club = (row.get('club') or row.get('team_name') or '').strip()
+					name = (row.get('name') or (row.get('info.firstname', '') + ' ' + row.get('info.surname', ''))).strip()
+					if club and name:
+						result[club] = name
+		except Exception:
+			pass
+	json_path = _os.path.join(base_dir, 'data', 'club_managers.json')
+	if _os.path.exists(json_path):
+		try:
+			with open(json_path, mode='r', encoding='utf-8') as f:
+				result.update(_json.load(f))
+		except Exception:
+			pass
+	return result
 
 CLUB_MANAGERS = _load_club_managers()
+
+def get_club_manager(team_name):
+	if not team_name:
+		return 'Manager'
+	clean = str(team_name).strip()
+	if clean in CLUB_MANAGERS:
+		return CLUB_MANAGERS[clean]
+	lower = clean.lower()
+	if lower in _CSV_TO_INTERNAL:
+		mapped = _CSV_TO_INTERNAL[lower]
+		if mapped in CLUB_MANAGERS:
+			return CLUB_MANAGERS[mapped]
+	norm = _strip_accents(lower)
+	for k, v in CLUB_MANAGERS.items():
+		if _strip_accents(k.lower()) == norm:
+			return v
+	for k, v in CLUB_MANAGERS.items():
+		k_norm = _strip_accents(k.lower())
+		if len(norm) >= 4 and (norm in k_norm or k_norm in norm):
+			return v
+	return '{} Manager'.format(clean)
 
 CLUB_PHILOSOPHIES = {
 	'FC Barcelona': 'tiki_taka',
@@ -1054,7 +1072,7 @@ class CoachAI:
 		self.team = team_obj
 		self.match = match
 		t_name = getattr(team_obj, 'name', '') or str(team_obj)
-		self.name = CLUB_MANAGERS.get(t_name, '{} Manager'.format(t_name))
+		self.name = get_club_manager(t_name)
 		self.philosophy = CLUB_PHILOSOPHIES.get(t_name, 'balanced')
 		self.mentality = 'balanced'
 		self.subs_made = 0
@@ -1347,7 +1365,7 @@ class fixture:
 		self.momentum[self.home.name] = 0.0
 		self.momentum[self.away.name] = 0.0
 		if (not self.venue or self.venue.endswith(' Ground')) and hasattr(self.home, 'name') and self.home.name:
-			self.venue = STADIUM_MAP.get(self.home.name, self.venue or (self.home.name + ' Ground'))
+			self.venue = get_stadium(self.home.name)
 		if hasattr(self.home, 'name') and self.home.name and self.home_elo == 1750:
 			self.home_elo = get_club_elo(self.home.name, self.home)
 		if hasattr(self.away, 'name') and self.away.name and self.away_elo == 1750:

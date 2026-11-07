@@ -1,5 +1,5 @@
 import os, sys, pickle, copy, unicodedata
-from engine import player, team, fixture, listshow
+from engine import player, team, fixture, listshow, STADIUM_MAP, get_stadium
 from game import game, setup, playerwrite, playermake, load_clubs
 
 if sys.stdout.encoding and sys.stdout.encoding.lower() != 'utf-8':
@@ -264,5 +264,5 @@ if __name__ == '__main__':
 	fix = fixture()
 	fix.home = teams[0]
 	fix.away = teams[1]
-	fix.venue = STADIUM_MAP.get(fix.home.name, fix.home.name + ' Ground')
+	fix.venue = get_stadium(fix.home.name)
 	game(fix)

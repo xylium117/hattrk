@@ -1,5 +1,5 @@
 import random, os, sys, csv, unicodedata
-from engine import fixture, team, player, pos_order, pos_to_role, listshow, STADIUM_MAP
+from engine import fixture, team, player, pos_order, pos_to_role, listshow, STADIUM_MAP, get_stadium
 from tactics import FORMATIONS, calculate_player_familiarity, calculate_team_fluidity, load_club_tactics
 
 if sys.stdout.encoding and sys.stdout.encoding.lower() != 'utf-8':
@@ -511,7 +511,7 @@ def setup(home_name, away_name, savecard=None):
 
 	t.home.formation = load_club_tactics(matched_home).get('formation', '4-3-3')
 	t.away.formation = load_club_tactics(matched_away).get('formation', '4-3-3')
-	t.venue = STADIUM_MAP.get(matched_home, STADIUM_MAP.get(home_name, t.home.name + ' Ground'))
+	t.venue = get_stadium(matched_home)
 	return t
 
 def game(fixture_obj, savecard=None):

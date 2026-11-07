@@ -1,5 +1,5 @@
 import sys, os, unicodedata
-from engine import fixture, team, listshow
+from engine import fixture, team, listshow, STADIUM_MAP, get_stadium
 from game import setup, game, load_clubs, find_club, POPULAR_CLUBS
 from custom import getcustom
 import customplayer
@@ -120,7 +120,7 @@ def custom_match():
 	fix = fixture()
 	fix.home = teams[0]
 	fix.away = teams[1]
-	fix.venue = STADIUM_MAP.get(fix.home.name, fix.home.name + ' Ground')
+	fix.venue = get_stadium(fix.home.name)
 	print('\nStarting Custom Match: {} vs. {}\n'.format(fix.home.name, fix.away.name))
 	game(fix)
 

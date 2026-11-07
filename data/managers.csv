@@ -1,491 +1,445 @@
-﻿info.firstname,info.surname,info.managerid,info.gender,nationality,team_name,team_id,domestic_prestige,profitability,info.real_face,info.height,info.weight,info.contract.jointeamdate
-Mikel,Arteta Amatriain,254782,Male,Spain,Arsenal,1,10,8,Yes,175,75,2019-12-20
-Andoni,Iraola Sagarna,251637,Male,Spain,Liverpool,9,10,9,Yes,182,75,2026-06-04
-Enzo,Maresca,263428,Male,Italy,Manchester City,10,10,8,Yes,180,75,2026-06-30
-Vincent,Kompany,251204,Male,Belgium,Bayern München,21,10,3,Yes,190,75,2024-06-01
-Danny,Röhl,278857,Male,Germany,RB Salzburg,191,10,8,No,184,75,2026-06-17
-Francesco,Farioli,263710,Male,Italy,FC Porto,236,10,4,No,174,75,2023-07-01
-Rui Manuel,Gomes Borges,264687,Male,Portugal,Sporting CP,237,10,5,Yes,173,75,2024-12-26
-Hans-Dieter,Flick,254149,Male,Germany,FC Barcelona,241,10,4,Yes,177,75,2024-07-01
-Brian,Priske,252928,Male,Denmark,Sparta Praha,267,10,6,No,188,75,2025-07-01
-Gaute,Helstrup,261271,Male,Norway,Malmö FF,320,10,9,No,175,75,2026-07-01
-Bo,Svensson,260230,Male,Denmark,FC København,819,10,8,No,190,75,2026-03-30
-Brian,Riemer,272666,Male,Denmark,Denmark,1331,10,0,No,174,75,2024-10-24
-Gheorghe,Hagi,262188,Male,Romania,Romania,1356,10,0,No,172,75,2026-04-20
-Luis,de la Fuente,272689,Male,Spain,Spain,1362,10,0,Yes,173,75,2022-12-08
-Jung Yong,Chung,254575,Male,Korea Republic,Jeonbuk Hyundai Motors,1477,10,10,No,183,75,2025-12-24
-Patrick,Kisnorbo,258665,Male,Australia,Sydney FC,111400,10,8,No,188,75,2026-03-24
-Sang Sik,Kim,260119,Male,Korea Republic,Vietnam,111488,10,0,No,184,75,2024-05-03
-Mark,Jackson,272778,Male,England,Buriram United,112638,10,9,No,182,75,2025-10-15
-Tony,Gustavsson,253212,Male,Sweden,Sweden Women,113008,10,0,No,176,75,2025-07-21
-Pedro,López Ramos,271814,Male,Spain,Mexico Women,113010,10,0,No,175,75,2022-09-15
-Germán,Portanova,272831,Male,Argentina,Argentina Women,113996,10,0,No,174,75,2021-07-26
-Francisco,Conceição Neto,261966,Male,Portugal,Portugal Women,115682,10,0,No,180,75,2014-02-25
-Sonia,Bompastor,268315,Female,France,Chelsea,116010,10,9,Yes,162,75,2024-07-01
-Jonatan,Giráldez Costas,272398,Male,Spain,OL Lyonnes,116033,10,9,No,160,75,2025-07-02
-Þorsteinn,Halldorsson,270677,Male,Iceland,Iceland Women,116428,10,0,No,179,75,2021-01-28
-Luis Enrique,Martínez García,249948,Male,Spain,Paris Saint-Germain,73,10,7,Yes,180,75,2023-07-05
-Martin,O'Neill,250036,Male,Northern Ireland,Celtic,78,10,3,No,178,75,2026-01-05
-José Mário,dos Santos Mourinho,232425,Male,Portugal,Real Madrid,243,10,4,Yes,176,75,2026-06-11
-Jindřich,Trpišovský,249675,Male,Czech Republic,Slavia Praha,266,10,7,No,180,75,2018-06-30
-Imanol,Alguacil,249601,Male,Spain,Olympiacos,280,10,9,Yes,187,75,2026-09-10
-Okan,Buruk,250192,Male,Turkey,Galatasaray,325,10,7,Yes,170,75,2022-06-22
-Niels,Frederiksen,250172,Male,Denmark,Lech Poznań,873,10,9,No,188,75,2024-07-01
-Kjetil,Knutsen,249860,Male,Norway,FK Bodø/Glimt,918,10,8,No,182,75,2018-01-01
-Thomas,Tuchel,250585,Male,Germany,England,1318,10,0,Yes,192,75,2025-01-01
-Jacob,Friis,249620,Male,Denmark,Finland,1334,10,0,No,182,75,2025-01-19
-Zinedine,Zidane,238399,Male,France,France,1335,10,0,Yes,185,78,2026-07-28
-Jürgen,Klopp,232302,Male,Germany,Germany,1337,10,0,Yes,193,70,2026-07-24
-Ståle,Solbakken,250516,Male,Norway,Norway,1352,10,0,No,190,75,2020-12-07
-Jorge Fernando,Pinheiro de Jesus,249725,Male,Portugal,Portugal,1354,10,0,No,175,75,2025-07-14
-Marek,Papszun,250974,Male,Poland,Legia Warszawa,1871,10,2,No,182,75,2026-01-01
-Marco,Rossi,249995,Male,Italy,Hungary,1886,10,0,No,187,75,2018-06-19
-Laurențiu,Reghecampf,249891,Male,Romania,FCSB,100761,10,9,No,174,75,2026-09-24
-Michael,O'Neill,250085,Male,Northern Ireland,Northern Ireland,110081,10,0,No,180,75,2026-02-13
-Giorgos,Donis,249481,Male,Greece,Saudi Arabia,111114,10,0,No,175,75,2026-04-23
-John,Herdman,249699,Male,England,Indonesia,111510,10,0,No,165,69,2026-01-03
-Julen,Lopetegui Argote,243874,Male,Spain,Qatar,111527,10,0,Yes,187,77,2025-05-01
-Ange,Postecoglou,220812,Male,Australia,Al Nassr,112139,10,10,Yes,184,75,2026-07-03
-Sarina,Wiegman,250462,Female,Holland,England Women,113002,10,0,Yes,168,75,2024-07-17
-Marius,Șumudică,250013,Male,Romania,CFR Cluj,114385,10,7,No,179,75,2026-08-14
-Jakob,Michelsen,249625,Male,Denmark,Denmark Women,115362,10,0,No,174,75,2025-07-11
-Mario,Kovacevic,79143,Male,Croatia,Dinamo Zagreb,211,10,2,No,180,75,2025-06-17
-Marco Alexandre,Saraiva da Silva,178609,Male,Portugal,Benfica,234,10,2,Yes,180,75,2021-07-01
-Stephen,Bradley,169187,Male,Republic of Ireland,Shamrock Rovers,306,10,8,No,170,63,2016-11-16
-Jens,Wissing,87066,Male,Germany,Al Ittihad,607,10,10,No,185,75,2026-07-10
-Slaviša,Jokanović,146331,Male,Serbia,FC Basel,896,10,5,No,191,87,2026-09-25
-Slaven,Bilić,183617,Male,Croatia,Croatia,1328,10,0,Yes,189,79,2026-08-13
-Santiago,Denia Sánchez,88163,Male,Spain,Czech Republic,1330,10,0,No,180,75,2026-08-01
-Arnar,Gunnlaugsson,76529,Male,Iceland,Iceland,1341,10,0,No,185,75,2025-01-15
-Sébastien,Pocognoli,73757,Male,Belgium,Scotland,1359,10,0,No,181,75,2026-08-16
-Graham,Potter,156320,Male,England,Sweden,1363,10,0,Yes,185,75,2025-10-20
-Craig,Bellamy,73384,Male,Wales,Wales,1367,10,0,No,175,75,2024-07-09
-Rafael,Márquez,86809,Male,Mexico,Mexico,1386,10,0,Yes,184,75,2026-07-06
-Balázs,Borbély,86246,Male,Hungary,Ferencvárosi TC,1874,10,5,No,182,75,2026-06-02
-Leonardo,Ponzio,89593,Male,Argentina,River Plate,1876,10,6,No,175,75,2026-08-27
-Nikolaos,Papadopoulos,87210,Male,Greece,APOEL Nicosia FC,100135,10,7,No,181,75,2026-07-01
-Joonas,Rantanen,82449,Male,Finland,HJK Helsinki,100325,10,6,No,175,75,2025-12-01
-Igor,Kostyuk,83204,Male,Ukraine,Dynamo Kyiv,101047,10,3,No,186,75,2025-12-17
-Mohamed,Ouahbi,84336,Male,Belgium,Morocco,111111,10,0,No,180,75,2026-03-06
-Christian,Wück,75486,Male,Germany,Germany Women,113004,10,0,No,180,75,2024-08-10
-Sonia,Bermúdez Tribano,80512,Female,Spain,Spain Women,113012,10,0,No,158,75,2025-08-11
-Panagiotis,Dilmperis,73480,Male,Greece,Mohun Bagan Super Giant,113146,10,9,No,193,75,2026-07-06
-Melissa,Andreatta,78108,Female,Australia,Scotland Women,113984,10,0,No,170,75,2025-04-09
-José Antonio,Barcala García,79297,Male,Spain,Bayern München,115995,10,10,Yes,170,75,2025-07-01
-Isaac,Guerrero,87252,Male,Spain,Juventus,116280,10,8,No,175,75,2026-07-03
-Ian,Jeffs,86672,Male,England,Breiðablik,132890,10,3,No,180,75,2025-11-05
-Xabier,Alonso Olano,262757,Male,Spain,Chelsea,5,9,8,Yes,183,75,2026-07-01
-Michael,Carrick,265587,Male,England,Manchester United,11,9,8,Yes,188,75,2026-01-13
-Luciano,Spalletti,249931,Male,Italy,Juventus,45,9,2,Yes,180,75,2025-10-30
-Derek,McInnes,51495,Male,Scotland,Rangers,86,10,5,No,170,65,2026-06-17
-Vítor Bruno,Motas Fernandes,72692,Male,Portugal,Anderlecht,229,10,9,No,184,75,2024-06-06
-Ivan,Leko,6016,Male,Croatia,Club Brugge,231,10,8,No,179,79,2025-12-08
-Gonzalo Manuel,García-García,249491,Male,Spain,Hajduk Split,263,9,5,No,185,75,2025-06-13
-Marko,Nikolić,256773,Male,Serbia,AEK,278,9,8,No,170,75,2025-06-01
-Bjarte Lunde,Aarsheim,249057,Male,Norway,Viking FK,300,9,4,No,177,75,2021-01-01
-Ismail,Kartal,249609,Male,Turkey,Fenerbahçe,326,9,7,No,176,75,2026-06-26
-Alessio,Lisci,265765,Male,Italy,PAOK,393,9,9,No,172,75,2026-07-01
-Simone,Inzaghi,7728,Male,Italy,Al Hilal,605,10,10,No,183,82,2025-06-05
-Vincenzo,Montella,4609,Male,Italy,Türkiye,1365,10,0,No,172,71,2023-09-21
-Lionel,Scaloni,8842,Male,Argentina,Argentina,1369,10,0,Yes,182,80,2018-08-02
-Tae Ha,Park,250558,Male,Korea Republic,Pohang Steelers,1474,9,8,No,177,75,2023-12-15
-Rodolfo,Arruabarrena,250414,Male,Argentina,Boca Juniors,1877,9,6,No,176,75,2026-07-01
-Jacob,Neestrup,256779,Male,Denmark,Panathinaikos,1884,9,5,No,184,75,2022-09-20
-Giovanni,Savarese,249484,Male,Venezuela,Melbourne Victory,111397,9,8,No,183,75,2026-07-01
-Vladimir,Ivić,250669,Male,Serbia,Al Ain FC (UAE),111701,9,8,No,191,75,2025-02-04
-Gemma,Grainger,70310,Female,England,Norway Women,113007,10,0,No,170,75,2024-01-10
-Qurban,Qurbanov,72867,Male,Azerbaijan,Qarabağ FK,113888,10,4,No,178,75,2008-07-01
-Tomasz,Kaczmarek,250597,Male,Poland,Raków Częstochowa,114326,9,8,No,180,75,2026-09-09
-Stephan,Lerch,274851,Male,Germany,VfL Wolfsburg,115998,9,10,No,183,75,2025-07-01
-Pere,Romeu Sunyer,73107,Male,Spain,FC Barcelona,116325,10,5,No,170,75,2024-07-01
-Marko,Saloranta,72820,Male,Finland,Finland Women,131124,10,0,No,170,75,2023-01-01
-Fabio,Ingolitsch,75543,Male,Austria,Sturm Graz,209,9,6,No,180,75,2026-01-01
-Marvin,Compper,88167,Male,Germany,Antwerp,230,9,8,No,185,75,2026-08-03
-Henning,Berg,47,Male,Norway,Omonia Nicosia FC,264,9,7,No,180,76,2025-07-01
-Filipe Amaral,Rino Coelho,82227,Male,Portugal,Universitatea Craiova,308,9,6,No,178,75,2025-11-11
-Daniel,Pancu,258096,Male,Romania,FC Rapid,310,8,7,No,185,75,2026-05-27
-José Luis,Riveiro Cabaleiro,269851,Male,Spain,AIK,433,8,3,No,175,75,2022-06-25
-Jess,Thorup,17455,Male,Denmark,Genk,673,9,8,No,190,83,2026-07-14
-Rik,De Mil,274862,Male,Belgium,Gent,674,8,7,No,175,75,2023-03-08
-Henrik,Rydström,47178,Male,Sweden,Hammarby IF,708,9,8,No,177,72,2026-06-05
-Jani,Honkavaara,76466,Male,Finland,Djurgårdens IF,710,9,8,No,180,75,2025-01-01
-Ciarán,Kilduff,75873,Male,Republic of Ireland,Dundalk,837,9,8,No,191,75,2024-11-06
-Gerardo,Seoane,138420,Male,Switzerland,BSC Young Boys,900,9,6,No,186,83,2025-10-31
-Mike,Tullberg,76709,Male,Denmark,FC Midtjylland,1516,9,9,No,189,75,2025-09-02
-David,Hubert,75243,Male,Belgium,Union Saint-Gilloise,2014,9,5,No,184,75,2024-09-19
-Juan Pablo,Vojvoda,135828,Male,Argentina,Racing Club de Avellaneda,101085,9,5,No,185,83,2026-06-22
-Martin,Hysky,82734,Male,Czech Republic,Viktoria Plzeň,110468,9,5,No,183,75,2025-10-01
-Adrian,Siemieniec,275035,Male,Poland,Jagiellonia Białystok,110745,8,7,No,180,75,2023-04-04
-Aurelio,Vidmar,279003,Male,Australia,Melbourne City,112224,8,10,No,180,75,2023-11-01
-Niko,Arnautis,271639,Male,Germany,Eintracht Frankfurt,115997,8,9,Yes,170,75,2024-07-17
-Renée,Slegers,75397,Female,Holland,Arsenal,116009,9,9,No,163,75,2024-10-16
-David,González Sanz,86819,Male,Spain,Atlético de Madrid,116327,9,8,No,187,75,2026-07-01
-Ivan,Baptista,80132,Male,Portugal,Benfica,131358,9,6,No,180,75,2025-07-01
-Filip,Klapka,88160,Male,Czech Republic,Slavia Praha,131360,9,5,No,187,75,2026-01-15
-Pedro Miguel,de Barros Moreira,279484,Male,Portugal,Auckland FC,131739,8,8,No,180,75,2026-07-30
-Laura,Kaminski,74179,Female,England,SK Brann,132889,9,4,Yes,173,75,2026-01-08
-Roberto,De Zerbi,157767,Male,Italy,Tottenham Hotspur,18,8,10,Yes,175,66,2026-03-31
-Massimiliano,Allegri,250047,Male,Italy,Napoli,48,8,9,Yes,181,75,2026-07-01
-Filipe Luís,Kasmirski,86825,Male,Brazil,AS Monaco,69,8,2,Yes,182,75,2026-07-06
-Stephen,Robinson,250536,Male,Northern Ireland,Aberdeen,77,8,3,No,173,75,2026-03-12
-Wouter,Vrancken,251205,Male,Belgium,Heart of Midlothian,80,8,4,No,185,75,2026-06-25
-Vincent,Euvrard,256523,Male,Belgium,Standard Liège,232,8,6,No,184,75,2024-07-01
-Thomas,Nørgaard,250583,Male,Denmark,Brøndby IF,269,8,7,No,178,75,2026-06-10
-Vincenzo,Italiano,251172,Male,Italy,Beşiktaş,327,8,6,Yes,171,75,2026-06-06
-Thomas,Reis,253183,Male,Germany,Trabzonspor,436,8,6,No,183,75,2026-09-17
-Jens,Gustafsson,249657,Male,Sweden,BK Häcken,711,8,7,No,182,75,2025-01-01
-Eirik,Horneland,249307,Male,Norway,SK Brann,919,8,7,No,180,75,2026-07-02
-Juan Carlos,Vicens Gómez,78915,Male,Spain,Sporting de Braga,1896,8,8,No,170,75,2025-05-28
-Alexander,Medina,251008,Male,Uruguay,Estudiantes de La Plata,101083,8,6,No,178,75,2026-02-23
-Jadson,Viera,76162,Male,Uruguay,Independiente,110093,8,2,No,192,75,2026-08-18
-Airton,Andrioli,79177,Male,Brazil,Adelaide United,111393,8,7,No,170,75,2025-05-26
-Marino,Pusic,250005,Male,Holland,Al Ahli,112387,8,10,No,188,75,2026-08-06
-Brendan,Rodgers,249063,Male,Northern Ireland,Al Qadsiah,112391,8,8,Yes,170,75,2025-12-16
-Manuel,Márquez Roca,249969,Male,Spain,Mumbai City FC,113300,8,10,No,175,75,2023-06-01
-Eva,Olid Nicolás,88278,Female,Spain,Manchester United,116012,8,8,No,165,75,2026-08-05
-Andrée,Jeglertz,79563,Male,Sweden,Manchester City,116017,8,9,No,175,75,2025-07-03
-Pau,Quesada Tormos,79144,Male,Spain,Real Madrid,116326,8,10,No,180,75,2025-06-17
-Gorka,Álvarez Esteibar,89766,Male,Spain,Real Sociedad,116336,8,7,No,180,75,2026-09-01
-Martina,Voss-Tecklenburg,250043,Female,Germany,FC Zürich,131361,8,4,Yes,167,75,2026-10-01
-Elena,Sadiku,86829,Female,Sweden,BK Häcken,132816,8,7,No,170,75,2026-01-01
-Corina,Dekker,87939,Female,Holland,FC Twente,132891,8,6,No,170,75,2025-07-01
-Matthias,Jaissle,263026,Male,Germany,Newcastle United,13,7,10,No,186,75,2026-08-05
-Marink,Reedijk,280166,Male,Holland,Hibernian,81,7,3,No,180,75,2026-09-24
-Diego,Simeone,5571,Male,Argentina,Atlético de Madrid,240,8,6,Yes,177,77,2011-12-23
-Dietmar,Kühbauer,50182,Male,Austria,LASK,252,8,5,No,173,73,2025-10-10
-Johannes Hoff,Thorup,273049,Male,Denmark,SK Rapid,254,7,5,No,184,75,2026-01-01
-Freyr,Alexandersson,269393,Male,Iceland,Rosenborg BK,298,7,7,No,180,75,2026-06-17
-Hans Erik,Ødegaard,260345,Male,Norway,Lillestrøm SK,299,7,5,No,180,75,2021-01-01
-Mateusz,Stolarski,72881,Male,Poland,Widzew Łódź,301,8,10,No,175,75,2026-09-11
-Sindre,Tjelmeland,72807,Male,Norway,Molde FK,417,8,7,No,182,75,2026-05-24
-Jørgen,Vik,279923,Male,Norway,Tromsø IL,418,7,5,No,176,75,2024-01-08
-Edin,Terzić,260049,Male,Germany,Athletic Club de Bilbao,448,7,3,No,184,75,2026-07-01
-Iñigo,Pérez Soto,71048,Male,Spain,Villarreal CF,483,8,7,Yes,178,75,2026-06-01
-John,Russell,269585,Male,Republic of Ireland,Shelbourne,834,7,2,No,173,75,2026-07-13
-Enrico,Maaßen,262686,Male,Germany,FC St. Gallen,898,7,4,No,178,75,2024-07-01
-Rubén Darío,Insúa,269154,Male,Argentina,San Lorenzo de Almagro,1013,7,3,No,180,75,2026-09-07
-Hyun Seok,Kim,71991,Male,Korea Republic,Ulsan HD FC,1473,8,10,No,178,75,2025-12-24
-Lars,Friis,262461,Male,Denmark,Cercle Brugge,1750,7,4,No,180,75,2024-06-12
-Nuno Alexandre,Carvalho Campos,264801,Male,Portugal,Dinamo București,100757,7,5,No,176,75,2026-06-06
-Andreas,Brännström,266289,Male,Sweden,Mjällby AIF,112072,7,7,No,187,75,2026-09-08
-José,Muñoz Zoyo,280162,Male,Spain,Bengaluru FC,113302,7,6,No,176,75,2026-03-26
-Roberto,Pätzold,262990,Male,Germany,Bayer 04 Leverkusen,115996,7,8,Yes,176,75,2024-07-01
-Victor,Martín Alba,274980,Male,Spain,Athletic Club de Bilbao,116328,7,4,Yes,170,75,2026-07-01
-Yerai,Martín Ramos,276684,Male,Spain,Costa Adeje Tenerife,116332,7,7,No,174,75,2026-01-02
-Leanne,Ross,276685,Female,Scotland,Glasgow City,131363,7,6,No,170,75,2022-12-01
-Eder,Maestre Eguia,73053,Male,Spain,London City Lionesses,132176,8,10,No,170,75,2026-01-02
-Unai,Emery Etxegoien,237389,Male,Spain,Aston Villa,2,7,10,Yes,181,75,2022-11-01
-Raffaele,Palladino,271765,Male,Italy,Bologna,189,6,3,No,182,75,2026-09-16
-Jakob,Poulsen,70773,Male,Denmark,AGF,271,7,7,No,181,75,2025-06-20
-Jocelyn,Gourvennec,30193,Male,France,Servette FC,324,7,4,No,183,77,2023-11-29
-Michal,Gašparík,79050,Male,Slovakia,Górnik Zabrze,420,7,7,No,179,75,2025-07-01
-Manuel,Pellegrini,168384,Male,Chile,Real Betis Balompié,449,7,3,No,184,80,2020-08-01
-Luis,García Fernández,275030,Male,Spain,RCD Mallorca,453,6,5,No,180,75,2026-07-01
-Pellegrino,Matarazzo,254885,Male,United States,Real Sociedad,457,7,3,No,198,75,2025-12-20
-Björn,Hamberg,84201,Male,Sweden,IF Elfsborg,700,7,6,No,178,75,2026-02-19
-Marcel,Koller,249978,Male,Switzerland,FC Zürich,894,7,5,No,173,75,2026-07-01
-Gi Dong,Kim,249856,Male,Korea Republic,FC Seoul,982,7,9,No,171,75,2023-12-14
-Francesc,Fàbregas i Soler,279104,Male,Spain,Como,1745,6,10,Yes,179,75,2024-07-01
-Pierre,Sage,279795,Male,France,Crystal Palace,1799,6,9,No,178,75,2026-06-15
-Mariusz,Jop,86256,Male,Poland,Wisła Kraków,1873,7,4,No,188,75,2024-09-24
-Tiago Miguel,Carvalho Margarido,72387,Male,Portugal,Vitória de Guimarães,1887,7,7,No,184,75,2023-07-03
-Guillermo,Barros Schelotto,142988,Male,Argentina,Vélez Sarsfield,101088,7,4,No,171,71,2025-03-18
-Ovidiu,Sabău,272995,Male,Romania,Farul Constanța,110075,6,5,No,176,75,2026-06-05
-Paolo,Vanoli,266077,Male,Italy,Fiorentina,110374,6,4,No,184,75,2026-09-07
-Óscar,García Junyent,250213,Male,Spain,Pogoń Szczecin,110746,7,5,No,184,75,2026-06-23
-Cristiano,Bergodi,249164,Male,Italy,Universitatea Cluj,110751,7,7,No,188,75,2025-10-23
-John,Hutchinson,181472,Male,Australia,Central Coast Mariners,111396,7,5,No,179,78,2026-07-01
-Mark,Milligan,78428,Male,Australia,Newcastle Jets,111398,7,5,No,178,75,2025-05-06
-Ovidiu,Burcă,275908,Male,Romania,Sepsi OSK,113378,6,8,No,186,75,2026-06-01
-Brian,Sørensen,268902,Male,Denmark,Aston Villa,116015,6,4,No,170,75,2022-06-01
-Ted,Lasso,269762,Male,United States,AFC Richmond Women,132823,6,8,Yes,182,75,2026-06-22
-David,Moyes,235732,Male,Scotland,Everton,7,6,8,Yes,185,79,2025-01-11
-Oliver,Glasner,152260,Male,Austria,Nottingham Forest,14,6,10,Yes,181,72,2026-07-06
-Alan,Reynolds,149774,Male,Republic of Ireland,Bohemians,305,6,3,No,177,82,2024-03-26
-Nicolás,Larcamón,250171,Male,Argentina,Real Sporting de Gijón,459,6,5,No,175,75,2026-07-01
-Frédéric,De Meyer,87207,Male,Belgium,Sint-Truiden,680,6,3,No,180,75,2026-07-01
-Rasmus,Bertelsen,250346,Male,Denmark,Randers FC,1786,6,6,No,176,75,2023-03-23
-Bernardo,Corradi,86528,Male,Italy,Sampdoria,1837,6,3,No,189,75,2026-07-01
-Francesc Xavier,García Pimienta,249393,Male,Spain,UD Almería,1861,6,6,Yes,170,75,2026-07-01
-Mattia,Croci-Torti,264598,Male,Switzerland,FC Lugano,10032,6,3,No,178,75,2021-09-20
-Nuri,Şahin,265497,Male,Turkey,İstanbul Başakşehir FK,101014,6,5,Yes,180,75,2025-09-15
-Enrique,Álvarez Sanjuán,87077,Male,Spain,Girona FC,110062,6,6,No,180,75,2026-07-01
-Frank,Kudelka,249422,Male,Argentina,Newell's Old Boys,110396,6,4,No,176,75,2026-02-26
-Bartosz,Grzelak,257632,Male,Sweden,Cracovia,110747,6,4,No,173,75,2026-04-20
-Juan José,Rojo Martín,249805,Male,Spain,Granada CF,110832,6,5,No,184,75,2025-05-14
-Ricardo,Zielinski,250378,Male,Argentina,Belgrano de Córdoba,111022,6,6,No,180,75,2025-02-11
-Jacek,Zieliński,249617,Male,Poland,Korona Kielce,111083,6,6,No,182,75,2024-08-07
-Thomas,Letsch,250582,Male,Germany,Al Shabab,111674,6,8,No,190,75,2026-07-11
-Arthur,Papas,262857,Male,Australia,Al Ettifaq,112096,6,7,No,174,75,2026-07-03
-Even,Sel,82874,Male,Norway,Sarpsborg 08,112199,6,7,No,180,75,2025-12-22
-Khalid,Al Atawi,251614,Male,Saudi Arabia,Al Fateh,112390,6,2,No,171,75,2026-07-21
-Vuk,Rašović,250672,Male,Serbia,Al Taawoun,112393,6,6,No,182,75,2026-09-21
-Gouramangi,Singh,88145,Male,India,FC Goa,113298,6,2,No,186,75,2026-07-24
-Ashley,Westwood,85260,Male,England,Kerala Blasters FC,113299,6,8,No,183,75,2026-03-27
-Eva-Maria,Virsinger,83003,Female,Germany,TSG 1899 Hoffenheim,115999,6,8,No,167,75,2026-01-05
-Anouk,Bruil,79301,Female,Holland,Ajax,131359,6,6,No,165,75,2025-06-30
-Alfred,Johansson,279614,Male,Sweden,Motherwell,83,5,4,No,182,75,2026-06-18
-Gary,O'Neil,271713,Male,England,Ipswich Town,94,5,6,Yes,173,75,2026-06-23
-Régis,Le Bris,270696,Male,France,Sunderland,106,5,10,Yes,180,75,2024-06-22
-Stephan,Helm,75597,Male,Austria,Austria Wien,256,6,2,No,182,75,2024-07-01
-Claudio,Giráldez González,71542,Male,Spain,RC Celta de Vigo,450,6,7,Yes,185,75,2024-03-12
-Thorsten,Fink,720,Male,Germany,Samsunspor,748,6,7,No,181,79,2026-02-16
-Johannes,Moesgaard,254987,Male,Norway,Vålerenga Fotball,920,5,6,No,188,75,2026-05-13
-Jens,Fønsskov Olsen,73116,Male,Denmark,FC Nordsjælland,1788,6,8,No,179,75,2024-07-01
-Frank,Lampard,262187,Male,England,Coventry City,1800,5,7,Yes,184,75,2024-11-28
-Fabian,Hürzeler,273963,Male,Germany,Brighton & Hove Albion,1808,5,9,Yes,183,75,2024-06-15
-Filippo,Inzaghi,262282,Male,Italy,Palermo,1843,5,6,No,181,75,2025-07-01
-Sergej,Jakirović,277879,Male,Bosnia and Herzegovina,Hull City,1952,5,5,No,191,75,2025-06-11
-Michael,Beale,270979,Male,England,Zulte Waregem,15005,5,5,No,184,75,2026-07-01
-Rubén,Albés Yáñez,256925,Male,Spain,CD Leganés,100888,5,5,No,188,75,2026-07-01
-Stanimir,Stoilov,73436,Male,Bulgaria,Göztepe,101026,6,7,No,171,75,2023-11-21
-İlhan,Palut,254545,Male,Turkey,Konyaspor,101033,5,5,No,175,75,2026-02-06
-Julián,Calero Fernández,262324,Male,Spain,Real Oviedo,110827,5,5,No,175,75,2026-06-11
-Daniel,Myśliwiec,278078,Male,Poland,Piast Gliwice,111086,5,3,No,180,75,2025-10-23
-Ante,Šimundža,76157,Male,Slovenia,Śląsk Wrocław,111092,6,7,No,181,75,2024-12-24
-Diego Hernán,Martínez,257048,Male,Argentina,Huracán,111711,5,6,No,175,75,2025-12-03
-Clifford,Miranda,256352,Male,India,Chennaiyin FC,113297,5,6,No,173,75,2026-02-02
-José Luis,Sánchez Vera,272476,Male,Spain,Madrid CFF,116334,5,3,Yes,174,75,2026-01-14
-David,Losada Andana,73052,Male,Spain,Sevilla FC,116337,6,4,No,170,75,2024-07-01
-Gareth,Taylor,268354,Male,England,Liverpool,116343,5,6,No,185,75,2025-08-08
-Joel,Kjetselberg,276467,Male,Sweden,FC Rosengård,131362,5,4,No,175,75,2026-01-15
-Daniel,Farke,249179,Male,Germany,Leeds United,8,5,8,Yes,182,75,2023-07-04
-Morten Dahm,Kjærgaard,86406,Male,Denmark,Silkeborg IF,270,5,5,No,182,75,2026-06-18
-Joachim,Björklund,87620,Male,Sweden,IFK Göteborg,319,5,6,No,186,75,2026-07-27
-Stephen,Kenny,250535,Male,Republic of Ireland,St Patrick's Athletic,423,5,6,No,175,75,2024-05-16
-Javier,Aguirre,192945,Male,Mexico,Valencia CF,461,5,1,Yes,173,75,2026-09-23
-Francisco,Escribá Segura,249399,Male,Spain,Real Valladolid,462,5,4,No,170,75,2026-02-17
-Rubén,de la Barrera,250434,Male,Spain,UD Las Palmas,472,5,5,No,178,75,2026-07-01
-Mario,Kohnen,85266,Male,Belgium,Charleroi,670,5,4,No,182,75,2026-04-08
-Jörg,Portmann,87944,Male,Switzerland,FC Luzern,897,5,3,No,180,75,2026-07-01
-Sun Hong,Hwang,241684,Male,Korea Republic,Daejeon Hana Citizen,980,5,9,No,183,80,2024-06-03
-Gian-Luca,Privitelli,87941,Male,Switzerland,FC Thun,1715,5,3,No,170,75,2026-07-01
-Luka,Elsner,251153,Male,Slovenia,FC Lausanne-Sport,1862,5,3,No,177,75,2026-07-01
-Jorge,Almirón,156367,Male,Argentina,Rosario Central,110580,5,5,No,185,80,2022-10-13
-Frederik,Vanderbiest,249437,Male,Belgium,KV Mechelen,110724,5,4,No,180,75,2025-04-01
-Didier,Tholot,249248,Male,France,FC Sion,110770,5,3,No,172,75,2023-07-01
-Alfredo,Berti,248959,Male,Argentina,Independiente Rivadavia,111020,5,8,No,175,75,2024-08-27
-Michael,Valkanis,181489,Male,Australia,Brisbane Roar,111395,5,4,No,181,79,2025-05-07
-Chris,Greenacre,119711,Male,England,Wellington Phoenix,111766,5,5,No,180,80,2026-02-23
-Thomas,Silberberger,251657,Male,Austria,Wolfsberger AC,111822,5,5,No,182,75,2026-04-07
-Giovanni,Solinas,249485,Male,Italy,Al Faisaly,112389,5,2,No,178,75,2025-07-27
-Ufuk,Talay,250843,Male,Australia,Western Sydney Wanderers,112427,5,6,No,178,75,2026-07-01
-Carlos Augusto,Carvalhal,243208,Male,Portugal,Famalicão,112809,5,8,Yes,178,82,2026-07-12
-José Manuel,Teixeira Gomes,249775,Male,Portugal,Al Khaleej,112883,5,5,No,180,75,2026-07-01
-Marco,Konrad,89435,Male,Germany,SC Freiburg,116002,5,6,No,180,75,2026-07-01
-Marie-Louise,Eta,85223,Female,Germany,1. FC Union Berlin,132589,5,6,No,165,75,2026-07-01
-Ignazio,Abate,79170,Male,Italy,Torino,54,5,4,No,180,75,2026-07-01
-Álvaro,Arbeloa Coca,83119,Male,Spain,Fulham,144,5,4,Yes,184,75,2026-07-08
-Nickolai,Lund,79405,Male,Denmark,Viborg FF,1443,5,4,No,184,75,2025-07-01
-Sérgio,e Castro Costa,82928,Male,Portugal,Jeju SK FC,1478,5,6,No,174,75,2025-12-24
-Andreas,Tegström,76104,Male,Sweden,Sandefjord Fotball,1757,5,5,No,186,75,2021-01-01
-Mitchell,van der Gaag,20558,Male,Holland,Marítimo,1893,5,5,No,186,87,2025-06-15
-Keith,Andrews,79244,Male,Republic of Ireland,Brentford,1925,5,9,Yes,183,75,2025-06-27
-Marco,Rose,50999,Male,Germany,AFC Bournemouth,1943,5,10,No,187,83,2026-06-04
-Christophe,Lepoint,280001,Male,Belgium,Kortrijk,100081,4,2,No,189,75,2025-07-01
-Selçuk,İnan,272653,Male,Turkey,Kocaelispor,101032,4,5,No,182,75,2025-07-01
-Rui Pedro,Duarte,71842,Male,Portugal,SC Oțelul Galați,110072,5,7,No,173,75,2026-09-28
-Rafał,Górak,72880,Male,Poland,GKS Katowice,110206,5,6,No,183,75,2019-06-03
-Mauricio,Pellegrino,10974,Male,Argentina,Lanús,110395,5,7,Yes,193,84,2024-01-24
-Daniele,De Rossi,271997,Male,Italy,Genoa,110556,4,5,Yes,184,75,2025-11-06
-Orhan,Ak,274932,Male,Turkey,Gaziantep FK,110776,4,3,No,179,75,2026-09-04
-Nicolás,Diez,76630,Male,Argentina,Argentinos Juniors,111019,5,4,No,173,75,2025-01-01
-Mariusz,Misiura,79051,Male,Poland,Motor Lublin,111097,5,7,No,181,75,2026-06-18
-Fredrik,Holmberg,70131,Male,Sweden,GAIS,111594,5,4,No,180,75,2021-11-01
-Tomasz,Tchórz,83884,Male,Poland,SC Delhi,113301,5,3,No,180,75,2026-02-02
-Andreas,Engelmark,75865,Male,Sweden,IK Sirius,113458,5,6,No,182,75,2024-12-03
-Friederike,Kromp,79415,Female,Germany,Werder Bremen,116004,5,6,No,170,75,2025-07-01
-Martin,Ho,79562,Male,England,Tottenham Hotspur,116011,5,5,No,168,75,2025-07-04
-Jonas,Stephan,75538,Male,Germany,RB Leipzig,116021,5,7,No,182,75,2024-07-18
-Sara,Monforte Mestre,272561,Female,Spain,RCD Espanyol,131733,4,3,Yes,168,75,2024-07-01
-Nico,Schneck,273802,Male,Germany,VfB Stuttgart,132865,4,5,No,180,75,2026-03-26
-Kosta,Runjaić,249867,Male,Germany,Udinese,55,4,2,No,177,75,2024-07-01
-Marco,Baroni,249993,Male,Italy,Hellas Verona,206,4,3,No,185,75,2026-07-01
-Luis Miguel,Ramis Monfort,249953,Male,Spain,CA Osasuna,479,4,3,No,190,75,2026-06-10
-Beñat,San José Gil,249047,Male,Spain,Rayo Vallecano,480,4,5,No,180,75,2026-06-18
-Luis,García Plaza,249939,Male,Spain,Sevilla FC,481,4,1,No,180,75,2026-03-24
-Sotirios,Sylaidopoulos,262177,Male,Greece,Rio Ave,744,4,7,No,180,75,2025-07-01
-Adam,Majewski,263265,Male,Poland,Wisła Płock,1569,4,4,No,175,75,2026-06-22
-José,Bordalás Jiménez,249735,Male,Spain,Getafe CF,1860,4,2,Yes,180,75,2023-04-29
-Iván,Ania Cadavieco,250880,Male,Spain,Córdoba CF,1867,4,4,No,175,75,2023-07-01
-Albert,Celades López,253222,Male,Spain,Cádiz CF,1968,4,4,No,177,75,2026-08-11
-Seung Jin,Joo,257989,Male,Korea Republic,Gimcheon Sangmu,2055,4,1,No,177,75,2026-01-01
-Timmy,Simons,266005,Male,Belgium,OH Leuven,100087,4,6,No,186,75,2026-07-01
-Bogdan,Andone,250982,Male,Romania,FC Argeș,100759,4,3,No,180,75,2024-09-23
-Recep,Uçar,269651,Male,Turkey,Çaykur Rizespor,101037,4,5,No,173,75,2025-12-03
-Ariel,Pereyra,214859,Male,Argentina,Gimnasia y Esgrima La Plata,101084,4,7,No,180,78,2026-05-19
-Pedro,Troglio,250277,Male,Argentina,Banfield,110404,4,4,No,172,75,2025-04-29
-Leszek,Ojrzyński,249911,Male,Poland,Zagłębie Lubin,110749,4,6,No,184,75,2025-03-13
-Adrian,Mihalcea,256416,Male,Romania,UTA Arad,110750,4,5,No,180,75,2025-06-05
-Jong Hwan,Yoon,136606,Male,Korea Republic,Incheon United,110765,4,4,No,173,63,2024-12-22
-Emre,Belözoğlu,264730,Male,Turkey,Kasımpaşa,111339,4,3,No,169,75,2025-12-04
-Julio,Vaccari,268489,Male,Argentina,Defensa y Justicia,111710,4,8,No,186,75,2026-05-27
-Diego,Dabove,249253,Male,Argentina,Tigre,111715,4,4,No,185,75,2023-06-08
-Kyeong Ho,Jeong,271558,Male,Korea Republic,Gangwon FC,112115,4,4,No,180,75,2024-12-06
-Fábio Luiz,Carille de Araújo,249359,Male,Brazil,Al Fayha,113057,4,5,No,186,75,2026-06-07
-Ed,Still,262232,Male,Belgium,RAAL La Louvière,132231,4,6,No,185,75,2026-02-09
-Thomas,Thomasberg,41039,Male,Denmark,Odense Boldklub,272,4,6,No,180,75,2026-07-30
-Tiernan,Lynch,75798,Male,Northern Ireland,Derry City,445,4,9,No,178,75,2024-11-20
-José Manuel,González Álvarez,71533,Male,Spain,RCD Espanyol,452,4,3,Yes,176,75,2024-03-12
-Jokin,Aranbarri,86441,Male,Spain,SD Eibar,467,4,4,No,171,75,2026-06-20
-Darren,Purse,87600,Male,England,Sligo Rovers,563,4,4,No,178,75,2026-07-24
-Andreas,Holmberg,82482,Male,Sweden,Örgryte IS,706,4,3,No,183,75,2024-01-01
-Graham,Coughlan,111310,Male,Republic of Ireland,Waterford,753,4,3,No,188,86,2026-05-06
-Luís Miguel,Correia Pinto,79565,Male,Portugal,Gil Vicente FC,1888,4,8,No,185,75,2026-07-01
-Vasco Maria,Botelho da Costa,79084,Male,Portugal,Moreirense,1900,4,7,No,171,75,2025-07-01
-Vasco Miguel,Lopes Matos,75367,Male,Portugal,Estoril,10020,4,8,No,175,75,2026-07-08
-Simo,Valakari,4373,Male,Finland,St. Johnstone,100804,4,2,No,178,81,2024-10-01
-Pablo,Hernández Domínguez,81650,Male,Spain,CD Castellón,100852,4,5,Yes,173,75,2025-09-16
-Metin,Diyadin,82782,Male,Turkey,Gençlerbirliği,101025,4,5,No,170,75,2026-05-06
-Ricardo André,de Pinho Sousa,86423,Male,Portugal,Petrolul Ploiești,110078,4,5,No,175,75,2026-06-15
-Adam,Griffiths,82165,Male,Australia,Perth Glory,111399,4,5,No,189,75,2025-07-01
-Ulf,Kristiansson,75860,Male,Sweden,IF Brommapojkarna,111705,4,8,No,184,75,2024-12-03
-Jeong Kyu,Lee,82929,Male,Korea Republic,Gwangju FC,112258,4,2,No,184,75,2025-12-24
-João Pedro,da Silva Pereira,75676,Male,Portugal,Corendon Alanyaspor,113142,4,4,Yes,172,75,2025-03-22
-T G,Purushothaman,83885,Male,India,Odisha FC,113257,4,4,No,177,75,2026-02-02
-Florin,Maxim,86455,Male,Romania,Corvinul Hunedoara,113449,4,5,No,178,75,2021-07-01
-Sasa,Ognenovski,89288,Male,Australia,Macarthur FC,114604,4,5,No,195,75,2026-08-20
-Rita,Guarino,82861,Female,Italy,West Ham United,116014,4,5,No,165,75,2025-12-22
-Scott,Phelan,85415,Male,England,Everton,116016,4,6,No,173,75,2026-02-04
-Marc,Ballester,82506,Male,Spain,FC Badalona Women,131125,4,5,No,180,75,2025-11-12
-Adrián,Martín,87611,Male,Spain,Granada CF,131391,4,4,No,180,75,2026-07-24
-Neil,McCann,250153,Male,Scotland,Kilmarnock,82,3,2,No,178,75,2026-01-06
-Jim,Goodwin,251865,Male,Republic of Ireland,Dundee United,181,3,3,No,183,75,2023-03-01
-Antonio,Hidalgo Morilla,257581,Male,Spain,RC Deportivo,242,3,10,No,183,75,2025-07-01
-Álvaro,Cervera Díaz,248965,Male,Spain,CD Tenerife,260,3,3,No,165,75,2024-12-23
-Uwe,Koschinat,250627,Male,Germany,Rot-Weiß Essen,526,3,2,No,178,75,2024-12-12
-Serkan,Özbalta,266845,Male,Turkey,Erzurumspor FK,749,3,4,No,180,75,2026-07-01
-Toni,Koskela,156073,Male,Finland,Kalmar FF,1439,3,3,No,189,80,2019-05-23
-Fatah,Abdirahman,86440,Male,Denmark,Sønderjyske Fodbold,1447,3,5,No,182,75,2026-06-19
-Kevin,Doherty,265779,Male,Republic of Ireland,Drogheda United,1572,3,3,No,193,75,2021-12-02
-Sergio,Francisco Ramos,86442,Male,Spain,Burgos CF,10846,3,4,No,180,75,2026-06-16
-Alexander,Ende,276294,Male,Germany,Fortuna Düsseldorf,110636,3,4,No,180,75,2026-04-13
-Paolo,Bianco,275873,Male,Italy,Pisa,110738,3,6,No,184,75,2026-07-01
-Marius,Croitoru,251206,Male,Romania,FC Botoșani,110752,3,4,No,175,75,2026-03-08
-Rafał,Grzyb,254684,Male,Poland,Radomiak Radom,111088,3,4,No,175,75,2026-09-08
-Fabio,Pecchia,1145,Male,Italy,Cremonese,111434,4,5,No,172,68,2026-09-02
-Javier,Sanguinetti,257047,Male,Argentina,Aldosivi,111707,3,4,No,174,75,2026-09-03
-Alberto,Aquilani,276254,Male,Italy,Sassuolo,111974,3,5,No,186,75,2026-07-01
-Vasco César,Freire de Seabra,250641,Male,Portugal,Arouca,112513,3,4,No,186,75,2023-09-25
-Omar,De Felippe,250206,Male,Argentina,Talleres de Córdoba,112670,3,6,No,181,75,2026-09-01
-Gerald,Scheiblehner,275685,Male,Austria,Grazer AK,113616,3,2,No,181,75,2026-08-25
-Filipe Emanuel,Curto Coelho,86956,Male,Portugal,Casa Pia,114510,3,5,No,178,75,2026-07-05
-Amy,Merricks,272463,Female,England,Birmingham City,116019,3,4,No,172,75,2024-04-24
-Alberto,Rodríguez Fraga,87003,Male,Spain,RC Deportivo,131720,3,3,No,175,75,2026-07-07
-Christophe,Galtier,249131,Male,France,NEOM SC,131798,3,9,No,176,75,2025-07-05
-Besnik,Hasi,249055,Male,Albania,Amed SK,132392,3,5,No,177,75,2025-04-01
-Carlos,Cuesta García,79171,Male,Spain,Parma,50,3,5,No,180,75,2025-07-01
-Thomas,Wörle,276667,Male,Germany,Preußen Münster,531,2,2,No,184,75,2026-07-01
-Issame,Charaï,79721,Male,Belgium,Westerlo,681,3,7,No,180,75,2025-07-01
-Mario,Despotović,86378,Male,Croatia,SV Ried,780,3,3,No,180,75,2026-06-16
-Armando,Gonçalves Teixeira,4083,Male,Portugal,Santa Clara,1438,3,5,No,176,68,2026-02-03
-Azar,Karadas,82725,Male,Norway,IK Start,1524,3,2,No,189,75,2024-02-08
-Guido,Pagliuca,72980,Male,Italy,Empoli,1746,3,2,No,183,75,2026-07-06
-Thomas,Myhre,79417,Male,Norway,HamKam Fotball,1756,3,6,No,188,75,2025-06-24
-Luís Manuel,Ferreira de Castro,73139,Male,Portugal,Levante UD,1853,3,2,No,175,75,2025-12-20
-Alberto,González Fernández,71745,Male,Spain,Albacete Balompié,1854,3,4,No,173,75,2024-03-27
-Markus,Schopp,10059,Male,Austria,Hartberg,2017,3,3,No,188,82,2026-05-20
-Casper,Røjkjær,86014,Male,Denmark,Fredrikstad FK,2041,3,5,No,180,75,2026-05-20
-Ognjen,Zarić,73744,Male,Austria,Altach,15009,3,2,No,181,75,2026-01-09
-Craig,McLeish,84410,Male,Scotland,St. Mirren,100805,3,2,No,180,75,2026-03-12
-Byeong Hoon,Ryu,279545,Male,Korea Republic,FC Anyang,112555,2,2,No,187,75,2023-12-07
-Martín,Palermo,51152,Male,Argentina,Platense,112689,3,6,No,188,85,2026-08-05
-Maurício Corrêa,Dulac,84046,Male,Brazil,Al Riyadh,113037,3,3,No,178,75,2026-02-11
-Juan Pedro,Benali Hammou,275413,Male,Spain,NorthEast United,113040,2,4,No,175,75,2023-05-22
-Amund,Skiri,70346,Male,Norway,Kristiansund BK,113459,3,4,No,178,75,2023-08-25
-Valentin,Suciu,75215,Male,Romania,FK Csíkszereda Miercurea Ciuc,114546,3,3,No,182,75,2026-09-24
-Carles,Mansó Rubio,82495,Male,Spain,FC Andorra,114554,3,4,No,175,75,2025-11-24
-Britta,Carlson,76210,Female,Germany,1. FC Köln,116003,3,4,No,167,75,2025-01-02
-Mikel,Crespo Aguilar,86372,Male,Spain,Valencia CF,116339,3,5,No,180,75,2025-07-01
-Özhan,Pulat,73360,Male,Turkey,Eyüpspor,131174,3,5,No,181,75,2026-07-01
-Uğur,Uçar,86340,Male,Turkey,Çorum F.K.,132868,3,5,No,180,75,2026-02-17
-André,Breitenreiter,248972,Male,Germany,Hansa Rostock,27,2,3,No,182,75,2026-09-21
-Stuart,Baxter,250545,Male,Scotland,Halmstads BK,321,2,5,No,175,75,2026-05-07
-José Alberto,López Menéndez,249745,Male,Spain,Racing de Santander,456,2,2,No,175,75,2022-12-13
-Enrique,Sánchez Flores,232307,Male,Spain,Deportivo Alavés,463,2,2,Yes,176,75,2026-03-03
-Martín,Anselmi,266434,Male,Argentina,Elche CF,468,2,2,No,178,75,2026-06-13
-Argirios,Giannikis,249019,Male,Greece,1. FC Saarbrücken,523,2,2,No,182,75,2024-01-10
-Juan Francisco,Funes Arjona,266732,Male,Spain,Málaga CF,573,2,2,No,180,75,2025-11-19
-Pedro Miguel,Costa Filipe,250281,Male,Portugal,Estrela da Amadora,718,2,4,No,185,75,2026-07-01
-Markus,Mader,269441,Male,Austria,Austria Lustenau,781,2,1,No,180,75,2024-12-01
-John,Caulfield,249697,Male,Republic of Ireland,Galway United,1571,2,2,No,180,75,2020-08-21
-Kjetil,Rekdal,249861,Male,Norway,Aalesunds FK,1755,2,5,No,187,75,2022-01-01
-Mersad,Selimbegović,251583,Male,Bosnia and Herzegovina,Alemannia Aachen,1826,2,2,No,180,75,2025-11-06
-Diego,Flores,264527,Male,Argentina,Instituto de Córdoba,110953,2,4,No,184,75,2026-02-12
-Achim,Beierlorzer,248893,Male,Germany,FC Ingolstadt 04,111239,2,3,No,190,75,2026-09-25
-Julio César,Falcioni,249819,Male,Argentina,Atlético Tucumán,111708,2,4,No,182,75,2026-03-05
-Leonardo,Madelón,249902,Male,Argentina,Unión de Santa Fe,111716,2,3,No,175,75,2023-09-06
-Ivan,Jurić,155191,Male,Croatia,Monza,111811,2,6,No,175,67,2026-07-01
-Damir,Burić,249175,Male,Croatia,Abha Club,113058,2,2,No,182,75,2026-07-07
-Florin,Pîrvu,274247,Male,Romania,FC Voluntari,113182,2,6,No,184,75,2025-04-25
-Jalel,Kadri,269904,Male,Tunisia,Al Hazem,113222,2,3,No,170,75,2025-04-14
-Bruno Miguel,Silva do Nascimento,249078,Male,Portugal,Diriyah Club,113224,2,3,Yes,190,75,2026-07-06
-Andrea,Esteban Catalán,272550,Female,Spain,Deportivo Alavés,116329,2,2,No,170,75,2023-07-19
-Željko,Kopić,265686,Male,Croatia,Wieczysta Kraków,131464,2,10,No,177,75,2026-08-26
-Jørgen,Isnes,272752,Male,Norway,KFUM-Kameratene Oslo,131491,2,5,No,188,75,2026-05-18
-Des,Buckingham,249239,Male,England,Al Kholood,131735,2,3,No,180,75,2025-08-19
-Lee,Johnson,11785,Male,England,Lommel SK,37,2,5,No,168,66,2025-07-01
-John,McGlynn,78918,Male,Scotland,Falkirk,79,2,2,No,180,75,2022-05-04
-Steven,Pressley,3448,Male,Scotland,Dundee FC,180,2,3,No,183,70,2025-06-02
-Marc,Schneider,47691,Male,Switzerland,FC Vaduz,286,2,3,No,180,73,2024-02-14
-Eusebio,Di Francesco,1212,Male,Italy,Lecce,347,2,4,Yes,178,71,2025-07-01
-Jochen,Seitz,280190,Male,Germany,SV Wehen Wiesbaden,492,1,3,No,182,75,2026-09-23
-Niki,Zimling,86388,Male,Denmark,AC Horsens,1446,2,3,No,178,75,2026-04-15
-Dietmar,Hirsch,78853,Male,Germany,MSV Duisburg,1825,2,2,No,187,75,2024-07-01
-Fabio,Pisacane,79200,Male,Italy,Cagliari,1842,2,7,No,178,75,2025-07-01
-Alexandre M.,Crispim Santos,89939,Male,Portugal,Nacional da Madeira,1891,2,5,No,176,75,2026-09-07
-Mikkel,Jespersen,86389,Male,Denmark,Lyngby BK,15001,2,4,No,184,75,2026-01-08
-Rui,Pinto da Mota,86983,Male,Portugal,SV Waldhof Mannheim,110532,2,3,No,185,75,2026-07-01
-Giorgio,Gorgone,82226,Male,Italy,Catanzaro,110908,2,5,No,176,75,2026-07-11
-Tim,Bakens,87193,Male,Holland,SK Beveren,110913,2,2,No,200,75,2026-07-01
-Alexander,Rubin,82279,Male,Sweden,Västerås SK,112180,2,4,No,180,75,2025-11-19
-Davide,Possanzini,274114,Male,Italy,Südtirol,112494,1,3,No,181,75,2026-07-01
-Sebastián,Dominguez,73293,Male,Argentina,Central Córdoba,112965,2,6,No,184,75,2026-03-18
-Pavlos,Dermitzakis,87159,Male,Greece,Punjab FC,115202,2,8,No,187,75,2026-07-13
-Guillermo,Duró,271712,Male,Argentina,Deportivo Riestra,115472,1,3,No,185,75,2026-04-03
-Iñaki,Goikoetxea,78777,Male,Spain,SD Eibar,116331,2,3,No,180,75,2025-05-20
-Omar,Adlani,89430,Male,Algeria,1. FC Nürnberg,131386,2,4,No,180,75,2026-07-01
-Jo,Potter,86184,Female,England,Crystal Palace,131725,2,3,No,174,75,2025-06-24
-Rodolfo,Cardoso,85264,Male,Argentina,Hamburger SV,132533,2,4,No,178,75,2026-04-13
-Santiago,García Olave,88325,Male,Spain,Logroño United,132629,2,2,No,175,75,2026-08-06
-Karen,Hills,86185,Female,England,Charlton Athletic,132867,2,3,No,162,75,2021-03-01
-Giovanni,Stroppa,104061,Male,Italy,Venezia,205,1,8,No,180,80,2025-07-01
-Sascha,Hildmann,250463,Male,Germany,Jahn Regensburg,543,1,3,No,184,75,2026-03-31
-Sérgio Ricardo,Oliveira Ferreira,86676,Male,Portugal,Alverca,717,1,2,No,178,75,2026-06-29
-Alessandro,Nesta,262191,Male,Italy,Avellino,2038,1,3,No,187,75,2026-07-01
-Matthias,Mink,87291,Male,Germany,Fortuna Köln,110169,1,3,No,180,75,2024-03-01
-Michael,Schiele,250088,Male,Germany,Würzburger Kickers,110197,1,2,No,172,75,2021-06-06
-Lucas,Beniermann,86583,Male,Germany,SV Meppen,110597,1,3,No,176,75,2024-08-12
-Nico,Willig,250167,Male,Germany,VfB Stuttgart II,110697,1,3,No,175,75,2025-07-01
-Alfredo,Álvarez Paredes,86805,Male,Spain,RC Celta Fortuna,110716,1,1,No,180,75,2024-03-12
-Cristian,Bucchi,249159,Male,Italy,Arezzo,110907,1,2,No,186,75,2025-02-04
-Antonio,Calabro,249007,Male,Italy,Padova,110912,1,5,No,176,75,2026-07-01
-Alessandro,Diamanti,86628,Male,Italy,Cesena,110915,1,5,No,180,75,2026-07-01
-Francesco,Modesto,264345,Male,Italy,Mantova,111433,1,3,No,177,75,2025-12-15
-Massimiliano,Alvini,268695,Male,Italy,Frosinone,111657,1,2,No,177,75,2025-07-02
-Pietro,De Giorgio,86828,Male,Italy,Juve Stabia,112124,1,2,No,178,75,2026-07-03
-Gabriele,Cioffi,157756,Male,Italy,Carrarese,112493,1,2,No,196,89,2026-07-01
-Young Min,Lee,250706,Male,Korea Republic,Bucheon FC 1995,112554,1,3,No,181,75,2020-11-19
-Bruno Miguel,Nogueira Pinheiro,262408,Male,Portugal,Académico de Viseu,112587,1,2,No,170,75,2026-07-01
-Facundo,Sava,122377,Male,Argentina,Sarmiento,112713,1,4,No,189,83,2024-03-03
-Fabio,Gallo,137215,Male,Italy,Vicenza,112954,1,2,No,176,74,2025-07-01
-Darío,Franco,249195,Male,Argentina,Gimnasia y Esgrima de Mendoza,113050,1,3,No,189,75,2026-03-28
-Henok,Goitom,271516,Male,Eritrea,Degerfors IF,113892,1,5,No,189,75,2025-07-09
-Rubén,Forestello,142729,Male,Argentina,Estudiantes de Río Cuarto,115470,1,3,No,180,79,2026-05-27
-Abhijit,Mondal,88147,Male,India,Inter Kashi,131461,1,1,No,176,75,2025-10-01
-Takashi,Yamashita,87937,Male,Japan,1. FSV Mainz 05,132866,1,2,No,180,75,2023-07-01
-Daniele,Galloppa,86376,Male,Italy,Modena,1744,1,4,No,181,75,2026-07-01
-Francesco,Tomei,86357,Male,Italy,Ascoli,1847,1,2,No,190,75,2025-07-03
-José Juan,Romero Gil,79670,Male,Spain,AD Ceuta,1894,1,2,No,178,75,2022-09-20
-Ferran,Costa Pinazo,71783,Male,Spain,CE Sabadell,15021,1,2,No,175,75,2025-07-01
-Philipp,Semlic,72702,Male,Austria,WSG Tirol,15040,1,3,No,180,75,2024-06-09
-Orest,Shala,86580,Male,Germany,SC Verl,110501,1,2,No,180,75,2026-07-01
-Marian,Wilhelm,79240,Male,Germany,Viktoria Köln,110645,1,1,No,185,75,2025-06-26
-Samir,Ferchichi,79021,Male,Germany,TSV Havelse,110678,1,1,No,182,75,2022-09-21
-Stefan,Kleineheismann,79056,Male,Germany,TSG 1899 Hoffenheim II,110685,1,3,No,186,75,2025-07-01
-Jon,Ansotegi Gorostola,79672,Male,Spain,Real Sociedad B,110711,1,1,No,192,75,2025-07-01
-Pascal,Reinhardt,86385,Male,Germany,SG Sonnenhof Großaspach,111379,1,1,No,186,75,2023-07-01
-Antonio,Floro Flores,86358,Male,Italy,Benevento,112026,1,1,No,183,75,2025-11-11
-Damián,Ayude,79010,Male,Argentina,Barracas Central,113044,1,3,No,178,75,2026-06-20
-Andrea,Chiappella,79715,Male,Italy,Entella,113147,1,2,No,183,75,2025-07-03
-Javier,Calleja Revilla,45490,Male,Spain,CD Eldense,131110,1,2,Yes,171,76,2026-09-17
+club,name
+1. FC Köln,René Wagner
+1. FC Köln Frauen,Britta Carlson
+1. FC Magdeburg,Petrik Sander
+1. FC Nürnberg,Miroslav Klose
+1. FC Nürnberg Frauen,Omar Adlani
+1. FSV Mainz 05,Urs Fischer
+1. FSV Mainz 05 Frauen,Takashi Yamashita
+AC Milan,Ruben Amorim
+AC Monza,Ivan Jurić
+ACF Fiorentina,Paolo Vanoli
+AD Ceuta FC,José Juan Romero
+AEK Athens,Marko Nikolić
+AFC Bournemouth,Marco Rose
+AGF,Jakob Poulsen
+AJ Auxerre,Will Still
+APOEL FC,Nikos Papadopoulos
+AS Monaco,Filipe Luís
+AS Roma,Gian Piero Gasperini
+AS Roma Women,Gianpiero Piovani
+AS Saint-Étienne,Ian Cathro
+AZ,Lee-Roy Echteld
+Ajax,Míchel
+Ajax Vrouwen,Anouk Bruil
+Al Ahli,Marino Pušić
+Al Hilal,Simone Inzaghi
+Al Ittihad,Jens Wissing
+Al Khaleej,José Gomes
+Al Nassr,Ange Postecoglou
+Al Qadsiah,Brendan Rodgers
+Al Shabab,Thomas Letsch
+Albacete BP,Joseba Etxeberria
+Aldosivi,Israel Damonte
+Amed,Besnik Hasi
+América de Cali,David González
+Angel City FC,Leif Gunnar Smerud
+Angers SCO,Stéphane Gilli
+Argentinos Jrs.,Nicolás Diez
+Arminia Bielefeld,Oliver Kirch
+Arouca,Vítor Severino
+Arsenal,Mikel Arteta
+Arsenal Women,Renée Slegers
+Aston Villa,Unai Emery
+Aston Villa Women,Brian Sørensen (interim)
+Atalanta BC,Maurizio Sarri
+Athletic Club,Edin Terzić
+Athletic Club F,Víctor Martín
+Atl. Nacional,Lucas González
+Atlanta United,Gerardo Martino
+Atlas FC,Hernán Crespo
+Atlético de Madrid,Diego Simeone
+Atlético de Madrid F,David González
+Atlético de SL,Diego Mejía
+BK Häcken,Jens Gustafsson
+BSC Young Boys,Gerardo Seoane
+Badalona Women,Ana Junyent
+Bahia,Rogério Ceni
+Barcelona SC,Pablo Trobbiani
+Barracas Central,Damián Ayude
+Bay FC,Matt Potter
+Bayer Leverkusen Frauen,Roberto Pätzold
+Başakşehir,Nuri Şahin
+Belgrano,Ricardo Zielinski
+Beşiktaş,Vincenzo Italiano
+Birmingham City,Chris Davies
+Birmingham City Women,Amy Merricks
+Blackburn Rovers,Tony Mowbray
+Blackpool,Ian Evatt
+Boca Juniors,Rodolfo Arruabarrena
+Bologna FC,Raffaele Palladino
+Bolton,Steven Schumacher
+Bolívar,Alejandro Restrepo
+Borussia Dortmund,Niko Kovač
+Boston Legacy,Filipa Patão
+Botafogo,Tite
+Braunschweig,Lars Kornetka
+Brentford,Keith Andrews
+Brighton,Fabian Hürzeler
+Brighton Women,Arturo Ruiz
+Bristol City,Michael Skubala
+Brøndby IF,Thomas Nørgaard
+Burgos CF,Sergio Francisco
+Buriram United,Raúl Caneda
+Burnley,Fabio Celestini
+CA Osasuna,Jagoba Arrasate
+CD Castellón,Pablo Hernández
+CD Leganés,Luis Carrión
+CD Tenerife,Álvaro Cervera
+CD Tenerife F,Eder Maestre
+CF Cruz Azul,Joel Huiqui
+Cagliari Calcio,Fabio Pisacane
+Cardiff City,Brian Barry-Murphy
+Casa Pia AC,Filipe Coelho
+Celta,Claudio Giráldez
+Celtic,Martin O'Neill
+Cerro Porteño,Gustavo Costas
+Cesena,Alessandro Diamanti |
+Charlton Ath,Nathan Jones
+Chelsea,Xabi Alonso
+Chelsea Women,Sonia Bompastor
+Chicago Fire FC,Gregg Berhalter
+Chicago Stars FC,Karina Báez
+Club América,Guillermo Almada
+Club Brugge,Ivan Leko
+Club Guadalajara,Gabriel Milito
+Club León,Javier Gandolfi
+Club Pachuca,Benjamín Mora
+Club Tigres,Víctor Manuel Vucetich (interim)
+Club Tijuana,Sebastián Abreu
+Columbus Crew,Laurent Courtois (interim)
+Como 1907,Cesc Fàbregas
+Coventry City,Frank Lampard
+Cracovia,Bartosz Grzelak
+Cremonese,Fabio Pecchia
+Crystal Palace,Pierre Sage
+Cádiz CF,Borja Jiménez
+Córdoba CF,Iván Ania
+D. Alavés,Quique Sánchez Flores
+Daejeon Hana,Hwang Sun-hong
+Defensa,Julio Vaccari
+Denver Summit,Nick Cushing
+Deportes Tolima,Luis Fernando Suárez
+Derby County,John Eustace
+Dinamo Zagreb,Jerko Leko (caretaker)
+Diriyah,Bruno Lage
+Dundee United,Jim Goodwin
+Dynamo Dresden,Thomas Stamm
+Dynamo Kyiv,Maciej Kędziorek (interim)
+Düsseldorf,Jens Langeneke (interim)
+ESTAC Troyes,Stéphane Dumont
+Eintracht Frankfurt Frauen,Niko Arnautis
+Elche CF,Martín Anselmi
+Energie Cottbus,Claus-Dieter Wollitz
+Erzurum FK,Serkan Özbalta
+Estoril Praia,Leandro Pires (caretaker)
+Estudiantes,Alexander Medina
+Everton,David Moyes
+Everton Women,Scott Phelan
+F.C. København,Bo Svensson
+FC Alverca,Sérgio Ferreira
+FC Argeș,Bogdan Andone
+FC Augsburg,Manuel Baum
+FC Barcelona,Hansi Flick
+FC Barcelona F,Pere Romeu
+FC Basel 1893,Slaviša Jokanović
+FC Bayern München,Vincent Kompany
+FC Bayern München Frauen,José Barcala
+FC Cincinnati,Pat Noonan
+FC Dallas,Eric Quill
+FC Dinamo 1948,Nuno Campos
+FC Famalicão,Ricardo (caretaker)
+FC Fleury 91,Maxime D'Ornano
+FC Juárez,Gustavo Lema
+FC Lorient,Alexandre Dujeux
+FC Lugano,Mattia Croci-Torti
+FC Midtjylland,Mike Tullberg
+FC Nantes,Grégory Poirier
+FC Nordsjælland,Jens Fønsskov Olsen
+FC Porto,Francesco Farioli
+FC Rapid 1923,Daniel Pancu
+FC Schalke 04,Miron Muslić
+FC Seoul,Kim Gi-dong
+FC Sion,Didier Tholot
+FC St. Pauli,Marcel Rapp
+FC Twente,John van den Brom
+FC Twente Vrouwen,Corina Dekker
+FC Univ. Cluj,Cristiano Bergodi
+FC Utrecht,Anthony Correia
+FCSB,Laurențiu Reghecampf
+FK Austria Wien,Maximilian Uhlig (caretaker)
+FK Bodø/Glimt,Kjetil Knutsen
+Fenerbahçe,Emre Belözoğlu
+Ferencvárosi TC,Balázs Borbély
+Feyenoord,Giovanni van Bronckhorst
+Fortuna Sittard,Danny Buijs
+Frankfurt,Adi Hütter
+Frosinone Calcio,Massimiliano Alvini
+Fulham,Álvaro Arbeloa
+GKS Katowice,Rafał Górak
+Galatasaray,Okan Buruk
+Gangwon FC,Chung Kyung-ho
+Gaziantep,Orhan Ak
+Genoa CFC,Daniele De Rossi
+Gençlerbirliği,Bernd Storck
+Getafe CF,José Bordalás
+Gil Vicente,Luís Pinto
+Gimcheon Sangmu,Ju Seung-jin
+Gimnasia La Plata,Ariel Pereyra
+Girona FC,Quique Álvarez
+Go Ahead Eagles,Joseph Oosting
+Gotham FC,Juan Carlos Amorós
+Granada CF,Pacheta
+Górnik Zabrze,Michal Gašparík
+Göztepe,Stanimir Stoilov
+HALL OF FUT,HALL OF FUT Manager
+Hajduk Split,Gonzalo García
+Hamburger SV,Merlin Polzin
+Hamburger SV Frauen,Liése Brancão
+Hammarby IF,Henrik Rydström
+Hannover 96,Sandro Wagner
+Havre AC,Jaïr Karam
+Hearts,Wouter Vrancken
+Heidenheim,Frank Schmidt
+Hellas Verona,Marco Baroni
+Hertha BSC,Stefan Leitl
+Hibernian,Marink Reedijk
+Houston Dash,Angela Hucles Mangano
+Houston Dynamo,Ben Olsen
+Huddersfield,Martin Drury
+Hull City,Sergej Jakirović
+Huracán,Diego Martínez
+ICON,ICON Manager
+ICON F,ICON F Manager
+IDV,Joaquín Papa
+Incheon United,Yoon Jong-hwan
+Ind. Rivadavia,Alfredo Berti
+Indep. Medellín,Luis Amaranto Perea
+Indep. Santa Fe,Pablo Repetto
+Independiente,Jadson Viera
+Instituto,Diego Flores
+Inter Miami CF,Kily González
+Inter Milan,Cristian Chivu
+Ipswich,Gary O'Neil
+Jagiellonia,Adrian Siemieniec
+Jeonbuk Hyundai,Chung Jung-yong
+Junior,Sebastián Viera
+Juventus FC,Luciano Spalletti
+Juventus FC Women,Isaac Guerrero
+KAA Gent,Rik De Mil
+KC Current,Chris Armas
+KRC Genk,Jess Thorup
+KV Kortrijk,Christophe Lepoint (caretaker)
+KV Mechelen,Frederik Vanderbiest
+Kaiserslautern,Torsten Lieberknecht
+Kasımpaşa,Alfred Schreuder
+Kocaelispor,Selçuk İnan
+Konyaspor,İlhan Palut
+Korona Kielce,Robert Kolendowicz
+LA Galaxy,Greg Vanney
+LAFC,Larry Freedman
+LASK,Dietmar Kühbauer
+LDU Quito,Gustavo Álvarez
+LOSC,Davide Ancelotti
+Lanús,Mauricio Pellegrino
+Le Mans FC,Patrick Videira
+Lech Poznań,Niels Frederiksen
+Leeds United,Daniel Farke
+Legia Warszawa,Marek Papszun
+Leicester City,Russell Martin
+Levante UD,Luís Castro
+Leverkusen,Carles Martínez Novell
+Leyton Orient,Richie Wellens
+Lincoln City,Chris Cohen & Tom Shaw
+Liverpool,Andoni Iraola
+Liverpool Women,Gareth Taylor
+London City Lionesses,Eder Maestre
+Luton Town,Jack Wilshere
+M'gladbach,Alexander Blessin
+MK Dons,Paul Warne
+MSV Duisburg,Dietmar Hirsch
+Malmö FF,Gaute Helstrup
+Man Utd,Michael Carrick
+Man Utd Women,Eva Olid
+Manchester City,Enzo Maresca
+Manchester City Women,Andrée Jeglertz
+Marítimo M.,Mitchell van der Gaag
+Middlesbrough,Kim Hellberg
+Millwall,Alex Neil
+Minnesota United,Cameron Knowles
+Modena,Daniele Galloppa
+Molde FK,Sindre Tjelmeland
+Monterrey,Matías Almeyda
+Málaga CF,Juan Francisco Funes
+N.E.C. Nijmegen,Dick Schreuder
+NC Courage,Mak Lind
+Nacional,Jorge Bava
+Nashville SC,B. J. Callaghan
+Neom SC,Christophe Galtier
+New England,Marko Mitrović
+New York City FC,Pascal Jansen
+Newcastle Utd,Matthias Jaissle
+Norwich,Philippe Clement
+Nott'm Forest,Oliver Glasner
+OGC Nice,Olivier Pantaloni
+OH Leuven,Timmy Simons
+OL,Jorge Maciel (caretaker)
+OL Féminin,Jonatan Giráldez
+OM,Bruno Génésio
+OM Féminin,Corinne Diacre
+Odense BK,Thomas Thomasberg
+Olimpia,Vitamina Sánchez
+Olympiacos FC,Imanol Alguacil
+Omonia FC,Henning Berg
+Orlando City,Martín Perelman ''(interim)''
+Orlando Pride,Yolanda Thomas
+Oxford United,Aaron Ramsey
+PAOK FC,Alessio Lisci
+PFC Ludogorets,Igor Jovićević
+PSG,Luis Enrique
+PSG Féminine,Paulo César
+PSV,Peter Bosz
+Padova,Antonio Calabro
+Palermo,Filippo Inzaghi
+Panathinaikos,Jacob Neestrup
+Paris FC,Liam Rosenior
+Paris FC Féminine,Sandrine Soubeyrand
+Parma Calcio,Alberto Gilardino
+Peñarol,Diego Aguirre
+Philadelphia,Ryan Richter (interim)
+Pisa,Paolo Bianco
+Platense,Martín Palermo
+Pogoń Szczecin,Óscar García
+Portland Thorns,Robert Vilahamn
+Portland Timbers,Martí Cifuentes
+Portsmouth,John Mousinho
+Preston,Graham Alexander
+Pumas,Esteban Solari
+QPR,Julien Stéphan
+Qarabağ FK,Qurban Qurbanov
+R. Oviedo,Julián Calero
+R. Racing Club,José Alberto
+R. Sporting,Nicolás Larcamón
+R. Union St.-G.,David Hubert
+R. Valladolid CF,Fran Escribá
+RB Leipzig,Martín Demichelis
+RB Leipzig Frauen,Jonas Stephan
+RB Salzburg,Danny Röhl
+RC Deportivo,Antonio Hidalgo
+RC Lens,Yannick Cahuzac
+RCD Espanyol,Eder Sarabia
+RCD Espanyol F,Sara Monforte
+RCD Mallorca,Luis García
+RSC Anderlecht,Vítor Bruno
+Rac. Louisville,Bev Yanez
+Racing Club,Sebastián Romero
+Radomiak Radom,John Carver
+Raków,Dawid Szwarga
+Randers FC,Rasmus Bertelsen
+Rangers,Derek McInnes
+Rayo Vallecano,Beñat San José
+Reading,Leam Richardson
+Real Betis,Manuel Pellegrini
+Real Madrid,José Mourinho
+Real Madrid F,Pau Quesada
+Real Salt Lake,Pablo Mastroeni
+Real Sociedad,Pellegrino Matarazzo
+Real Sociedad F,Arturo Ruiz
+Rio Ave FC,Vasco Seabra
+River Plate,Pablo Longoria
+Rosario Central,Jorge Almirón
+Rosenborg BK,Freyr Alexandersson
+SC Braga,Franclim Carvalho
+SC Freiburg,Julian Schuster
+SC Freiburg Frauen,Marco Konrad
+SC Paderborn 07,Ralf Kettemann
+SJ Earthquakes,Bruce Arena
+SK Brann,Eirik Horneland
+SK Rapid,Johannes Hoff Thorup
+SK Sturm Graz,Fabio Ingolitsch
+SL Benfica,Marco Silva
+SL Benfica Feminino,Ivan Baptista
+SS Lazio,Gennaro Gattuso
+SSC Napoli,Massimiliano Allegri
+SV Darmstadt 98,Florian Kohfeldt
+SV Elversberg,Vincent Wagner
+SV Werder Bremen,Daniel Thioune
+SV Werder Bremen Frauen,Friederike Kromp
+Salford City,Peter Cklamovski
+Sampdoria,Luca D'Angelo
+Samsunspor,Nenad Bjelica
+San Diego FC,Mikey Varas
+San Diego Wave,Jonas Eidevall
+San Lorenzo,Rubén Darío Insúa
+Sassuolo,Alberto Aquilani
+Seattle Reign,Laura Harvey
+Servette FC,Jocelyn Gourvennec
+Sevilla FC,Luis García Plaza
+Sevilla FC F,David Losada
+Shakhtar Donetsk,Arda Turan
+Sheffield Utd,Chris Wilder
+Sheffield Wed,Dave Challinor
+Slavia Praha,Jindřich Trpišovský
+Sounders FC,Brian Schmetzer
+Southampton,Tonda Eckert
+Sparta Praha,Brian Priske
+Sporting CP,Paulo Fonseca
+Sporting Cristal,Roberto Mosquera
+Spurs,Roberto De Zerbi
+Spurs Women,Martin Ho
+St. Louis CITY SC,Corey Wray
+Stade Brestois 29,Julien Lachuer
+Stade Rennais FC,Franck Haise
+Stade de Reims,Nicolas Usaï
+Standard Liège,Vincent Euvrard
+Stoke City,Mark Robins
+Strasbourg,Hugo Oliveira
+Strasbourg Féminine,Sophie-Margaux Lagandré
+Sunderland,Régis Le Bris
+Swansea City,Vítor Matos
+Südtirol,Davide Possanzini
+TSG Hoffenheim,Christian Ilzer
+TSG Hoffenheim Frauen,Eva-Maria Virsinger
+Talleres,Omar De Felippe
+Tigre,Diego Dabove
+Toluca FC,Antonio Mohamed
+Torino FC,Ignazio Abate
+Toronto FC,Jason Hernandez
+Toulouse FC,Jens Berthel Askou
+Trabzonspor,Thomas Reis
+UD Almería,García Pimienta
+UD Las Palmas,Juan Manuel Rodríguez (caretaker)
+US Lecce,Eusebio Di Francesco
+Udinese Calcio,Paolo Zanetti
+Ulsan HD FC,Kim Hyun-seok
+Union Berlin,Mauro Lustrinelli
+Union Berlin Frauen,Marie-Louise Eta
+Univ. Craiova,Filipe Coelho
+Unión,Leonardo Madelón
+Utah Royals,Jimmy Coenraets
+Valencia CF,Javier Aguirre
+Venezia FC,Davide Nicola
+VfB Stuttgart,Sebastian Hoeneß
+VfB Stuttgart Frauen,Heiko Gerber
+VfL Bochum 1848,Uwe Rösler
+VfL Osnabrück,Timo Schultz
+VfL Wolfsburg,Tobias Strobl
+VfL Wolfsburg Frauen,Stephan Lerch
+Vicenza,Fabio Gallo
+Viking FK,Bjarte Lunde Aarsheim & Morten Jensen
+Viktoria Plzeň,Radoslav Kováč
+Villarreal CF,Iñigo Pérez
+Vålerenga Fotball,Johannes Moesgaard
+Vélez Sarsfield,Guillermo Barros Schelotto
+Washington Spirit,Adrián González
+Watford,Alessio Dionisi
+Wehen Wiesbaden,Jochen Seitz
+West Brom,James Morrison
+West Ham,Scott Parker
+West Ham Women,Rita Guarino
+Whitecaps FC,Axel Schuster
+Widzew Łódź,Mateusz Stolarski
+Wolves,César Peixoto
+Wrexham,Phil Parkinson
+sc Heerenveen,Robin Veldman
+Çorum FK,Burak Yılmaz
