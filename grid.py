@@ -185,3 +185,4 @@ class PitchGrid:
 		numer = def_power * 0.38 + dist_penalty
 		risk = numer / (numer + denom)
 		return max(0.04, min(0.75, risk))
+

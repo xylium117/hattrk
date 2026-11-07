@@ -2,6 +2,7 @@ import random, shutil, datetime, os, sys
 from grid import PitchGrid
 from gamestate import GameStateManager
 from possession import PossessionEngine
+from elo import get_club_elo
 
 if sys.stdout.encoding and sys.stdout.encoding.lower() != 'utf-8':
 	try:
@@ -1608,6 +1609,8 @@ class fixture:
 		self.home_game_state = None
 		self.away_game_state = None
 		self.possession_engine = None
+		self.home_elo = 1750
+		self.away_elo = 1750
 
 	def decay_momentum(self):
 		for k in self.momentum:
@@ -1737,6 +1740,10 @@ class fixture:
 		self.momentum[self.away.name] = 0.0
 		if (not self.venue or self.venue.endswith(' Ground')) and hasattr(self.home, 'name') and self.home.name:
 			self.venue = STADIUM_MAP.get(self.home.name, self.venue or (self.home.name + ' Ground'))
+		if hasattr(self.home, 'name') and self.home.name and self.home_elo == 1750:
+			self.home_elo = get_club_elo(self.home.name, self.home)
+		if hasattr(self.away, 'name') and self.away.name and self.away_elo == 1750:
+			self.away_elo = get_club_elo(self.away.name, self.away)
 		self.header()
 		self.kickoff()
 		self.home_game_state = GameStateManager(self.home, self, is_home=True)

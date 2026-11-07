@@ -114,3 +114,4 @@ class GameStateManager:
 		elif self.mentality in ['attacking_overload', 'desperation_hail_mary']:
 			return 'high'
 		return 'standard'
+

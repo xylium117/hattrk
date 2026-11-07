@@ -31,6 +31,13 @@ class PossessionEngine:
 	def _get_opp_manager(self, team):
 		return self.away_mgr if team == self.match.home else self.home_mgr
 
+	def _get_elo_multiplier(self, is_home):
+		h_elo = getattr(self.match, 'home_elo', 1750)
+		a_elo = getattr(self.match, 'away_elo', 1750)
+		diff = (h_elo + 65) - a_elo
+		raw = 1.0 + (diff / 400.0) * 0.20 if is_home else 1.0 - (diff / 400.0) * 0.20
+		return max(0.70, min(1.40, raw))
+
 	def _decay_fitness(self, minute):
 		for p in (self.match.home.xi + self.match.away.xi):
 			if len(p.inns) > 0:
@@ -211,7 +218,7 @@ class PossessionEngine:
 
 		att_p = random.randint(3, 5)
 		risk = self.grid.calculate_pass_interception_risk(passer, receiver, opp_team, is_home)
-		risk *= opp_mgr.get_press_modifier() * 0.40
+		risk = (risk * opp_mgr.get_press_modifier() * 0.40) / self._get_elo_multiplier(is_home)
 
 		if random.random() < (0.035 * opp_mgr.get_press_modifier()):
 			if self._check_foul(period_obj, opp_team, ctrl_team, minute, in_box=False):
@@ -249,7 +256,7 @@ class PossessionEngine:
 
 		att_p = random.randint(3, 5)
 		risk = self.grid.calculate_pass_interception_risk(passer, receiver, opp_team, is_home) * 0.70
-		risk *= ctrl_mgr.get_pass_risk_modifier()
+		risk = (risk * ctrl_mgr.get_pass_risk_modifier()) / self._get_elo_multiplier(is_home)
 
 		if random.random() < 0.040:
 			if self._check_foul(period_obj, opp_team, ctrl_team, minute, in_box=False):
@@ -291,6 +298,7 @@ class PossessionEngine:
 		risk = self.grid.calculate_pass_interception_risk(creator, target, opp_team, is_home) * 0.90
 		if opp_mgr.mentality == 'park_the_bus':
 			risk *= 1.35
+		risk /= self._get_elo_multiplier(is_home)
 
 		if random.random() < 0.045:
 			if self._check_foul(period_obj, opp_team, ctrl_team, minute, in_box=(random.random() < 0.15)):
@@ -417,7 +425,7 @@ class PossessionEngine:
 		gk_disp = (getattr(gk, 'short_name', '') or gk.name) if gk else 'the goalkeeper'
 		is_fem = (getattr(shooter, 'gender', 'Male') == 'Female')
 
-		conv_prob = xg_val * 0.90
+		conv_prob = xg_val * 0.90 * self._get_elo_multiplier(is_home)
 		on_target_prob = min(0.68, 0.30 + (sh_finishing / 220.0))
 
 		shot_roll = random.random()
