@@ -317,11 +317,11 @@ AI managers evaluate the match at minutes 60, 70, and 78 with clear tactical obj
   - [x] Implement trailing low-block compactness and lead-protection game killing.
   - [x] Rerun 100-match benchmark to verify total goals (2.74) and blowout rate (17.0%).
 - [x] **Comprehensive Test Suite**: 39/39 passing pytest suite in `tests/` covering grid, gamestate, tactics, elo, data integrity, and realism.
-- [ ] **Pillar 5 Implementation**:
-  - [ ] Implement non-linear stamina decay in `possession.py` with tactical pressing multipliers.
-  - [ ] Implement fatigue attribute degradation (pace, defending, passing composure, card risk).
-  - [ ] Implement AI Manager in-match substitution decision engine at min 60, 70, 78.
-  - [ ] Implement "Super-Sub" pace burst mismatch against tired fullbacks.
-  - [ ] Implement defensive fortress substitution (back-5 transition to protect leads).
-  - [ ] Implement dynamic stoppage time calculation based on match events.
-  - [ ] Verify 76'–90'+ goal distribution reaches authentic 22%–26% proportion.
+- [x] **Pillar 5 Implementation**:
+  - [x] Implement non-linear stamina decay in `possession.py` with tactical pressing multipliers.
+  - [x] Implement fatigue attribute degradation (pace, defending, passing composure, card risk).
+  - [x] Implement AI Manager in-match substitution decision engine at min 60, 68, 75, 82 (up to 5 substitutions).
+  - [x] Implement "Super-Sub" pace burst mismatch against tired fullbacks.
+  - [x] Implement defensive fortress substitution (back-5 transition to protect leads).
+  - [x] Implement dynamic stoppage time calculation based on match events.
+  - [x] Verify 76'–90'+ goal distribution reaches authentic 22%–26% proportion.

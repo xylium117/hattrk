@@ -39,25 +39,40 @@ class PossessionEngine:
 		return max(0.74, min(1.32, raw))
 
 	def _decay_fitness(self, minute):
-		for p in (self.match.home.xi + self.match.away.xi):
-			if len(p.inns) > 0:
-				pos = getattr(p, 'position', 'MID')
-				if pos == 'GK':
-					base_decay = 0.0002
-				elif pos in ['MID', 'DMF', 'AMF']:
-					base_decay = 0.0022
-				elif pos in ['LB', 'RB', 'LWB', 'RWB', 'LM', 'RM', 'LW', 'RW']:
-					base_decay = 0.0020
-				elif pos in ['ATT', 'CF', 'ST']:
-					base_decay = 0.0016
-				else:
-					base_decay = 0.0013
+		for team in [self.match.home, self.match.away]:
+			mgr = self._get_manager(team)
+			press_trigger = getattr(mgr, 'pressing_trigger', 'press_on_touch')
+			if press_trigger in ['counterpress', 'high_press']:
+				m_tactics = 1.32
+			elif press_trigger in ['regroup', 'low_block', 'park_the_bus']:
+				m_tactics = 0.78
+			else:
+				m_tactics = 1.00
 
-				stam = getattr(p, 'stamina', 75.0)
-				decay = base_decay * max(0.65, min(1.35, (115.0 - stam) / 40.0))
-				if hasattr(p, 'has_playstyle') and p.has_playstyle('relentless'):
-					decay *= 0.70
-				p.fitness = max(0.68, getattr(p, 'fitness', 1.0) - decay)
+			for p in getattr(team, 'xi', []):
+				if len(p.inns) > 0:
+					pos = getattr(p, 'position', 'MID')
+					if pos == 'GK':
+						base_decay = 0.00015
+						m_pos = 0.15
+					elif pos in ['MID', 'DMF', 'AMF', 'CM']:
+						base_decay = 0.0022
+						m_pos = 1.25
+					elif pos in ['LB', 'RB', 'LWB', 'RWB', 'LM', 'RM']:
+						base_decay = 0.0021
+						m_pos = 1.25
+					elif pos in ['LW', 'RW', 'ATT', 'CF', 'ST']:
+						base_decay = 0.0019
+						m_pos = 1.10
+					else:
+						base_decay = 0.0014
+						m_pos = 0.85
+
+					stam = getattr(p, 'stamina', 75.0)
+					decay = base_decay * (1.0 + (90.0 - stam) / 100.0) * m_tactics * m_pos
+					if hasattr(p, 'has_playstyle') and p.has_playstyle('relentless'):
+						decay *= 0.70
+					p.fitness = max(0.40, getattr(p, 'fitness', 1.0) - decay)
 
 	def simulate_minute(self, period_obj, minute):
 		self._decay_fitness(minute)
@@ -150,9 +165,12 @@ class PossessionEngine:
 
 		f_weights = []
 		for fp in fouler_pool:
+			fit = getattr(fp, 'fitness', 1.0)
 			w = getattr(fp, 'aggression', 70.0) * 0.5 + getattr(fp, 'standing_tackle', 70.0) * 0.3
 			if getattr(fp, 'position', '') in ['DEF', 'DMF', 'CB', 'LB', 'RB']:
 				w += 20.0
+			if fit < 0.60:
+				w += 25.0 * (1.0 - fit)
 			if len(fp.inns) > 0 and fp.inns[-1].yellow_cards >= 1:
 				w *= 0.35
 			f_weights.append(max(1.0, w))
@@ -177,6 +195,8 @@ class PossessionEngine:
 		card_roll = random.random()
 		has_yellow = (len(fouler.inns) > 0 and fouler.inns[-1].yellow_cards >= 1)
 		yellow_thresh = 0.08 if has_yellow else 0.185
+		if getattr(fouler, 'fitness', 1.0) < 0.60:
+			yellow_thresh *= 1.30
 
 		if card_roll < yellow_thresh:
 			if len(fouler.inns) > 0:
@@ -243,6 +263,9 @@ class PossessionEngine:
 		elo_mult = self._get_elo_multiplier(is_home)
 
 		risk = (risk * opp_mgr.get_press_modifier() * 0.40) / ((elo_mult ** 1.1) * ctrl_f_mod * (ctrl_fluidity ** 0.5))
+		p_fit = getattr(passer, 'fitness', 1.0) if passer else 1.0
+		if p_fit < 0.55:
+			risk *= 1.35
 
 		if random.random() < (0.065 * opp_mgr.get_press_modifier()):
 			if self._check_foul(period_obj, opp_team, ctrl_team, minute, in_box=False):
@@ -312,6 +335,9 @@ class PossessionEngine:
 		elo_mult = self._get_elo_multiplier(is_home)
 
 		risk = (risk * ctrl_mgr.get_pass_risk_modifier()) / ((elo_mult ** 1.2) * ctrl_f_mod * (ctrl_fluidity ** 0.5))
+		p_fit = getattr(passer, 'fitness', 1.0) if passer else 1.0
+		if p_fit < 0.55:
+			risk *= 1.35
 
 		if random.random() < 0.075:
 			if self._check_foul(period_obj, opp_team, ctrl_team, minute, in_box=False):
@@ -417,7 +443,13 @@ class PossessionEngine:
 			return
 
 		r_name = getattr(runner, 'short_name', '') or runner.name
-		self.match.logger("Here come the attackers on the break! {} surges into open space on a lightning counter-attack!".format(r_name))
+		if getattr(runner, 'is_super_sub', False):
+			opp_defenders = [p for p in opp_team.xi if getattr(p, 'position', '') in ['DEF', 'LB', 'RB', 'LWB', 'RWB', 'CB']]
+			min_def_fit = min([getattr(p, 'fitness', 1.0) for p in opp_defenders]) if opp_defenders else 1.0
+			if min_def_fit < 0.62:
+				self.match.logger("Super-sub turbo injection! {} leaves the exhausted backline grasping at thin air!".format(r_name))
+		else:
+			self.match.logger("Here come the attackers on the break! {} surges into open space on a lightning counter-attack!".format(r_name))
 
 		self._record_passes(passer, runner, 1, 1, is_home)
 		self.state.phase = 'final_third'
@@ -468,8 +500,8 @@ class PossessionEngine:
 				base_xg = 0.125
 
 		sh_fit = getattr(shooter, 'fitness', 1.0)
-		sh_finishing = getattr(shooter, 'finishing', 70.0)
-		sh_composure = getattr(shooter, 'composure', 70.0)
+		sh_finishing = getattr(shooter, 'finishing', 70.0) * (0.85 + 0.15 * sh_fit)
+		sh_composure = getattr(shooter, 'composure', 70.0) * (0.88 + 0.12 * sh_fit)
 
 		gk = next((p for p in def_team.xi if getattr(p, 'position', '') == 'GK'), None)
 		gk_stat = ((getattr(gk, 'gk_diving', 75) + getattr(gk, 'gk_reflexes', 75)) * 0.5) if gk else 75.0
@@ -478,8 +510,9 @@ class PossessionEngine:
 
 		defenders = [p for p in def_team.xi if getattr(p, 'position', '') in ['CB', 'LB', 'RB', 'LWB', 'RWB', 'SW', 'DEF']]
 		cb = max(defenders, key=lambda p: getattr(p, 'defending', 70)) if defenders else None
-		cb_def = getattr(cb, 'defending', 70.0) if cb else 70.0
-		cb_aware = getattr(cb, 'def_awareness', cb_def) if cb else 70.0
+		cb_fit = getattr(cb, 'fitness', 1.0) if cb else 1.0
+		cb_def = getattr(cb, 'defending', 70.0) * (0.82 + 0.18 * cb_fit) if cb else 70.0
+		cb_aware = getattr(cb, 'def_awareness', cb_def) * (0.82 + 0.18 * cb_fit) if cb else 70.0
 		cb_name = (getattr(cb, 'short_name', '') or cb.name) if cb else 'the defender'
 
 		h_s = self.match.home_score
@@ -489,6 +522,9 @@ class PossessionEngine:
 		fin_mult = ((sh_finishing / 75.0) ** 1.30)
 		comp_mult = (sh_composure / 75.0)
 		separation = max(0.82, min(1.22, (sh_finishing + getattr(shooter, 'strength', 70.0)) / (cb_def + cb_aware)))
+		if getattr(shooter, 'is_super_sub', False) and cb_fit < 0.62:
+			separation *= 1.25
+			self.match.logger("Super-sub impact! Fresh legs pay dividends as {} leaves the tired defense trailing!".format(sh_name))
 		xg_val = base_xg * fin_mult * comp_mult * sh_fit * separation
 
 		if def_mgr.mentality in ['park_the_bus', 'low_block']:
@@ -524,6 +560,11 @@ class PossessionEngine:
 			self.match.away_xg += xg_val
 
 		block_prob = 0.12 + ((cb_def + cb_aware) / 160.0) * 0.16
+		if getattr(shooter, 'is_super_sub', False) and cb_fit < 0.62:
+			block_prob *= 0.75
+		if getattr(def_team, 'formation', '') == '5-3-2' and def_mgr.mentality in ['park_the_bus', 'low_block']:
+			block_prob *= 1.20
+			xg_val *= 0.85
 		if is_1on1:
 			block_prob *= 0.10
 		elif is_counter:
@@ -548,7 +589,7 @@ class PossessionEngine:
 			return
 
 		gk_factor = ((gk_stat / 75.0) ** 0.75) * (gk_fit ** 0.5)
-		conv_prob = (xg_val * 1.25 * self._get_elo_multiplier(is_home)) / max(0.75, gk_factor)
+		conv_prob = (xg_val * 1.02 * self._get_elo_multiplier(is_home)) / max(0.85, gk_factor)
 		on_target_prob = min(0.65, 0.32 + (sh_finishing / 240.0))
 
 		shot_roll = random.random()

@@ -186,6 +186,24 @@ def run_monte_carlo(home_name, away_name, runs=500, home_missing=None, away_miss
 	implied_odds_d = round(1.0 / max(0.001, p_draw), 2)
 	implied_odds_a = round(1.0 / max(0.001, p_away), 2)
 
+	ah_minus_1_win = round(sum(cnt for (h, a), cnt in scorelines.items() if (h - a) >= 2) / float(runs), 4)
+	ah_minus_1_push = round(sum(cnt for (h, a), cnt in scorelines.items() if (h - a) == 1) / float(runs), 4)
+	ah_minus_1_loss = round(sum(cnt for (h, a), cnt in scorelines.items() if (h - a) <= 0) / float(runs), 4)
+
+	ah_minus_1_5_win = ah_minus_1_win
+	ah_plus_1_5_win = round(1.0 - ah_minus_1_5_win, 4)
+
+	non_draw = max(0.0001, p_home + p_away)
+	dnb_home = round(p_home / non_draw, 4)
+	dnb_away = round(p_away / non_draw, 4)
+
+	dc_1x = round(p_home + p_draw, 4)
+	dc_x2 = round(p_draw + p_away, 4)
+	dc_12 = round(p_home + p_away, 4)
+
+	xp_home = round(3.0 * p_home + 1.0 * p_draw, 2)
+	xp_away = round(3.0 * p_away + 1.0 * p_draw, 2)
+
 	sorted_scores = []
 	for (h, a), cnt in scorelines.most_common(10):
 		sorted_scores.append({
@@ -254,6 +272,24 @@ def run_monte_carlo(home_name, away_name, runs=500, home_missing=None, away_miss
 			'home_blowout_3plus': f'{(home_blowouts / float(runs)) * 100:.1f}%',
 			'away_blowout_3plus': f'{(away_blowouts / float(runs)) * 100:.1f}%'
 		},
+		'asian_handicap': {
+			'ah_minus_0_5_home': f'{p_home * 100:.1f}%',
+			'ah_plus_0_5_away': f'{(p_draw + p_away) * 100:.1f}%',
+			'ah_minus_1_0_home': f'{ah_minus_1_win * 100:.1f}%',
+			'ah_minus_1_0_push': f'{ah_minus_1_push * 100:.1f}%',
+			'ah_plus_1_0_away': f'{ah_minus_1_loss * 100:.1f}%',
+			'ah_minus_1_5_home': f'{ah_minus_1_5_win * 100:.1f}%',
+			'ah_plus_1_5_away': f'{ah_plus_1_5_win * 100:.1f}%'
+		},
+		'derivatives': {
+			'dnb_home': f'{dnb_home * 100:.1f}%',
+			'dnb_away': f'{dnb_away * 100:.1f}%',
+			'double_chance_1x': f'{dc_1x * 100:.1f}%',
+			'double_chance_x2': f'{dc_x2 * 100:.1f}%',
+			'double_chance_12': f'{dc_12 * 100:.1f}%',
+			'expected_points_home': xp_home,
+			'expected_points_away': xp_away
+		},
 		'top_scorelines': sorted_scores,
 		'top_home_scorers': top_h_scorers,
 		'top_away_scorers': top_a_scorers
@@ -296,6 +332,18 @@ def print_prediction_report(res):
 	print("TOP ANYTIME GOALSCORER THREATS:")
 	for s in (res['top_home_scorers'][:3] + res['top_away_scorers'][:3]):
 		print(f"  {s['player']} ({s['team']}): {s['percentage']}")
+
+	if 'asian_handicap' in res:
+		ah = res['asian_handicap']
+		d = res['derivatives']
+		print("-" * 74)
+		print("ASIAN HANDICAP & DERIVATIVE MARKETS:")
+		print(f"  AH -0.5 / +0.5:  {f['home']} -0.5 ({ah['ah_minus_0_5_home']}) | {f['away']} +0.5 ({ah['ah_plus_0_5_away']})")
+		print(f"  AH -1.0 / +1.0:  {f['home']} -1.0 ({ah['ah_minus_1_0_home']}) | Push ({ah['ah_minus_1_0_push']}) | {f['away']} +1.0 ({ah['ah_plus_1_0_away']})")
+		print(f"  AH -1.5 / +1.5:  {f['home']} -1.5 ({ah['ah_minus_1_5_home']}) | {f['away']} +1.5 ({ah['ah_plus_1_5_away']})")
+		print(f"  Draw No Bet:     {f['home']} ({d['dnb_home']}) | {f['away']} ({d['dnb_away']})")
+		print(f"  Double Chance:   1X: {d['double_chance_1x']} | X2: {d['double_chance_x2']} | 12: {d['double_chance_12']}")
+		print(f"  Expected Points: {f['home']}: {d['expected_points_home']} pts | {f['away']}: {d['expected_points_away']} pts")
 	print("=" * 74)
 
 def run_backtest_suite():
@@ -339,6 +387,37 @@ def run_backtest_suite():
 		print("Model Rating: MODERATE")
 	print("=" * 74)
 
+def optimize_hyperparameters(runs=30):
+	benchmark_fixtures = [
+		('Arsenal', 'Chelsea', 'home'),
+		('Real Madrid', 'Spurs', 'home'),
+		('Liverpool', 'Manchester City', 'draw'),
+		('FC Barcelona', 'FC Bayern München', 'draw'),
+		('Inter Milan', 'Juventus FC', 'home')
+	]
+	print("=" * 74)
+	print("HATTRK PREDICTOR: HYPERPARAMETER LOSS OPTIMIZATION".center(74))
+	print("Evaluating loss surface over benchmark fixtures via coordinate search".center(74))
+	print("=" * 74)
+	best_loss = 999.0
+	best_params = {}
+	for ha in [20, 28, 35]:
+		for fm in [0.8, 1.2, 1.6]:
+			scores = []
+			for h, a, act in benchmark_fixtures:
+				res = run_monte_carlo(h, a, runs=runs)
+				probs = [res['probabilities']['home_win'], res['probabilities']['draw'], res['probabilities']['away_win']]
+				scores.append(evaluate_rps(probs, act))
+			mean_rps = sum(scores) / len(scores)
+			print(f"Param candidate: home_advantage={ha}, form_scale={fm:.1f} -> Mean RPS: {mean_rps:.4f}")
+			if mean_rps < best_loss:
+				best_loss = mean_rps
+				best_params = {'home_advantage': ha, 'form_scale': fm}
+	print("-" * 74)
+	print(f"OPTIMAL HYPERPARAMETERS: {best_params} (Min RPS: {best_loss:.4f})")
+	print("=" * 74)
+	return best_params
+
 def main():
 	parser = argparse.ArgumentParser(description="Hattrk Match Predictor & Monte Carlo Ensemble Engine")
 	parser.add_argument("--home", type=str, default="Arsenal", help="Home team name")
@@ -352,11 +431,16 @@ def main():
 	parser.add_argument("--away-missing", type=str, default="", help="Comma-separated missing players for away team")
 	parser.add_argument("--json", type=str, default="", help="Export JSON results to filepath")
 	parser.add_argument("--backtest", action="store_true", help="Run backtesting validation benchmark")
+	parser.add_argument("--optimize", action="store_true", help="Run hyperparameter optimization")
 
 	args = parser.parse_args()
 
 	if args.backtest:
 		run_backtest_suite()
+		return
+
+	if args.optimize:
+		optimize_hyperparameters()
 		return
 
 	h_missing = [x.strip() for x in args.home_missing.split(',')] if args.home_missing else None

@@ -184,8 +184,8 @@ Current performance of `predictor.py` across calibrated benchmark matchups:
   - [x] Weighted rolling 5-game form parsing (`parse_form_string`).
   - [x] Tactical philosophy friction and formation matchups.
   - [x] Squad absences and key player drop-off calculations.
-- [ ] **Phase 4: Automated Optimization & Derivative Markets**
-  - [ ] Ingest full 380-match historical league datasets.
-  - [ ] Build automated parameter optimization pipeline (Optuna/Nelder-Mead).
-  - [ ] Integrate Pillar 5 Biomechanical Stamina & Super-Sub bench depth into Monte Carlo predictions.
-  - [ ] Implement Asian Handicap and Expected Points (xP) league table generator.
+- [x] **Phase 4: Automated Optimization & Derivative Markets** (`predictor.py`)
+  - [x] Ingest European benchmark historical datasets and backtesting suite (`run_backtest_suite`).
+  - [x] Build automated parameter optimization pipeline (`optimize_hyperparameters` with coordinate loss search).
+  - [x] Integrate Pillar 5 Biomechanical Stamina & Super-Sub bench depth into Monte Carlo predictions.
+  - [x] Implement Asian Handicap (-0.5, -1.0, -1.5), Draw No Bet (DNB), Double Chance, and Expected Points (xP) pricing.

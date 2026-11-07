@@ -1076,7 +1076,7 @@ class CoachAI:
 		self.philosophy = CLUB_PHILOSOPHIES.get(t_name, 'balanced')
 		self.mentality = 'balanced'
 		self.subs_made = 0
-		self.max_subs = 3
+		self.max_subs = 5
 		self.tactical_orders = set()
 
 	def evaluate(self, minute, goal_diff):
@@ -1098,8 +1098,14 @@ class CoachAI:
 				)
 				self.match.logger(msg)
 
-		if minute in [62, 70, 78] and self.subs_made < self.max_subs:
-			self.make_tactical_substitution(minute, goal_diff)
+		if self.subs_made < self.max_subs:
+			if minute in [60, 68, 75, 82]:
+				self.make_tactical_substitution(minute, goal_diff)
+			elif minute >= 55:
+				fatigued = [p for p in getattr(self.team, 'xi', []) if p.position != 'GK' and getattr(p, 'fitness', 1.0) < 0.52]
+				cautioned = [p for p in getattr(self.team, 'xi', []) if p.position != 'GK' and len(p.inns) > 0 and p.inns[-1].yellow_cards > 0 and getattr(p, 'fitness', 1.0) < 0.65]
+				if fatigued or cautioned:
+					self.make_tactical_substitution(minute, goal_diff)
 
 	def make_tactical_substitution(self, minute, goal_diff):
 		used_in = [pair[0] for pair in getattr(self.team, 'subs_used', [])]
@@ -1122,18 +1128,26 @@ class CoachAI:
 			candidates = outfield
 
 		candidates = sorted(candidates, key=lambda p: (
-			getattr(p, 'fitness', 1.0) - (0.18 if (len(p.inns) > 0 and p.inns[-1].yellow_cards > 0) else 0.0)
+			getattr(p, 'fitness', 1.0) - (0.22 if (len(p.inns) > 0 and p.inns[-1].yellow_cards > 0) else 0.0)
 		))
 		p_out = candidates[0]
 
-		if goal_diff <= -1:
-			p_in = max(bench, key=lambda p: p.attack)
-			role_note = "attacking spark"
-		elif goal_diff >= 1:
-			p_in = max(bench, key=lambda p: p.defense)
-			role_note = "defensive solidity"
+		if goal_diff <= -1 or (goal_diff == 0 and minute >= 68):
+			p_in = max(bench, key=lambda p: getattr(p, 'attack', getattr(p, 'overall', 70)) * 0.5 + getattr(p, 'face_pace', 70) * 0.5)
+			p_in.is_super_sub = True
+			role_note = "super-sub attacking injection"
+		elif goal_diff >= 1 and minute >= 74:
+			def_bench = [p for p in bench if getattr(p, 'position', '') in ['CB', 'DEF', 'DMF', 'LB', 'RB']]
+			p_in = max(def_bench, key=lambda p: getattr(p, 'defense', getattr(p, 'overall', 70))) if def_bench else max(bench, key=lambda p: getattr(p, 'defense', 70))
+			role_note = "defensive fortress"
+			if hasattr(self.team, 'formation') and '5-' not in getattr(self.team, 'formation', ''):
+				self.team.formation = '5-3-2'
+				self.match.logger("{} adjusts formation into a compact 5-3-2 low block to lock down the victory.".format(self.team.name))
+		elif getattr(p_out, 'fitness', 1.0) < 0.55:
+			p_in = max(bench, key=lambda p: getattr(p, 'overall', 70))
+			role_note = "fatigue replacement"
 		else:
-			p_in = max(bench, key=lambda p: p.overall)
+			p_in = max(bench, key=lambda p: getattr(p, 'overall', 70))
 			role_note = "fresh legs"
 
 		idx = self.team.xi.index(p_out)
@@ -1159,6 +1173,11 @@ class CoachAI:
 			self.match.players.append(p_in)
 
 		self.subs_made += 1
+		if self.team == self.match.home:
+			self.match.home_subs_made = getattr(self.match, 'home_subs_made', 0) + 1
+		else:
+			self.match.away_subs_made = getattr(self.match, 'away_subs_made', 0) + 1
+
 		if hasattr(self.team, 'manager_pov') and self.team.manager_pov:
 			self.team.manager_pov.record_substitution(self.team)
 		out_disp = getattr(p_out, 'short_name', '') or p_out.name
@@ -1811,7 +1830,22 @@ class period:
 		self.goals = []
 		self.minutes = 0
 		self.active = True
-		self.injury_time = random.randint(1, 5)
+		self.injury_time = random.randint(1, 3) if half == 1 else random.randint(3, 5)
+
+	def calculate_dynamic_stoppage(self):
+		if self.half == 1:
+			base = 1.0
+			extra = (len(self.match.card) * 0.5) + ((self.match.home_yellows + self.match.away_yellows) * 0.3)
+			return max(1, min(4, round(base + extra)))
+		elif self.half == 2:
+			base = 2.0
+			n_subs = len(getattr(self.match.home, 'subs_used', [])) + len(getattr(self.match.away, 'subs_used', []))
+			n_goals = self.match.home_score + self.match.away_score
+			n_cards = (self.match.home_yellows + self.match.away_yellows + self.match.home_reds + self.match.away_reds)
+			stoppage = base + (0.5 * n_subs) + (0.75 * n_goals) + (0.4 * n_cards)
+			return max(3, min(8, round(stoppage)))
+		else:
+			return random.randint(1, 3)
 
 	def run(self):
 		half_len = 15 if self.half in [3, 4] else 45
@@ -1821,6 +1855,12 @@ class period:
 		if hasattr(self.match, 'possession_engine') and self.match.possession_engine:
 			self.match.possession_engine.reset_kickoff(self.att_team)
 		while self.minutes < total_mins and self.active:
+			if self.minutes == half_len:
+				self.injury_time = self.calculate_dynamic_stoppage()
+				total_mins = half_len + self.injury_time
+				self.match.logger("The fourth official indicates a minimum of {} minute{} of stoppage time to be played.".format(
+					self.injury_time, 's' if self.injury_time > 1 else ''
+				))
 			self.minute_event()
 			self.match.minute += 1
 			self.minutes += 1
