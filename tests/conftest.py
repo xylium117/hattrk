@@ -6,12 +6,33 @@ import game
 import engine
 
 
-@pytest.fixture(scope="session")
-def seeded_random():
-    """Ensure deterministic random state for all tests."""
+# Module to store the pristine random state after session initialization
+_pristine_state = None
+
+
+def pytest_sessionstart(session):
+    """Capture the random state after pytest initialization but before any tests run."""
+    global _pristine_state
     random.seed(42)
-    yield random
-    random.seed(42)
+    _pristine_state = random.getstate()
+
+
+def pytest_sessionfinish(session):
+    """Restore the pristine random state at the end."""
+    if _pristine_state is not None:
+        random.setstate(_pristine_state)
+
+
+@pytest.fixture(autouse=True)
+def restore_pristine_random():
+    """Restore pristine random state before each test and clear module caches."""
+    global _pristine_state
+    if _pristine_state is not None:
+        random.setstate(_pristine_state)
+    # Clear game.py's module-level club cache so club data regenerates with restored random state
+    game._CACHED_CLUBS = None
+    game._CACHED_LEAGUES = {}
+    yield
 
 
 @pytest.fixture
