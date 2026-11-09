@@ -1,6 +1,7 @@
 import random, os, sys, csv, unicodedata
 from engine import fixture, team, player, pos_order, pos_to_role, listshow, STADIUM_MAP, get_stadium
 from tactics import FORMATIONS, calculate_player_familiarity, calculate_team_fluidity, load_club_tactics
+from elo import get_club_elo
 
 if sys.stdout.encoding and sys.stdout.encoding.lower() != 'utf-8':
 	try:
@@ -156,6 +157,59 @@ def card_selection_score(rarity_str, overall_val):
 		tier = 300
 
 	return (tier, ovr)
+
+def _create_dummy_squad(club_name, base_ovr, existing_count=0):
+    """Create dummy players for clubs not in database"""
+    positions = ['GK', 'CB', 'CB', 'LB', 'RB', 'CDM', 'CM', 'CAM', 'LW', 'RW', 'ST']
+    players = []
+    for i, pos in enumerate(positions):
+        p = player()
+        p.name = f"{club_name} Player {existing_count + i + 1}"
+        p.short_name = p.name.split()[-1]
+        p.primary_position = pos
+        p.position = pos
+        p.overall = base_ovr + random.randint(-5, 5)
+        p.club = club_name
+        p.team = club_name
+        if pos == 'GK':
+            p.gk_diving = p.overall
+            p.gk_reflexes = p.overall
+            p.gk_positioning = p.overall
+            p.gk_handling = p.overall
+        elif pos in ['CB', 'LB', 'RB']:
+            p.def_awareness = p.overall
+            p.standing_tackle = p.overall
+            p.interceptions = p.overall
+            p.pace = p.overall
+        elif pos == 'CDM':
+            p.interceptions = p.overall
+            p.standing_tackle = p.overall
+            p.short_passing = p.overall
+        elif pos == 'CM':
+            p.short_passing = p.overall
+            p.vision = p.overall
+            p.long_passing = p.overall
+        elif pos == 'CAM':
+            p.vision = p.overall
+            p.short_passing = p.overall
+            p.dribbling_stat = p.overall
+        elif pos in ['LW', 'RW']:
+            p.pace = p.overall
+            p.dribbling_stat = p.overall
+            p.crossing = p.overall
+        elif pos in ['ST', 'CF']:
+            p.finishing = p.overall
+            p.positioning = p.overall
+            p.shot_power = p.overall
+        for attr in ['finishing', 'positioning', 'shot_power', 'pace', 'dribbling_stat',
+                     'crossing', 'vision', 'short_passing', 'long_passing',
+                     'def_awareness', 'standing_tackle', 'interceptions',
+                     'gk_diving', 'gk_reflexes', 'gk_positioning', 'gk_handling']:
+            if not hasattr(p, attr):
+                setattr(p, attr, p.overall)
+        p.capt = 50
+        players.append(p)
+    return players
 
 def load_clubs(filepath=None, min_players=11):
 	global _CACHED_CLUBS, _CACHED_LEAGUES
@@ -508,6 +562,14 @@ def setup(home_name, away_name, savecard=None):
 	t.away.squad = list(t.away.active)
 	t.away.players = list(t.away.active)
 	t.away.league = _CACHED_LEAGUES.get(matched_away, '')
+
+	for t_obj, m_name in [(t.home, matched_home), (t.away, matched_away)]:
+		if len(t_obj.active) < 11:
+			elo = get_club_elo(m_name)
+			base_ovr = max(55, min(85, int(elo / 25)))
+			t_obj.active = _create_dummy_squad(m_name, base_ovr, len(t_obj.active))
+			t_obj.squad = list(t_obj.active)
+			t_obj.players = list(t_obj.active)
 
 	t.home.formation = load_club_tactics(matched_home).get('formation', '4-3-3')
 	t.away.formation = load_club_tactics(matched_away).get('formation', '4-3-3')

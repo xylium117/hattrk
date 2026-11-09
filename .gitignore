@@ -17,3 +17,14 @@ scorecard.txt
 env/
 venv/
 
+
+# Local Claude instructions
+CLAUDE.md
+.claude/
+
+# Planning docs
+SIMULATOR_REALISM_PLAN.md
+PREDICTION_PLAN.md
+
+# Test output
+test_*.txt

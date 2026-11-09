@@ -1,4 +1,5 @@
 import io
+import random
 from contextlib import redirect_stdout
 import pytest
 import game
@@ -34,6 +35,7 @@ def test_pick_bench():
 		assert b not in xi
 
 def test_full_match_simulation():
+	random.seed(123)
 	fix = game.setup('Liverpool', 'Everton', savecard=False)
 	with redirect_stdout(io.StringIO()):
 		game.game(fix)

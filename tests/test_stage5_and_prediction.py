@@ -1,4 +1,5 @@
 import math
+import random
 import pytest
 import game
 import engine
@@ -8,6 +9,7 @@ from gamestate import GameStateManager
 from predictor import evaluate_rps, evaluate_brier, run_monte_carlo
 
 def test_dynamic_stoppage_time():
+	random.seed(789)
 	fix = game.setup('Arsenal', 'Chelsea', savecard=False)
 	fix.savecard = False
 	p1 = engine.period(fix, 1)
@@ -25,6 +27,7 @@ def test_dynamic_stoppage_time():
 	assert 3 <= stoppage_h2 <= 8
 
 def test_stamina_tactical_and_positional_decay():
+	random.seed(999)
 	fix = game.setup('Liverpool', 'Everton', savecard=False)
 	fix.savecard = False
 	fix.home.xi = game.firstxi(fix.home, fix.home.formation)
@@ -51,6 +54,7 @@ def test_stamina_tactical_and_positional_decay():
 	assert mid.fitness < 1.0
 
 def test_coach_ai_max_subs_and_fortress():
+	random.seed(111)
 	fix = game.setup('Manchester City', 'Tottenham', savecard=False)
 	fix.savecard = False
 	fix.home.xi = game.firstxi(fix.home, fix.home.formation)
@@ -68,6 +72,7 @@ def test_coach_ai_max_subs_and_fortress():
 	assert sub_in.fitness == 1.0
 
 def test_super_sub_flagging():
+	random.seed(222)
 	fix = game.setup('Real Madrid', 'FC Barcelona', savecard=False)
 	fix.savecard = False
 	fix.home.xi = game.firstxi(fix.home, fix.home.formation)
@@ -80,7 +85,8 @@ def test_super_sub_flagging():
 	assert getattr(sub_in, 'is_super_sub', False) is True
 
 def test_prediction_derivatives_and_handicaps():
-	res = run_monte_carlo('Arsenal', 'Chelsea', runs=25)
+	random.seed(456)
+	res = run_monte_carlo('Arsenal', 'Chelsea', runs=100)
 	assert 'asian_handicap' in res
 	assert 'derivatives' in res
 	d = res['derivatives']

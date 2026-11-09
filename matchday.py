@@ -161,3 +161,4 @@ class SetPieceChoreography:
 				return f"Short corner variation opens up space for {target_name} to strike from the edge of the area, but {gk_name} dives full length to push it behind!"
 			else:
 				return f"Short corner worked out wide, but the low cross is cut out cleanly at the front post."
+

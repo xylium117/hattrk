@@ -1274,6 +1274,9 @@ class fixture:
 		self.var_engine = VAREngine()
 		self.stoppage_delays = 0.0
 		self.away_elo = 1750
+		self.ko_aggregate_home = 0
+		self.ko_aggregate_away = 0
+		self.is_ko_leg = False
 
 	def decay_momentum(self):
 		for k in self.momentum:
@@ -1436,8 +1439,18 @@ class fixture:
 		p2.run()
 		self.blank()
 
-		if self.home_score == self.away_score and self.extra_time_opt:
-			self.logger('Full time reached with scores level. Heading into extra time.')
+		if self.is_ko_leg:
+			agg_home = self.ko_aggregate_home + self.home_score
+			agg_away = self.ko_aggregate_away + self.away_score
+			tied = (agg_home == agg_away)
+		else:
+			tied = (self.home_score == self.away_score)
+
+		if tied and self.extra_time_opt:
+			if self.is_ko_leg:
+				self.logger(f'Full time reached. Aggregate tied {agg_home}-{agg_away}. Heading into extra time.')
+			else:
+				self.logger('Full time reached with scores level. Heading into extra time.')
 			self.blank()
 			p3 = period(self, 3)
 			self.periods.append(p3)
@@ -1447,7 +1460,15 @@ class fixture:
 			self.periods.append(p4)
 			p4.run()
 			self.blank()
-			if self.home_score == self.away_score and self.penalties_opt:
+
+			if self.is_ko_leg:
+				agg_home = self.ko_aggregate_home + self.home_score
+				agg_away = self.ko_aggregate_away + self.away_score
+				tied = (agg_home == agg_away)
+			else:
+				tied = (self.home_score == self.away_score)
+
+			if tied and self.penalties_opt:
 				self.shootout()
 				self.blank()
 
@@ -1621,18 +1642,19 @@ class fixture:
 	def cardsave(self):
 		if not self.savecard:
 			return
-		try:
-			timestamp = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
-			os.makedirs('scorecards', exist_ok=True)
-			dest = 'scorecards/{}_{}_{}.txt'.format(
-				self.home.name.replace(' ', '_'),
-				self.away.name.replace(' ', '_'),
-				timestamp
-			)
-			if os.path.exists(self.scorecard):
-				shutil.copyfile(self.scorecard, dest)
-		except Exception:
-			pass
+		if self.scorecard == 'scorecard.txt':
+			try:
+				timestamp = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
+				os.makedirs('scorecards', exist_ok=True)
+				dest = 'scorecards/{}_{}_{}.txt'.format(
+					self.home.name.replace(' ', '_'),
+					self.away.name.replace(' ', '_'),
+					timestamp
+				)
+				if os.path.exists(self.scorecard):
+					shutil.copyfile(self.scorecard, dest)
+			except Exception:
+				pass
 
 	def kickoff(self):
 		if self.kickoff_team == '':
@@ -1666,7 +1688,11 @@ class fixture:
 		return self.motm
 
 	def shootout(self):
-		self.logger('Penalty Shootout begins!')
+		self.score('')
+		self.score('=' * 66)
+		self.score('PENALTY SHOOTOUT'.center(66))
+		self.score('=' * 66)
+		self.score('')
 		home_pen = 0
 		away_pen = 0
 
@@ -1676,52 +1702,312 @@ class fixture:
 		home_gk = next((p for p in self.home.xi if p.position == 'GK'), None)
 		away_gk = next((p for p in self.away.xi if p.position == 'GK'), None)
 
+		def check_early_end(hp, ap, round_num):
+			remaining = 5 - (round_num + 1)
+			if hp > ap + remaining:
+				return True
+			if ap > hp + remaining:
+				return True
+			return False
+
+		def build_tension(round_num, is_sudden_death=False, score_diff=0):
+			if is_sudden_death:
+				if round_num == 5:
+					tension = [
+						'SUDDEN DEATH! The tension is unbearable!',
+						'Here we go — sudden death! One mistake and it\'s over!',
+						'Sudden death begins. Nerves of steel required now!',
+						'We go to sudden death. The crowd holds its breath!'
+					]
+				else:
+					tension = [
+						'Still level! The drama continues!',
+						'Nobody can break the deadlock! What tension!',
+						'Another round, another heartbeat!',
+						'The shootout goes on! Incredible drama!',
+						'Neither side will blink! Sudden death rolls on!'
+					]
+			else:
+				if round_num == 0:
+					tension = [
+						'The shootout begins. The stadium falls silent...',
+						'Penalty shootout time. Hearts pounding in the stands!',
+						'Here we go. 12 yards between glory and heartbreak.',
+						'The ultimate test of nerve. Penalty shootout underway!'
+					]
+				elif round_num == 4:
+					tension = [
+						'Final round of the initial five! Everything on this kick!',
+						'Last kick of the standard five! The pressure is immense!',
+						'Round 5 — the final guaranteed kicks. Do or die!',
+						'One round left before sudden death. The stakes couldn\'t be higher!'
+					]
+				elif abs(score_diff) >= 2:
+					tension = [
+						'{} need a response here! The pressure mounts!'.format(self.away.name if score_diff > 0 else self.home.name),
+						'A two-goal deficit! Can {} fight back?'.format(self.away.name if score_diff > 0 else self.home.name),
+						'{} staring down the barrel!'.format(self.away.name if score_diff > 0 else self.home.name)
+					]
+				else:
+					tension = [
+						'Round {} — the tension builds!'.format(round_num + 1),
+						'Still all to play for as we enter round {}!'.format(round_num + 1),
+						'Round {}. Every kick feels like a final!'.format(round_num + 1)
+					]
+			self.score(random.choice(tension))
+
+		def take_penalty(taker, gk, team_name, score_home, score_away, is_home_team, round_num, is_sudden_death=False):
+			pen_attr = getattr(taker, 'penalties', 70)
+			comp = getattr(taker, 'composure', 70)
+			gk_attr = gk.gk_overall if gk else 70
+			gk_ref = getattr(gk, 'reflexes', 70) if gk else 70
+			gk_comp = getattr(gk, 'composure', 70) if gk else 70
+			taker_name = getattr(taker, 'short_name', taker.name)
+			gk_name = getattr(gk, 'short_name', gk.name) if gk else 'the keeper'
+
+			base_prob = 0.75 + (pen_attr - 70) * 0.003 + (comp - 70) * 0.0015
+			gk_factor = (gk_attr - 70) * 0.002 + (gk_ref - 70) * 0.001 + (gk_comp - 70) * 0.0005
+			pen_prob = base_prob - gk_factor
+			pen_prob = max(0.38, min(0.93, pen_prob))
+
+			rng = random.random()
+			score_diff = score_home - score_away if is_home_team else score_away - score_home
+
+			if rng < pen_prob * 0.75:
+				if is_sudden_death and (round_num > 8 or abs(score_diff) == 0):
+					score_types = [
+						'ICE COOL! Slotted home into the bottom corner!',
+						'WHAT A PENALTY! Blasted it into the top corner!',
+						'NERVES OF STEEL! Placed it calmly into the side netting!',
+						'UNSTOPPABLE! Fired low and hard past the keeper!',
+						'SENT THE KEEPER THE WRONG WAY! Keeps {} alive!'.format(team_name),
+						'A PANENKA! Chipped it delicately down the middle! AUDACIOUS!',
+						'ROOF OF THE NET! Driven it home with authority!',
+						'PRECISION! Rolled it into the corner!',
+						'TOP BINS! Hammered it in! What a moment!',
+						'AS COOL AS YOU LIKE! Bottom corner! {} survive!'.format(team_name)
+					]
+				elif round_num == 4 and not is_sudden_death:
+					score_types = [
+						'Steps up... AND SCORES! {} into the bottom corner!'.format(random.choice(['slotted home', 'placed calmly', 'rolled precisely'])),
+						'LAST KICK OF THE FIVE! BLASTS IT HOME!',
+						'HOLDS THEIR NERVE! {} into the top corner!'.format(random.choice(['placed it', 'fired it', 'driven it'])),
+						'WHAT A MOMENT! Sends the keeper the wrong way!',
+						'ICE IN THE VEINS! Chipped it down the middle!'
+					]
+				else:
+					score_types = [
+						'slotted home into the bottom corner!',
+						'blasted it into the top corner!',
+						'placed it calmly into the side netting!',
+						'fired low and hard past the keeper!',
+						'sent the keeper the wrong way!',
+						'chipped it delicately down the middle!',
+						'driven it into the roof of the net!',
+						'rolled it into the corner with precision!',
+						'hammered it into the top bins!',
+						'cool as you like, bottom corner!'
+					]
+				desc = random.choice(score_types)
+				if is_home_team:
+					self.score('Shootout: {} {} ({}-{})'.format(taker_name, desc, score_home + 1, score_away))
+				else:
+					self.score('Shootout: {} {} ({}-{})'.format(taker_name, desc, score_home, score_away + 1))
+
+				celebration = [
+					'{} erupts in celebration!'.format(team_name),
+					'The {} fans go wild!'.format(team_name),
+					'What a kick from {}!'.format(taker_name),
+					'{} punches the air!'.format(taker_name),
+					'Teammates mob {}!'.format(taker_name)
+				]
+				if random.random() < 0.3:
+					self.score(random.choice(celebration))
+				return True
+
+			elif rng < pen_prob * 0.90:
+				if is_sudden_death:
+					miss_types = [
+						'{} FIRED OVER THE BAR! Agony for {}!'.format(taker_name, team_name),
+						'{} SENT IT WIDE! The nightmare scenario!',
+						'{} CRASHED IT AGAINST THE CROSSBAR! So cruel!',
+						'{} SMACKED THE POST AND IT STAYED OUT! Heartbreak!',
+						'{} CLIPPED THE OUTSIDE OF THE POST! Inches from glory!',
+						'{} BALLOONED IT OVER! The pressure told!',
+						'{} DRAGGED IT WIDE! Sudden death claims another victim!',
+						'{} LEATHERED IT INTO THE STANDS! Unthinkable!'
+					]
+				elif round_num == 4 and not is_sudden_death:
+					miss_types = [
+						'LAST KICK AND {} FIRED OVER! {} hearts broken!'.format(taker_name, team_name),
+						'{} SENT THE FINAL ONE WIDE! Disaster!',
+						'{} HIT THE CROSSBAR ON THE FINAL KICK! Cruel!',
+						'{} SMASHED THE POST! It stayed out! Sudden death awaits!'
+					]
+				else:
+					miss_types = [
+						'{} fired over the bar!'.format(taker_name),
+						'{} sent it wide of the post!'.format(taker_name),
+						'{} crashed it against the crossbar!'.format(taker_name),
+						'{} smacked the post and it stayed out!'.format(taker_name),
+						'{} clipped the outside of the post!'.format(taker_name),
+						'{} ballooned it over the crossbar!'.format(taker_name),
+						'{} dragged it wide of the target!'.format(taker_name),
+						'{} leathered it into the stands!'.format(taker_name)
+					]
+				desc = random.choice(miss_types)
+				if is_home_team:
+					self.score('Shootout: {} {} ({}-{})'.format(taker_name, desc, score_home, score_away))
+				else:
+					self.score('Shootout: {} {} ({}-{})'.format(taker_name, desc, score_home, score_away))
+
+				reaction = [
+					'{} holds their head in their hands!'.format(taker_name),
+					'The {} fans fall silent.'.format(team_name),
+					'Agony etched on the face of {}.'.format(taker_name),
+					'{} sinks to their knees.'.format(taker_name),
+					'A collective groan from the {} end.'.format(team_name)
+				]
+				if random.random() < 0.3:
+					self.score(random.choice(reaction))
+				return False
+
+			else:
+				if is_sudden_death:
+					save_types = [
+						'SAVED BY DIVING LOW TO PALM IT AWAY! {} IS THE HERO!'.format(gk_name),
+						'SAVED BY GUESSING RIGHT! A MAGNIFICENT SAVE IN SUDDEN DEATH!',
+						'{} GOT A STRONG HAND TO IT! WHAT A STOP!',
+						'{} PARRIED AWAY WITH A REFLEX STOP! INCREDIBLE!',
+						'SAVED BY SMOTHERING THE EFFORT! THE {} KEEPER IS A WALL!'.format(team_name.upper()),
+						'SAVED BY TIPPING IT ONTO THE POST! SUDDEN DEATH CONTINUES!',
+						'{} READ IT ALL THE WAY AND CAUGHT IT! ICE COLD!',
+						'{} SPRUNG TO THE LEFT TO KEEP IT OUT! SENSATIONAL!',
+						'{} PLUCKED IT OUT OF THE TOP CORNER! A MASTERCLASS!',
+						'SAVED BY GETTING DOWN QUICKLY TO SAVE! {} SURVIVE!'.format(team_name)
+					]
+				elif round_num == 4 and not is_sudden_death:
+					save_types = [
+						'SAVED! A HUGE SAVE ON THE FINAL KICK!',
+						'SAVED BY GUESSING RIGHT! WHAT A MOMENT FOR THE KEEPER!',
+						'SAVED BY PARRYING THE FINAL KICK AWAY! SUDDEN DEATH HERE WE COME!',
+						'SAVED BY TIPPING THE FINAL PENALTY ONTO THE POST! DRAMA!'
+					]
+				else:
+					save_types = [
+						'saved by diving low to palm it away!',
+						'saved by guessing right and making a fine save!',
+						'saved by getting a strong hand to it!',
+						'saved by parrying away with a reflex stop!',
+						'saved by smothering the effort!',
+						'saved by tipping it onto the post!',
+						'saved by reading it all the way and catching it!',
+						'saved by springing to the left to keep it out!',
+						'saved by plucking it out of the top corner!',
+						'saved by getting down quickly to save!'
+					]
+				desc = random.choice(save_types)
+				if is_home_team:
+					self.score("Shootout: {}'s penalty {} by {}! ({}-{})".format(taker_name, desc, gk_name, score_home, score_away))
+				else:
+					self.score("Shootout: {}'s penalty {} by {}! ({}-{})".format(taker_name, desc, gk_name, score_home, score_away))
+
+				reaction = [
+					'{} is mobbed by teammates!'.format(gk_name),
+					'The {} keeper is the hero!'.format(team_name),
+					'What a stop from {}!'.format(gk_name),
+					'{} pumps their fist!'.format(gk_name),
+					'The {} bench empties!'.format(team_name)
+				]
+				if random.random() < 0.3:
+					self.score(random.choice(reaction))
+				return False
+
+		build_tension(0)
+
 		for r in range(5):
 			hp = home_takers[r % len(home_takers)]
-			gk_def = away_gk.gk_overall if away_gk else 70
-			pen_prob = 0.75 + (hp.penalties - 70) * 0.003 - (gk_def - 70) * 0.002
-			pen_prob = max(0.40, min(0.92, pen_prob))
-			hp_name = getattr(hp, 'short_name', hp.name)
-			if random.random() < pen_prob:
-				home_pen += 1
-				self.logger('Shootout: {} scored for {} ({}-{})'.format(hp_name, self.home.name, home_pen, away_pen))
-			else:
-				gk_name = getattr(away_gk, 'short_name', away_gk.name) if away_gk else 'the keeper'
-				self.logger('Shootout: {} had their penalty saved by {}!'.format(hp_name, gk_name))
+			scored = take_penalty(hp, away_gk, self.home.name, home_pen, away_pen, True, r, False)
+			if scored: home_pen += 1
 
-			ap = away_takers[r % len(away_takers)]
-			gk_def = home_gk.gk_overall if home_gk else 70
-			pen_prob = 0.75 + (ap.penalties - 70) * 0.003 - (gk_def - 70) * 0.002
-			pen_prob = max(0.40, min(0.92, pen_prob))
-			ap_name = getattr(ap, 'short_name', ap.name)
-			if random.random() < pen_prob:
-				away_pen += 1
-				self.logger('Shootout: {} scored for {} ({}-{})'.format(ap_name, self.away.name, home_pen, away_pen))
-			else:
-				gk_name = getattr(home_gk, 'short_name', home_gk.name) if home_gk else 'the keeper'
-				self.logger('Shootout: {} had their penalty saved by {}!'.format(ap_name, gk_name))
+			if r < 4 or home_pen <= away_pen + (4 - r):
+				ap = away_takers[r % len(away_takers)]
+				scored = take_penalty(ap, home_gk, self.away.name, home_pen, away_pen, False, r, False)
+				if scored: away_pen += 1
 
+			if check_early_end(home_pen, away_pen, r):
+				break
+
+			if r < 4:
+				build_tension(r + 1, False, home_pen - away_pen)
+
+		if home_pen == away_pen:
+			sudden_death_intros = [
+				'SUDDEN DEATH! The drama reaches its peak!',
+				'WE GO TO SUDDEN DEATH! One kick decides it all!',
+				'SUDDEN DEATH BEGINS! The ultimate test of nerve!',
+				'PENALTIES CONTINUE IN SUDDEN DEATH! Incredible tension!'
+			]
+			self.score('')
+			self.score(random.choice(sudden_death_intros))
+			self.score('')
+
+		sd_idx = 0
 		r_round = 5
 		while home_pen == away_pen:
 			hp = home_takers[r_round % len(home_takers)]
 			ap = away_takers[r_round % len(away_takers)]
-			h_score = random.random() < 0.70
-			a_score = random.random() < 0.70
-			if h_score: home_pen += 1
-			if a_score: away_pen += 1
-			self.logger('Shootout Sudden Death: {} {} - {} {}'.format(self.home.name, home_pen, away_pen, self.away.name))
+
+			if r_round > 5:
+				if random.random() < 0.4:
+					mid_sd = [
+						'Still level after {} sudden death rounds!'.format(r_round - 4),
+						'Neither side will blink! Round {} of sudden death!'.format(r_round - 4),
+						'The drama continues! Sudden death round {}!'.format(r_round - 4)
+					]
+					self.score(random.choice(mid_sd))
+
+			scored = take_penalty(hp, away_gk, self.home.name, home_pen, away_pen, True, r_round, True)
+			if scored: home_pen += 1
+
+			scored = take_penalty(ap, home_gk, self.away.name, home_pen, away_pen, False, r_round, True)
+			if scored: away_pen += 1
+
+			self.score('SUDDEN DEATH: {} {} - {} {}'.format(self.home.name, home_pen, away_pen, self.away.name))
 			r_round += 1
 
+		self.score('')
+		self.score('=' * 66)
 		if home_pen > away_pen:
 			self.win = self.home
 			self.loss = self.away
 			self.draw = False
 			self.resultdesc = '{} won on penalties {}-{}'.format(self.home.name, home_pen, away_pen)
+			self.score('{} WIN THE PENALTY SHOOTOUT {}-{}!'.format(self.home.name.upper(), home_pen, away_pen).center(66))
+			winner_reactions = [
+				'{} explode in joy! What a night!'.format(self.home.name),
+				'The {} players rush to mob their hero between the sticks!'.format(self.home.name),
+				'SCENES OF JUBILATION! {} are the victors!'.format(self.home.name),
+				'Penalty shootout glory for {}!'.format(self.home.name)
+			]
+			self.score(random.choice(winner_reactions))
+			self.score('Heartbreak for {}. So close, yet so far.'.format(self.away.name))
 		else:
 			self.win = self.away
 			self.loss = self.home
 			self.draw = False
 			self.resultdesc = '{} won on penalties {}-{}'.format(self.away.name, away_pen, home_pen)
+			self.score('{} WIN THE PENALTY SHOOTOUT {}-{}!'.format(self.away.name.upper(), away_pen, home_pen).center(66))
+			winner_reactions = [
+				'{} explode in joy! What a night!'.format(self.away.name),
+				'The {} players rush to mob their hero between the sticks!'.format(self.away.name),
+				'SCENES OF JUBILATION! {} are the victors!'.format(self.away.name),
+				'Penalty shootout glory for {}!'.format(self.away.name)
+			]
+			self.score(random.choice(winner_reactions))
+			self.score('Heartbreak for {}. So close, yet so far.'.format(self.home.name))
+		self.score('=' * 66)
+		self.score('')
 
 	def endofgame(self):
 		if self.resultdesc == '':
@@ -1931,6 +2217,11 @@ class period:
 			score = p.heading * 0.45 + p.jumping * 0.35 + p.strength * 0.20
 			if hasattr(p, 'has_playstyle'):
 				if p.has_playstyle('aerial fortress') or p.has_playstyle('power header'): score += 12
+			pos = getattr(p, 'assigned_slot', getattr(p, 'position', 'MID'))
+			if pos in ['CB', 'DEF', 'LB', 'RB', 'LWB', 'RWB', 'CDM', 'DMF', 'SW']:
+				score *= 0.45
+			elif pos in ['CM', 'MID', 'LM', 'RM']:
+				score *= 0.75
 			return score
 
 		aerial_targets = sorted(outfield, key=_aerial_score, reverse=True)
@@ -2458,7 +2749,7 @@ class period:
 					return
 
 				yellow_roll = random.random()
-				if yellow_roll < 0.14:
+				if yellow_roll < 0.115:
 					fouler.inns[-1].yellow_cards += 1
 					if fouling_team == self.match.home:
 						self.match.home_yellows += 1

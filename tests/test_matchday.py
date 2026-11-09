@@ -40,3 +40,4 @@ def test_fixture_matchday_integration():
 	assert hasattr(fix, "weather")
 	assert hasattr(fix, "var_engine")
 	assert hasattr(fix, "stoppage_delays")
+

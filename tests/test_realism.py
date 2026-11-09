@@ -1,4 +1,5 @@
 import io
+import random
 from contextlib import redirect_stdout
 import pytest
 import game
@@ -23,6 +24,7 @@ TEST_MATCHUPS = [
 
 @pytest.fixture(scope='module')
 def simulation_results():
+	random.seed(42)
 	goals = []
 	shots = []
 	shots_target = []

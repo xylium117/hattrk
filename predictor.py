@@ -4,6 +4,7 @@ import os
 import random
 import sys
 from collections import Counter, defaultdict
+from tqdm import tqdm
 import engine
 import game
 from elo import get_club_elo, elo_win_probability, elo_goal_difference_anchor, parse_form_string, get_tactical_friction
@@ -103,7 +104,7 @@ def run_monte_carlo(home_name, away_name, runs=500, home_missing=None, away_miss
 
 	engine.set_save_scorecard(False)
 
-	for _ in range(runs):
+	for _ in tqdm(range(runs), desc="Simulating matches", unit="match", leave=False):
 		orig_stdout = sys.stdout
 		sys.stdout = open(os.devnull, 'w', encoding='utf-8')
 		try:
@@ -366,7 +367,7 @@ def run_backtest_suite():
 	print("=" * 74)
 
 	rps_scores = []
-	for h, a, actual in benchmark_fixtures:
+	for h, a, actual in tqdm(benchmark_fixtures, desc="Backtesting fixtures", unit="fixture"):
 		res = run_monte_carlo(h, a, runs=100)
 		probs = [res['probabilities']['home_win'], res['probabilities']['draw'], res['probabilities']['away_win']]
 		score = evaluate_rps(probs, actual)
@@ -401,24 +402,25 @@ def optimize_hyperparameters(runs=30):
 	print("=" * 74)
 	best_loss = 999.0
 	best_params = {}
-	for ha in [20, 28, 35]:
-		for fm in [0.8, 1.2, 1.6]:
-			scores = []
-			for h, a, act in benchmark_fixtures:
-				res = run_monte_carlo(h, a, runs=runs)
-				probs = [res['probabilities']['home_win'], res['probabilities']['draw'], res['probabilities']['away_win']]
-				scores.append(evaluate_rps(probs, act))
-			mean_rps = sum(scores) / len(scores)
-			print(f"Param candidate: home_advantage={ha}, form_scale={fm:.1f} -> Mean RPS: {mean_rps:.4f}")
-			if mean_rps < best_loss:
-				best_loss = mean_rps
-				best_params = {'home_advantage': ha, 'form_scale': fm}
+
+	param_grid = [(ha, fm) for ha in [20, 28, 35] for fm in [0.8, 1.2, 1.6]]
+	for ha, fm in tqdm(param_grid, desc="Optimizing params", unit="config"):
+		scores = []
+		for h, a, act in benchmark_fixtures:
+			res = run_monte_carlo(h, a, runs=runs)
+			probs = [res['probabilities']['home_win'], res['probabilities']['draw'], res['probabilities']['away_win']]
+			scores.append(evaluate_rps(probs, act))
+		mean_rps = sum(scores) / len(scores)
+		print(f"Param candidate: home_advantage={ha}, form_scale={fm:.1f} -> Mean RPS: {mean_rps:.4f}")
+		if mean_rps < best_loss:
+			best_loss = mean_rps
+			best_params = {'home_advantage': ha, 'form_scale': fm}
 	print("-" * 74)
 	print(f"OPTIMAL HYPERPARAMETERS: {best_params} (Min RPS: {best_loss:.4f})")
 	print("=" * 74)
 	return best_params
 
-def predict_league_outcomes(league_name_or_id, runs=50):
+def predict_league_outcomes(league_name_or_id, runs=50, show_progress=True):
 	from league import get_league
 	lg_template = get_league(league_name_or_id)
 	if not lg_template:
@@ -434,7 +436,8 @@ def predict_league_outcomes(league_name_or_id, runs=50):
 		'positions': defaultdict(int)
 	})
 
-	for s_idx in range(runs):
+	iterator = tqdm(range(runs), desc="Simulating seasons", unit="season") if show_progress else range(runs)
+	for s_idx in iterator:
 		sim_lg = get_league(league_name_or_id)
 		standings = sim_lg.simulate_season(quiet=True)
 		n_teams = len(standings)
