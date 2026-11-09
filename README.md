@@ -541,6 +541,32 @@ Previously, player match ratings scaled linearly with raw goals, leading to unre
 - Generates balanced double round-robin home-and-away schedules with round rotation.
 - Simulates concurrent matchday fixtures with rolling 5-game form integration (`WWDDL`), live goal difference tracking, clean sheets, and Golden Boot top-scorer tracking.
 - Standings tables format with standard European criteria: Rank, Club, P, W, D, L, GF, GA, GD, Pts, and Rolling Form.
+- Season-end awards: Golden Boot, Golden Glove, Best Player, Best Manager, Fair Play.
+
+### 13.2 Probabilistic League Finish Predictor (`predictor.py --league`)
+The prediction engine models an entire season's finish distribution via Monte Carlo simulation:
+```bash
+python predictor.py --league "Premier League" --runs 500
+```
+Taking rolling team form, squad quality, and player form into account, the engine outputs:
+- **Champion %**: Probability of lifting the domestic title.
+- **Continental % (UCL/UEL/UECL)**: Probability of qualifying for European spots.
+- **Relegation %**: Probability of falling below the relegation line.
+- **Expected Points ($xP$)**: Probabilistic average points tally across campaigns.
+- **Expected Goal Difference ($xGD$)** and **Average Finish Position**.
+
+### 13.3 Knockout Match Resolution — Extra Time & Penalty Shootouts
+Continental cup and domestic cup knockout ties (two-legged aggregate, neutral single-leg finals) implement full extra time and penalty shootout mechanics:
+- **Extra Time**: 30 minutes (two 15-min halves) with dynamic stoppage time. Fatigued players continue stamina decay; fresh super-subs retain pace advantage.
+- **Penalty Shootout**: Standard ABAB sequence (5 penalties per team). Early termination if mathematically decided (e.g., 5-3 after 4 rounds). Sudden death beyond 5 rounds.
+- **GK Psychology**: Elite keepers apply resistance factor on penalties; spot-kick taker composure, finishing, and pressure handling determine conversion.
+- **Emotional Commentary**: Each penalty narrated with contextual drama — "ICE COOL!", "SMASHED THE BAR!", "DIVED LOW... IS THE HERO!", sudden-death tension builders.
+
+### 13.1 Double Round-Robin Scheduling & Matchdays
+`league.py` models full domestic league campaigns across 65 cataloged leagues:
+- Generates balanced double round-robin home-and-away schedules with round rotation.
+- Simulates concurrent matchday fixtures with rolling 5-game form integration (`WWDDL`), live goal difference tracking, clean sheets, and Golden Boot top-scorer tracking.
+- Standings tables format with standard European criteria: Rank, Club, P, W, D, L, GF, GA, GD, Pts, and Rolling Form.
 
 ### 13.2 Probabilistic League Finish Predictor (`predictor.py --league`)
 The prediction engine models an entire season's finish distribution via Monte Carlo simulation:
